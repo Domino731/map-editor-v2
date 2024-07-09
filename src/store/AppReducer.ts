@@ -5,18 +5,22 @@ import {create2DArray} from "../utils/array.ts";
 export const APP_REDUCER_NAME = 'APP';
 
 const initialState: AppState = {
-  mapTilesData: create2DArray(40, 40, null),
-  selectedTile: null
+    mapTilesData: create2DArray(40, 40, null),
+    objectId: null,
+    selectedTile: null
 }
 
 const appSlice = createSlice({
-  name: APP_REDUCER_NAME,
-  initialState,
-  reducers: {
-    setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
-      state.selectedTile = action.payload;
-    }
-  },
+    name: APP_REDUCER_NAME,
+    initialState,
+    reducers: {
+        setObjectId: (state, action: PayloadAction<AppState['objectId']>) => {
+            state.objectId = action.payload;
+        },
+        setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
+            state.selectedTile = action.payload;
+        }
+    },
 });
 
 export const AppSliceActions = appSlice.actions;

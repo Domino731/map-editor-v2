@@ -6,8 +6,10 @@ const root = (root: RootState) => root[APP_REDUCER_NAME];
 
 const mapTilesData = createSelector(root, (state) => state.mapTilesData);
 const selectedTile = createSelector(root, (state) => state.selectedTile);
+const objectId = createSelector(root, (state) => state.objectId);
 
 export const AppSelectors = {
     mapTilesData,
-    selectedTile
+    selectedTile,
+    objectId
 }
