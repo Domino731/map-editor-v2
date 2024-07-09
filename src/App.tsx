@@ -1,0 +1,36 @@
+
+import {createTheme, ThemeProvider} from "@mui/material";
+import {LeftColumn} from "./LeftColumn";
+import {RightColumn} from "./RightColumn";
+import {Map} from "./Map";
+import styles from './App.module.scss';
+import {Provider} from "react-redux";
+import {store} from "./store/store.ts";
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark'
+    }
+});
+
+function App() {
+  return (
+      <Provider store={store}>
+              <ThemeProvider theme={theme}>
+        <div className={styles.container}>
+            <div className={styles.leftColumn}>
+                <LeftColumn/>
+            </div>
+            <div className={styles.map}>
+                <Map/>
+            </div>
+            <div className={styles.rightColumn}>
+                <RightColumn/>
+            </div>
+        </div>
+    </ThemeProvider>
+      </Provider>
+  )
+}
+
+export default App
