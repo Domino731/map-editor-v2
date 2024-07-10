@@ -1,23 +1,36 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {Tab, Tabs} from "@mui/material";
 import {RightColumnTabs} from "./RightColumn.const.ts";
 import styles from './RightColumn.module.scss';
 import {Tiles} from "./Tiles";
 import {Objects} from "./Objects";
+import {useDispatch, useSelector} from "react-redux";
+import {AppSelectors} from "../store/AppReducer.selectors.ts";
+import {AppSliceActions} from "../store/AppReducer.ts";
 
 export const RightColumn = () => {
-    const [tab, setTab] = useState<RightColumnTabs>(RightColumnTabs.Tiles);
+    const dispatch = useDispatch();
+
+    const rightColumnType = useSelector(AppSelectors.rightColumnType);
+
+    const handleChangeRightColumnType = useCallback((v: RightColumnTabs) => {
+        dispatch(AppSliceActions.setRightColumnType(v))
+    }, [dispatch])
 
     return <div>
-        <Tabs value={tab} aria-label="right-column-tabs" className={styles.tabs} variant="fullWidth">
-            <Tab label="Tiles" value={RightColumnTabs.Tiles} onClick={() => setTab(RightColumnTabs.Tiles)}/>
-            <Tab label="Objects" value={RightColumnTabs.Objects} onClick={() => setTab(RightColumnTabs.Objects)}/>
-            <Tab label="Entities" value={RightColumnTabs.Entities} onClick={() => setTab(RightColumnTabs.Entities)}/>
-            <Tab label="Special" value={RightColumnTabs.Special} onClick={() => setTab(RightColumnTabs.Special)}/>
+        <Tabs value={rightColumnType} aria-label="right-column-tabs" className={styles.tabs} variant="fullWidth">
+            <Tab label="Tiles" value={RightColumnTabs.Tiles}
+                 onClick={() => handleChangeRightColumnType(RightColumnTabs.Tiles)}/>
+            <Tab label="Objects" value={RightColumnTabs.Objects}
+                 onClick={() => handleChangeRightColumnType(RightColumnTabs.Objects)}/>
+            <Tab label="Entities" value={RightColumnTabs.Entities}
+                 onClick={() => handleChangeRightColumnType(RightColumnTabs.Entities)}/>
+            <Tab label="Special" value={RightColumnTabs.Special}
+                 onClick={() => handleChangeRightColumnType(RightColumnTabs.Special)}/>
         </Tabs>
-        {tab === RightColumnTabs.Tiles && <Tiles/>}
-        {tab === RightColumnTabs.Objects && <Objects/>}
-        {tab === RightColumnTabs.Entities && <>Entities</>}
-        {tab === RightColumnTabs.Special && <>Special</>}
+        {rightColumnType === RightColumnTabs.Tiles && <Tiles/>}
+        {rightColumnType === RightColumnTabs.Objects && <Objects/>}
+        {rightColumnType === RightColumnTabs.Entities && <>Entities</>}
+        {rightColumnType === RightColumnTabs.Special && <>Special</>}
     </div>
 }
