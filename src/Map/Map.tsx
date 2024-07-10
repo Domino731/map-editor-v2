@@ -54,6 +54,7 @@ export const Map = () => {
     }, [objectId, rightColumnType])
 
     const onMapMouseOver = useCallback((event: MouseEvent) => {
+        console.log(123);
         if (rightColumnType !== RightColumnTabs.Objects || !mapRef.current) return;
         const rect = mapRef.current.getBoundingClientRect();
         console.log(123);
@@ -86,10 +87,9 @@ export const Map = () => {
 
     return <section className={styles.container}>
         <div className={styles.map}>
-            <div ref={mapRef} style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
-                 onMouseOver={onMapMouseOver}
+            <div style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
                  onClick={onMapClick}>
-                <div style={{width: '100%', height: '100%'}}>
+                <div style={{width: '100%', height: '100%', position: 'relative'}}>
                     {mapData.map((row, rowIndex) => <div className={styles.row} key={`map-row-${rowIndex}`}>
                         {row.map((_, i) => <MapCell cellX={i} cellY={rowIndex} key={`map-cell-${rowIndex}-${i}`}/>)}
                     </div>)}
@@ -110,8 +110,19 @@ export const Map = () => {
                         </div>
                     })}
                 </div>
-
-                <ObjectComponent/>
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    zIndex: 3
+                }}
+                     ref={mapRef}
+                     onMouseMove={onMapMouseOver}
+                >
+                    <ObjectComponent/>
+                </div>
             </div>
         </div>
 
