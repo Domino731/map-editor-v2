@@ -9,7 +9,8 @@ const initialState: AppState = {
     mapTilesData: create2DArray(40, 40, null),
     objectId: null,
     selectedTile: null,
-    rightColumnType: RightColumnTabs.Tiles
+    rightColumnType: RightColumnTabs.Tiles,
+    objectStage: null
 }
 
 const appSlice = createSlice({
@@ -18,6 +19,12 @@ const appSlice = createSlice({
     reducers: {
         setObjectId: (state, action: PayloadAction<AppState['objectId']>) => {
             state.objectId = action.payload;
+            state.objectStage = initialState.objectStage;
+        },
+        setObjectIdWithStage: (state, action: PayloadAction<{ id: AppState['objectId'], stage: number }>) => {
+            state.objectId = action.payload.id;
+            state.objectStage = action.payload.stage;
+
         },
         setRightColumnType: (state, action: PayloadAction<AppState['rightColumnType']>) => {
             state.rightColumnType = action.payload;

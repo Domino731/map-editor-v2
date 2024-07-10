@@ -8,10 +8,11 @@ const mapTilesData = createSelector(root, (state) => state.mapTilesData);
 const selectedTile = createSelector(root, (state) => state.selectedTile);
 const objectId = createSelector(root, (state) => state.objectId);
 const rightColumnType = createSelector(root, (state) => state.rightColumnType);
-
+const objectStage = createSelector(root, (state) => state.objectStage);
 export const AppSelectors = {
     mapTilesData,
     selectedTile,
     objectId,
-    rightColumnType
+    rightColumnType,
+    objectStage
 }

@@ -1,14 +1,14 @@
 import bushSprite from '../../../../assets/map/objects/environment/bushes.png';
 import minesSprite from '../../../../assets/map/objects/environment/mines.png';
+import treesSprite from '../../../../assets/map/objects/environment/trees.png';
 import {useMemo} from "react";
 
 interface ObjectImageProps {
-    src: string;
     x: number;
     y: number;
     width: number;
     height: number;
-    type: 'bush' | 'mine'
+    type: 'bush' | 'mine' | 'tree'
 }
 
 export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
@@ -19,6 +19,8 @@ export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
                 return bushSprite;
             case "mine":
                 return minesSprite;
+            case 'tree':
+                return treesSprite;
             default:
                 return '';
         }

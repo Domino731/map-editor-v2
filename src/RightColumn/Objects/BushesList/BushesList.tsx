@@ -1,6 +1,4 @@
-import {BushesData} from "../../../const/bushes.ts";
 import {ObjectImage} from "../components/ObjectImage";
-import bushImage from '../../../assets/map/objects/environment/bushes.png';
 import styles from './BushesList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";

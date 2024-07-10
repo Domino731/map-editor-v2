@@ -1,0 +1,35 @@
+.list {
+  padding-left: 0;
+  height: 84vh;
+  overflow: auto;
+}
+
+.stageList {
+  padding-left: 0;
+}
+
+.stageListItem {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid grey;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.accordion {
+  background: transparent !important;
+  box-shadow: none;
+  border-bottom: 1px solid grey;
+}
+
+.accordionSummary {
+  padding: 0 !important;
+}
+
+.accordionDetails {
+  padding: 0 !important;
+}

@@ -5,6 +5,7 @@ export interface AppState {
     mapTilesData: Array<Array<TileData | null>>;
     selectedTile: MapTileData | null;
     objectId: string | null;
+    objectStage: number | null;
     rightColumnType: RightColumnTabs;
 }
 

@@ -10,6 +10,7 @@ import {AllObjects} from "../const/allObjects.ts";
 import {ObjectImage} from "../RightColumn/Objects/components/ObjectImage";
 import bushImage from '../assets/map/objects/environment/bushes.png'
 import {a} from "vite/dist/node/types.d-aGj9QkWt";
+import {generateUUID} from "../utils/string.ts";
 
 const defaultCellData: MapTileData = {
     ...TilesData[33],
@@ -44,9 +45,16 @@ export const Map = () => {
     const mapData = useSelector(AppSelectors.mapTilesData);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
     const objectId = useSelector(AppSelectors.objectId);
+    const objectStage = useSelector(AppSelectors.objectStage);
 
     const [objectCords, setObjectsCords] = useState<{ x: number; y: number }>({x: 0, y: 0});
-    const [objectsOnMap, setObjectsOnMap] = useState<{ x: number; y: number; id: string }[]>([]);
+    const [objectsOnMap, setObjectsOnMap] = useState<{
+        x: number;
+        y: number;
+        id: string,
+        stage: number | null;
+        uuid: string
+    }[]>([]);
 
     const object = useMemo(() => {
         if (rightColumnType !== RightColumnTabs.Objects || !objectId) return;
@@ -68,23 +76,38 @@ export const Map = () => {
     const onMapClick = useCallback(() => {
         if (rightColumnType !== RightColumnTabs.Objects || !object) return;
         const {x, y} = objectCords;
-        setObjectsOnMap(prev => [...prev, {x, y, id: object.id}])
-    }, [object, objectCords, rightColumnType])
+        setObjectsOnMap(prev => [...prev, {x, y, id: object.id, stage: objectStage, uuid: generateUUID()}])
+    }, [object, objectCords, objectStage, rightColumnType])
 
-    const ObjectComponent = useCallback(() => <div
-        style={{
-            width: `${object?.specs.texture.width}px`,
-            height: `${object?.specs.texture.height}px`,
-            border: '1px solid red',
-            position: 'absolute',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            transform: `translate(${(objectCords.x) * 16}px, ${(objectCords.y) * 16}px)`
-        }}>
-        <ObjectImage type={object?.type ?? 'bush'} x={object?.specs.texture.x ?? 0} y={object?.specs.texture.y ?? 0}
-                     width={object?.specs.texture.width ?? 0} height={object?.specs.texture.height ?? 0}/>
-    </div>, [object?.specs.texture.height, object?.specs.texture.width, object?.specs.texture.x, object?.specs.texture.y, objectCords.x, objectCords.y])
+    const ObjectComponent = useCallback(() => {
+        let width = object?.specs?.texture?.width;
+        let height = object?.specs?.texture?.height;
+        let x = object?.specs?.texture?.x;
+        let y = object?.specs?.texture?.y;
+
+        if (objectStage !== null) {
+            const stage = object?.specs.stages[objectStage];
+            width = stage.width;
+            height = stage.height;
+            x = stage.x;
+            y = stage.y;
+        }
+
+        return <div
+            style={{
+                width: `${width}px`,
+                height: `${height}px`,
+                border: '1px solid red',
+                position: 'absolute',
+                zIndex: 100,
+                top: 0,
+                left: 0,
+                transform: `translate(${(objectCords.x) * 16}px, ${(objectCords.y) * 16}px)`
+            }}>
+            <ObjectImage type={object?.type ?? 'bush'} x={x} y={y}
+                         width={width} height={height}/>
+        </div>
+    }, [object, objectCords, objectStage])
 
     return <section className={styles.container}>
         <div className={styles.map}>
@@ -99,16 +122,30 @@ export const Map = () => {
                 <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
                     {objectsOnMap.map(objectOnMap => {
                         const object = AllObjects.find(el => el.id === objectOnMap.id);
+                        let width = object?.specs?.texture?.width;
+                        let height = object?.specs?.texture?.height;
+                        let x = object?.specs?.texture?.x;
+                        let y = object?.specs?.texture?.y;
+
+                        if (objectOnMap.stage !== null) {
+                            const stage = object?.specs.stages[objectStage];
+                            width = stage.width;
+                            height = stage.height;
+                            x = stage.x;
+                            y = stage.y;
+                        }
+
                         return <div
+                            key={`map-objects-${objectOnMap.uuid}`}
                             style={{
                                 position: 'absolute',
                                 top: `${objectOnMap.y * 16}px`,
                                 left: `${objectOnMap.x * 16}px`
                             }}>
-                            <ObjectImage type={object?.type ?? 'bush'} x={object?.specs.texture.x ?? 0}
-                                         y={object?.specs.texture.y ?? 0}
-                                         width={object?.specs.texture.width ?? 0}
-                                         height={object?.specs.texture.height ?? 0}/>
+                            <ObjectImage type={object?.type ?? 'bush'} x={x}
+                                         y={y}
+                                         width={width}
+                                         height={height}/>
                         </div>
                     })}
                 </div>

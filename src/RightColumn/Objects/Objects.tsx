@@ -5,6 +5,8 @@ import {objectTypeOptions} from "./Objects.const.ts";
 import {BushesList} from "./BushesList";
 import {BushesData} from "../../const/bushes.ts";
 import {MinesData} from "../../const/mines.ts";
+import {MultiStageList} from "./MultiStageList";
+import {TreesData} from "../../const/trees.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
@@ -25,5 +27,6 @@ export const Objects = () => {
 
         {objectsType === ObjectsTypes.Bushes && <BushesList objects={BushesData}/>}
         {objectsType === ObjectsTypes.Mines && <BushesList objects={MinesData}/>}
+        {objectsType === ObjectsTypes.Trees && <MultiStageList objects={TreesData}/>}
     </div>
 }
