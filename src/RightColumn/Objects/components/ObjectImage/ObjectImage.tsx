@@ -1,6 +1,8 @@
 import bushSprite from '../../../../assets/map/objects/environment/bushes.png';
 import minesSprite from '../../../../assets/map/objects/environment/mines.png';
 import treesSprite from '../../../../assets/map/objects/environment/trees.png';
+import cropsSprite from '../../../../assets/map/objects/environment/crops.png';
+import grassSprite from '../../../../assets/map/objects/environment/grass.png';
 import {useMemo} from "react";
 
 interface ObjectImageProps {
@@ -8,7 +10,7 @@ interface ObjectImageProps {
     y: number;
     width: number;
     height: number;
-    type: 'bush' | 'mine' | 'tree'
+    type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass'
 }
 
 export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
@@ -21,6 +23,10 @@ export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
                 return minesSprite;
             case 'tree':
                 return treesSprite;
+            case 'crop':
+                return cropsSprite;
+            case 'grass':
+                return grassSprite;
             default:
                 return '';
         }
@@ -32,5 +38,6 @@ export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
         backgroundPosition: `${x * -1}px ${y * -1}px`,
         width: `${width}px`,
         height: `${height}px`,
+        // border: '1px solid red'
     }}></div>
 }

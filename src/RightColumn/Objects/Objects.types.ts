@@ -4,5 +4,6 @@ export enum ObjectsTypes {
     Debris,
     Trees,
     FruitTrees,
-    Mines
+    Mines,
+    Grass
 }

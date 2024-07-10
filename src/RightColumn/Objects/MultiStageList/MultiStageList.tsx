@@ -22,6 +22,7 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
     const currentObjectId = useSelector(AppSelectors.objectId);
     const objectStage = useSelector(AppSelectors.objectStage);
 
+
     return (
         <ul className={styles.list}>
             {objects.map(object => <li key={`multi-stage-list-${object.id}`}>
@@ -35,7 +36,7 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
                         <p style={{
                             margin: 0,
                             color: currentObjectId === object.id ? theme.palette.primary.main : 'white'
-                        }}> {object.name}</p>
+                        }}> {object.name} {!object.specs.stages && 'No stages'}</p>
 
                     </AccordionSummary>
                     <AccordionDetails className={styles.accordionDetails}>
