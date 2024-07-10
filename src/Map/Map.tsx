@@ -53,6 +53,7 @@ export const Map = () => {
         return AllObjects.find(el => el.id === objectId);
     }, [objectId, rightColumnType])
 
+
     const onMapMouseOver = useCallback((event: MouseEvent) => {
         console.log(123);
         if (rightColumnType !== RightColumnTabs.Objects || !mapRef.current) return;
@@ -81,7 +82,7 @@ export const Map = () => {
             left: 0,
             transform: `translate(${(objectCords.x) * 16}px, ${(objectCords.y) * 16}px)`
         }}>
-        <ObjectImage src={bushImage} x={object?.specs.texture.x ?? 0} y={object?.specs.texture.y ?? 0}
+        <ObjectImage type={object?.type ?? 'bush'} x={object?.specs.texture.x ?? 0} y={object?.specs.texture.y ?? 0}
                      width={object?.specs.texture.width ?? 0} height={object?.specs.texture.height ?? 0}/>
     </div>, [object?.specs.texture.height, object?.specs.texture.width, object?.specs.texture.x, object?.specs.texture.y, objectCords.x, objectCords.y])
 
@@ -89,12 +90,13 @@ export const Map = () => {
         <div className={styles.map}>
             <div style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
                  onClick={onMapClick}>
-                <div style={{width: '100%', height: '100%', position: 'relative'}}>
+                <div style={{width: '100%', height: '100%', position: 'relative', zIndex: 1}}>
                     {mapData.map((row, rowIndex) => <div className={styles.row} key={`map-row-${rowIndex}`}>
                         {row.map((_, i) => <MapCell cellX={i} cellY={rowIndex} key={`map-cell-${rowIndex}-${i}`}/>)}
                     </div>)}
                 </div>
-                <div style={{width: '100%', height: '100%', top: 0, left: 0, position: 'absolute', zIndex: 2}}>
+
+                <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
                     {objectsOnMap.map(objectOnMap => {
                         const object = AllObjects.find(el => el.id === objectOnMap.id);
                         return <div
@@ -103,20 +105,21 @@ export const Map = () => {
                                 top: `${objectOnMap.y * 16}px`,
                                 left: `${objectOnMap.x * 16}px`
                             }}>
-                            <ObjectImage src={bushImage} x={object?.specs.texture.x ?? 0}
+                            <ObjectImage type={object?.type ?? 'bush'} x={object?.specs.texture.x ?? 0}
                                          y={object?.specs.texture.y ?? 0}
                                          width={object?.specs.texture.width ?? 0}
                                          height={object?.specs.texture.height ?? 0}/>
                         </div>
                     })}
                 </div>
+
                 <div style={{
                     width: '100%',
                     height: '100%',
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    zIndex: 3
+                    zIndex: rightColumnType === RightColumnTabs.Objects ? 3 : -1
                 }}
                      ref={mapRef}
                      onMouseMove={onMapMouseOver}

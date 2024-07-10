@@ -1,6 +1,7 @@
 {
   "id": "bush_11",
   "name": "Bush 11",
+  "type": "bush",
   "specs": {
     "texture": {
       "name": "bushes",

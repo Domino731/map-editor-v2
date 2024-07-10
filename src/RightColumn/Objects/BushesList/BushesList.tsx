@@ -7,18 +7,22 @@ import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
 import {useTheme} from "@mui/material";
 
-export const BushesList = () => {
+interface BushesListProps {
+    objects: any[];
+}
+
+export const BushesList = ({objects}: BushesListProps) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const currentObjectId = useSelector(AppSelectors.objectId);
 
     return <ul className={styles.list}>
-        {BushesData.map(el => {
+        {objects.map(el => {
             return <li key={`bushes-list-item-${el.id}`} onClick={() => dispatch(AppSliceActions.setObjectId(el.id))}
                        className={styles.listItem}>
                 <ObjectImage
-                    src={bushImage}
+                    type={el.type}
                     x={el.specs.texture.x}
                     y={el.specs.texture.y}
                     width={el.specs.texture.width}

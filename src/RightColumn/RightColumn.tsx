@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 import {Tab, Tabs} from "@mui/material";
 import {RightColumnTabs} from "./RightColumn.const.ts";
 import styles from './RightColumn.module.scss';
