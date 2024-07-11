@@ -21,6 +21,8 @@ export interface ObjectActionCollisionModel {
 export interface GroundPlaceModel {
     width: number;
     height: number;
+    texture_x_offset: number;
+    texture_y_offset: number;
 }
 
 export interface TreeStageModel {

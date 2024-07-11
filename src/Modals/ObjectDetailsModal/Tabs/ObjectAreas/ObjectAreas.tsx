@@ -7,6 +7,8 @@ import {Checkbox, FormControlLabel, FormGroup, IconButton, Typography, useTheme}
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import {CELL_SIZE} from "../../../../const/app.ts";
+import {create2DArray} from "../../../../utils/array.ts";
+import {defaultCellData} from "../../../../Map/Map.tsx";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -16,6 +18,8 @@ const initialGridScale = 1;
 const gridSize = CELL_SIZE;
 const gridRows = 20;
 const gridCols = 20;
+
+const mapData = create2DArray(gridRows, gridCols, null);
 
 export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
     const theme = useTheme();
@@ -83,11 +87,30 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
             }}>
                 <div className={styles.textureSection}
                      style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
+
+                    {/*Grass grid*/}
+                    <div>
+                        {mapData.map((mapCol, index) => <div key={`object-grid-col-${index}`} style={{display: 'flex'}}>
+                            {mapCol.map((mapRow, mapRowIndex) => <div
+                                key={`object-grid-col-${mapRowIndex}`}
+                                style={{
+                                    width: `${gridSize}px`,
+                                    height: `${gridSize}px`,
+                                    backgroundImage: `url(${defaultCellData.src})`,
+                                    backgroundPosition: `${defaultCellData.x * -1}px ${defaultCellData.y * -1}px`,
+                                    borderRight: isGrid ? '1px solid grey' : 'none',
+                                    borderBottom: isGrid ? '1px solid grey' : 'none'
+                                }}
+                            >
+                            </div>)}
+                        </div>)}
+                    </div>
+
                     <div style={{
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        transform: `translate(${objectX}px, ${objectY}px)`,
+                        transform: `translate(${objectX - objectStageData.ground_place.texture_x_offset}px, ${objectY - objectStageData.ground_place.texture_y_offset}px)`,
                     }}>
                         <ObjectImage
                             x={objectStageData.x}
@@ -103,8 +126,8 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        width: `${objectStageData.width}px`,
-                        height: `${objectStageData.height}px`,
+                        width: `${objectStageData.ground_place.width * gridSize}px`,
+                        height: `${objectStageData.ground_place.height * gridSize}px`,
                         border: '1px solid red',
                         transform: `translate(${objectX}px, ${objectY}px)`,
 

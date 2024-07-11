@@ -46,6 +46,6 @@ export const ObjectImage = ({x, y, width, height, type, sprite, isBorder}: Objec
         backgroundPosition: `${x * -1}px ${y * -1}px`,
         width: `${width}px`,
         height: `${height}px`,
-        border: isBorder ? '1px solid red' : 'none'
+        border: isBorder ? '1px solid red' : 'none',
     }}></div>
 }

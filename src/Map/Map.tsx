@@ -8,11 +8,9 @@ import {TilesData} from "../const/tiles.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {AllObjects} from "../const/allObjects.ts";
 import {ObjectImage} from "../RightColumn/Objects/components/ObjectImage";
-import bushImage from '../assets/map/objects/environment/bushes.png'
-import {a} from "vite/dist/node/types.d-aGj9QkWt";
 import {generateUUID} from "../utils/string.ts";
 
-const defaultCellData: MapTileData = {
+export const defaultCellData: MapTileData = {
     ...TilesData[33],
     x: 0,
     y: 7 * 16
@@ -31,9 +29,8 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
 
     const cellStyles = useMemo(() => {
         return ({
-            background: 'black'
-            // backgroundImage: `url(${tile.src})`,
-            // backgroundPosition: `${tile.x * -1}px ${tile.y * -1}px`
+            backgroundImage: `url(${tile.src})`,
+            backgroundPosition: `${tile.x * -1}px ${tile.y * -1}px`
         })
     }, [tile.src, tile.x, tile.y])
 

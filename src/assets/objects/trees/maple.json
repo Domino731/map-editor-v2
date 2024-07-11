@@ -40,7 +40,9 @@
         },
         "ground_place": {
           "width": 1,
-          "height": 1
+          "height": 1,
+          "texture_x_offset": 0,
+          "texture_y_offset": 0
         }
       },
       {
@@ -73,7 +75,9 @@
         },
         "ground_place": {
           "width": 1,
-          "height": 1
+          "height": 1,
+          "texture_x_offset": 0,
+          "texture_y_offset": 0
         }
       },
       {
@@ -103,7 +107,9 @@
         },
         "ground_place": {
           "width": 1,
-          "height": 1
+          "height": 1,
+          "texture_x_offset": 0,
+          "texture_y_offset": 0
         }
       },
       {
@@ -141,7 +147,9 @@
         },
         "ground_place": {
           "width": 1,
-          "height": 1
+          "height": 1,
+          "texture_x_offset": 0,
+          "texture_y_offset": 16
         }
       },
       {
@@ -179,7 +187,9 @@
         },
         "ground_place": {
           "width": 1,
-          "height": 1
+          "height": 1,
+          "texture_x_offset": 0,
+          "texture_y_offset": 16
         }
       }
     ]
