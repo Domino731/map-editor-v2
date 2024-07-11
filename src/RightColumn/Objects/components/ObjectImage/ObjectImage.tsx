@@ -7,6 +7,7 @@ import fruitTreesSprite from '../../../../assets/map/objects/environment/fruit-t
 import {useMemo} from "react";
 
 interface ObjectImageProps {
+    sprite?: string | null;
     x: number;
     y: number;
     width: number;
@@ -14,9 +15,10 @@ interface ObjectImageProps {
     type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass' | 'fruitTree'
 }
 
-export const ObjectImage = ({x, y, width, height, type}: ObjectImageProps) => {
+export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProps) => {
 
     const spriteSrc = useMemo(() => {
+        if (sprite) return sprite;
         switch (type) {
             case "bush":
                 return bushSprite;

@@ -10,6 +10,7 @@ import {useTheme} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
+import {getObjectSprite} from "../components/ObjectImage/ObjectImage.utils.ts";
 
 interface MultiStageListProps {
     objects: any[];
@@ -49,7 +50,8 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
                                     stage: stageIndex
                                 }))}
                             >
-                                <ObjectImage x={stage.x} y={stage.y} width={stage.width} height={stage.height}
+                                <ObjectImage sprite={getObjectSprite(stage.texture)} x={stage.x} y={stage.y}
+                                             width={stage.width} height={stage.height}
                                              type={object.type}/>
                                 <p style={{
                                     margin: 0,

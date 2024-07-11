@@ -51,6 +51,13 @@
         "height": 80,
         "x": 336,
         "y": 560
+      },
+      {
+        "texture": "banana-stage-5-harvest",
+        "width": 48,
+        "height": 80,
+        "x": 0,
+        "y": 0
       }
     ]
   }

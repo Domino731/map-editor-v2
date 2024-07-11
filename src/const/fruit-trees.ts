@@ -1,5 +1,5 @@
 import apricot from '../assets/objects/fruit-trees/cherry.json';
-import cherry from '../assets/objects/fruit-trees/3.json';
+import cherry from '../assets/objects/fruit-trees/apricot.json';
 import banana from '../assets/objects/fruit-trees/orange.json';
 import tree4 from '../assets/objects/fruit-trees/peach.json';
 import tree5 from '../assets/objects/fruit-trees/pomegranateTree.json';
