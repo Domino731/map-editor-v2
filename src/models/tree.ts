@@ -18,6 +18,11 @@ export interface ObjectActionCollisionModel {
     height: number;
 }
 
+export interface GroundPlaceModel {
+    width: number;
+    height: number;
+}
+
 export interface TreeStageModel {
     width: number;
     height: number;
@@ -27,6 +32,7 @@ export interface TreeStageModel {
     drop: Array<ObjectDropModel>;
     ground_collision: ObjectGroundCollisionModel;
     action_collision: ObjectActionCollisionModel;
+    ground_place: GroundPlaceModel
 }
 
 export interface TreeModel {

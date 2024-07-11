@@ -29,7 +29,7 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
             case ObjectDetailsModelTabs.General:
                 return <ObjectGeneralInfo/>
             case ObjectDetailsModelTabs.Areas:
-                return <ObjectAreas/>
+                return <ObjectAreas objectData={objectData}/>
             default:
                 return null;
         }

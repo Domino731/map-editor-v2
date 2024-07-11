@@ -12,10 +12,11 @@ interface ObjectImageProps {
     y: number;
     width: number;
     height: number;
-    type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass' | 'fruitTree' | 'staticTree'
+    type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass' | 'fruitTree' | 'staticTree';
+    isBorder?: boolean;
 }
 
-export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProps) => {
+export const ObjectImage = ({x, y, width, height, type, sprite, isBorder}: ObjectImageProps) => {
 
     const spriteSrc = useMemo(() => {
         if (sprite) return sprite;
@@ -45,6 +46,6 @@ export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProp
         backgroundPosition: `${x * -1}px ${y * -1}px`,
         width: `${width}px`,
         height: `${height}px`,
-        border: '1px solid red'
+        border: isBorder ? '1px solid red' : 'none'
     }}></div>
 }
