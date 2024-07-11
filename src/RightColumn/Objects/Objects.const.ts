@@ -1,12 +1,3 @@
-// export enum ObjectsTypes {
-//     Bushes,
-//     Crops,
-//     Debris,
-//     Trees,
-//     FruitTrees,
-//     Mines
-// }
-
 import {ObjectsTypes} from "./Objects.types.ts";
 
 export const objectTypeOptions = [
@@ -29,6 +20,10 @@ export const objectTypeOptions = [
     {
         label: 'Fruit Trees',
         type: ObjectsTypes.FruitTrees
+    },
+    {
+        label: 'Static Trees',
+        type: ObjectsTypes.StaticTrees
     },
     {
         label: 'Mines',

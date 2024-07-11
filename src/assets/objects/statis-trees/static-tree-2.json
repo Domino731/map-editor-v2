@@ -1,0 +1,33 @@
+{
+  "id": "static_tree_2",
+  "name": "Static Tree 2",
+  "type": "staticTree",
+  "specs": {
+    "stages": [
+      {
+        "x": 274,
+        "y": 167,
+        "width": 81,
+        "height": 112
+      },
+      {
+        "x": 388,
+        "y": 167,
+        "width": 81,
+        "height": 112
+      },
+      {
+        "x": 496,
+        "y": 167,
+        "width": 82,
+        "height": 112
+      },
+      {
+        "x": 612,
+        "y": 181,
+        "width": 82,
+        "height": 112
+      }
+    ]
+  }
+}

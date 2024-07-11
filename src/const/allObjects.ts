@@ -4,6 +4,7 @@ import {TreesData} from "./trees.ts";
 import {CropsData} from "./crops.ts";
 import {GrassData} from "./grass.ts";
 import {FruitTreesData} from "./fruit-trees.ts";
+import {StaticTreesData} from "./staticTrees.ts";
 
 export const AllObjects = [
     ...BushesData,
@@ -11,5 +12,6 @@ export const AllObjects = [
     ...TreesData,
     ...CropsData,
     ...GrassData,
-    ...FruitTreesData
+    ...FruitTreesData,
+    ...StaticTreesData
 ];

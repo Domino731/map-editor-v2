@@ -12,7 +12,7 @@ interface ObjectImageProps {
     y: number;
     width: number;
     height: number;
-    type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass' | 'fruitTree'
+    type: 'bush' | 'mine' | 'tree' | 'crop' | 'grass' | 'fruitTree' | 'staticTree'
 }
 
 export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProps) => {
@@ -32,10 +32,12 @@ export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProp
                 return grassSprite;
             case 'fruitTree':
                 return fruitTreesSprite;
+            case 'staticTree':
+                return treesSprite;
             default:
                 return '';
         }
-    }, [type])
+    }, [sprite, type])
 
 
     return <div style={{
@@ -43,6 +45,6 @@ export const ObjectImage = ({x, y, width, height, type, sprite}: ObjectImageProp
         backgroundPosition: `${x * -1}px ${y * -1}px`,
         width: `${width}px`,
         height: `${height}px`,
-        // border: '1px solid red'
+        border: '1px solid red'
     }}></div>
 }

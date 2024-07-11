@@ -31,8 +31,9 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
 
     const cellStyles = useMemo(() => {
         return ({
-            backgroundImage: `url(${tile.src})`,
-            backgroundPosition: `${tile.x * -1}px ${tile.y * -1}px`
+            background: 'black'
+            // backgroundImage: `url(${tile.src})`,
+            // backgroundPosition: `${tile.x * -1}px ${tile.y * -1}px`
         })
     }, [tile.src, tile.x, tile.y])
 

@@ -10,6 +10,7 @@ import {TreesData} from "../../const/trees.ts";
 import {CropsData} from "../../const/crops.ts";
 import {GrassData} from "../../const/grass.ts";
 import {FruitTreesData} from "../../const/fruit-trees.ts";
+import {StaticTreesData} from "../../const/staticTrees.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
@@ -32,6 +33,7 @@ export const Objects = () => {
         {objectsType === ObjectsTypes.Mines && <BushesList objects={MinesData}/>}
         {objectsType === ObjectsTypes.Trees && <MultiStageList objects={TreesData}/>}
         {objectsType === ObjectsTypes.FruitTrees && <MultiStageList objects={FruitTreesData}/>}
+        {objectsType === ObjectsTypes.StaticTrees && <MultiStageList objects={StaticTreesData}/>}
         {objectsType === ObjectsTypes.Crops && <MultiStageList objects={CropsData}/>}
         {objectsType === ObjectsTypes.Grass && <BushesList objects={GrassData}/>}
     </div>
