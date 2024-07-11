@@ -1,6 +1,6 @@
 import styles from './ObjectAreas.module.scss';
 import {TreeModel} from "../../../../models/tree.ts";
-import {useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {ObjectImage} from "../../../../RightColumn/Objects/components/ObjectImage";
 import {Checkbox, FormControlLabel, FormGroup, IconButton, Typography, useTheme} from "@mui/material";
 
@@ -9,6 +9,8 @@ import AddIcon from '@mui/icons-material/Add';
 import {CELL_SIZE} from "../../../../const/app.ts";
 import {create2DArray} from "../../../../utils/array.ts";
 import {defaultCellData} from "../../../../Map/Map.tsx";
+import {VectorForm} from "./VectorForm.tsx";
+import {Vector} from "../../../../types.ts";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -34,6 +36,25 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
     const [gridScale, setGridScale] = useState<number>(initialGridScale);
 
     const objectStageData = useMemo(() => objectData.specs.stages[stage], [objectData.specs.stages, stage]);
+
+    const [textureVectors, setTextureVectors] = useState<Vector[]>([]);
+
+    useEffect(() => {
+        const vectors: Vector[] = objectData.specs.stages.map(el => ({
+            x: el.x,
+            y: el.y,
+            width: el.width,
+            height: el.height
+        }));
+        setTextureVectors(vectors)
+    }, [objectData.specs.stages])
+
+
+    const handleChangeTextureVector = useCallback((data: Vector) => {
+        const newTextureVectors = [...textureVectors];
+        newTextureVectors[stage] = data;
+        setTextureVectors(newTextureVectors);
+    }, [stage, textureVectors])
 
     const objectX = (gridRows * gridSize) / 2;
     const objectY = (gridCols * gridSize) / 2;
@@ -78,7 +99,8 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         </div>
 
         <div className={styles.section}>
-            2
+            {textureVectors[stage] &&
+                <VectorForm title="Texture" data={textureVectors[stage]} onChange={handleChangeTextureVector}/>}
         </div>
 
         <div className={styles.section}>
