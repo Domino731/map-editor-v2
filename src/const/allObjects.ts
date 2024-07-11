@@ -3,5 +3,13 @@ import {MinesData} from "./mines.ts";
 import {TreesData} from "./trees.ts";
 import {CropsData} from "./crops.ts";
 import {GrassData} from "./grass.ts";
+import {FruitTreesData} from "./fruit-trees.ts";
 
-export const AllObjects = [...BushesData, ...MinesData, ...TreesData, ...CropsData, ...GrassData];
+export const AllObjects = [
+    ...BushesData,
+    ...MinesData,
+    ...TreesData,
+    ...CropsData,
+    ...GrassData,
+    ...FruitTreesData
+];

@@ -1,0 +1,57 @@
+{
+  "id": "fruit_tree_pomegranate",
+  "name": "Pomegranate Fruit Tree",
+  "type": "fruitTree",
+  "specs": {
+    "stages": [
+      {
+        "width": 48,
+        "height": 80,
+        "x": 0,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 48,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 96,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 144,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 192,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 240,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 288,
+        "y": 320
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 336,
+        "y": 320
+      }
+    ]
+  }
+}

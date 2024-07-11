@@ -1,0 +1,33 @@
+{
+  "id": "fruit_tree_dry_tree",
+  "name": "Dry Tree",
+  "type": "fruitTree",
+  "specs": {
+    "stages": [
+      {
+        "width": 48,
+        "height": 80,
+        "x": 0,
+        "y": 480
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 48,
+        "y": 480
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 96,
+        "y": 480
+      },
+      {
+        "width": 48,
+        "height": 80,
+        "x": 144,
+        "y": 480
+      }
+    ]
+  }
+}
