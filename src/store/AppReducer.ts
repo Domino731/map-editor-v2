@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppState} from "./AppReducer.types.ts";
+import {AppState, SetActiveModelActionProps} from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
+import {Modals} from "../Modals/ModalManager.types.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 
@@ -10,13 +11,17 @@ const initialState: AppState = {
     objectId: null,
     selectedTile: null,
     rightColumnType: RightColumnTabs.Tiles,
-    objectStage: null
+    objectStage: null,
+    activeModel: Modals.ObjectDetails
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setActiveModel: (state, action: PayloadAction<SetActiveModelActionProps>) => {
+            state.activeModel = action.payload.modalName;
+        },
         setObjectId: (state, action: PayloadAction<AppState['objectId']>) => {
             state.objectId = action.payload;
             state.objectStage = initialState.objectStage;
@@ -31,6 +36,9 @@ const appSlice = createSlice({
         },
         setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
             state.selectedTile = action.payload;
+        },
+        closeModel: (state) => {
+            state.activeModel = initialState.activeModel;
         }
     },
 });

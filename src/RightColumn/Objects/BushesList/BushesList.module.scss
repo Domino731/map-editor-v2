@@ -8,10 +8,18 @@
   min-height: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   border-bottom: 1px solid grey;
+  padding-right: 14px;
 
   &:hover {
     cursor: pointer;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }
