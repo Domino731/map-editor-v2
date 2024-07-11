@@ -38,15 +38,38 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
     const objectStageData = useMemo(() => objectData.specs.stages[stage], [objectData.specs.stages, stage]);
 
     const [textureVectors, setTextureVectors] = useState<Vector[]>([]);
+    const [groundCollisionVectors, setGroundCollisionVectors] = useState<Vector[]>([]);
+    const [actionCollisionVectors, setActionCollisionVectors] = useState<Vector[][]>([]);
+    const [groundPlaceVectors, setGroundPlaceVectors] = useState<Vector[]>([]);
 
     useEffect(() => {
-        const vectors: Vector[] = objectData.specs.stages.map(el => ({
-            x: el.x,
-            y: el.y,
-            width: el.width,
-            height: el.height
-        }));
-        setTextureVectors(vectors)
+        const texturesVectors: Vector[] = [];
+        const groundCollisionsVectorsData: Vector[] = [];
+        const groundPlaceVectorsData: Vector[] = [];
+
+        objectData.specs.stages.forEach(el => {
+            texturesVectors.push({
+                x: el.x,
+                y: el.y,
+                width: el.width,
+                height: el.height
+            });
+            groundCollisionsVectorsData.push({
+                x: el.ground_collision.x,
+                y: el.ground_collision.y,
+                width: el.ground_collision.width,
+                height: el.ground_collision.height
+            });
+            groundPlaceVectorsData.push({
+                x: el.ground_place.texture_x_offset,
+                y: el.ground_place.texture_y_offset,
+                width: el.ground_place.width,
+                height: el.ground_place.height
+            })
+        });
+        setTextureVectors(texturesVectors);
+        setGroundCollisionVectors(groundCollisionsVectorsData);
+        setGroundPlaceVectors(groundPlaceVectorsData);
     }, [objectData.specs.stages])
 
 
@@ -54,7 +77,19 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         const newTextureVectors = [...textureVectors];
         newTextureVectors[stage] = data;
         setTextureVectors(newTextureVectors);
-    }, [stage, textureVectors])
+    }, [stage, textureVectors]);
+
+    const handleChangeGroundCollisonVector = useCallback((data: Vector) => {
+        const newGroundCollisionVectors = [...groundCollisionVectors];
+        newGroundCollisionVectors[stage] = data;
+        setGroundCollisionVectors(newGroundCollisionVectors);
+    }, [groundCollisionVectors, stage])
+
+    const handleChangeGroundPlaceVector = useCallback((data: Vector) => {
+        const newGroundPlaceVectors = [...groundPlaceVectors];
+        newGroundPlaceVectors[stage] = data;
+        setGroundCollisionVectors(newGroundPlaceVectors);
+    }, [groundPlaceVectors, stage])
 
     const objectX = (gridRows * gridSize) / 2;
     const objectY = (gridCols * gridSize) / 2;
@@ -66,6 +101,7 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                 <ul className={styles.settingsSectionStageList}>
                     {objectData.specs.stages.map((_, index) => {
                         return <li
+                            key={`object-stages-list-${index}`}
                             className={styles.settingsSectionStageListItem}
                             onClick={() => setStage(index)}
                             style={{border: `${stage === index ? 2 : 1}px solid ${stage === index ? theme.palette.primary.main : 'grey'}`}}
@@ -101,6 +137,15 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         <div className={styles.section}>
             {textureVectors[stage] &&
                 <VectorForm title="Texture" data={textureVectors[stage]} onChange={handleChangeTextureVector}/>}
+            {groundCollisionVectors[stage] &&
+                <VectorForm title="Ground collision" data={groundCollisionVectors[stage]}
+                            onChange={handleChangeGroundCollisonVector}/>}
+            {groundPlaceVectors[stage] &&
+                <VectorForm title="Ground place" data={groundPlaceVectors[stage]}
+                            onChange={handleChangeGroundPlaceVector} labels={{
+                    x: "Texture x offset",
+                    y: "Texture y offset"
+                }}/>}
         </div>
 
         <div className={styles.section}>
