@@ -12,6 +12,7 @@ import {defaultCellData} from "../../../../Map/Map.tsx";
 import {ActionVectorForm, VectorForm} from "./VectorForm.tsx";
 import {Vector} from "../../../../types.ts";
 import {contrastColors} from "../../ObjectDetailsModel.const.ts";
+import {MapGrid} from "../../../../components/MapGrid";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -21,7 +22,7 @@ const initialGridScale = 1;
 const gridSize = CELL_SIZE;
 const gridRows = 20;
 const gridCols = 20;
-
+const gridMapSize = 20;
 const mapData = create2DArray(gridRows, gridCols, null);
 
 export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
@@ -186,23 +187,8 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                          style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
 
                         {/*Grass grid*/}
-                        <div>
-                            {mapData.map((mapCol, index) => <div key={`object-grid-col-${index}`}
-                                                                 style={{display: 'flex'}}>
-                                {mapCol.map((_, mapRowIndex) => <div
-                                    key={`object-grid-col-${mapRowIndex}`}
-                                    style={{
-                                        width: `${gridSize}px`,
-                                        height: `${gridSize}px`,
-                                        backgroundImage: `url(${defaultCellData.src})`,
-                                        backgroundPosition: `${defaultCellData.x * -1}px ${defaultCellData.y * -1}px`,
-                                        borderRight: isGrid ? '1px solid grey' : 'none',
-                                        borderBottom: isGrid ? '1px solid grey' : 'none'
-                                    }}
-                                >
-                                </div>)}
-                            </div>)}
-                        </div>
+                        <MapGrid size={gridMapSize} isGridBorderVisible={isGrid}/>
+
 
                         {/*Object image*/}
                         <div style={{
