@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import styles from './VectorForm.module.scss';
-import {FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Vector} from "../../../../types.ts";
 import {ChangeEvent, useCallback} from "react";
 import {ActionVector} from "../../../../models/tree.ts";
@@ -39,16 +39,18 @@ export const VectorForm = ({title, data, onChange, labels}: VectorFormProps) => 
             <AccordionDetails>
                 <div className={styles.inputRow}>
                     <TextField onChange={handleChange} name="x" value={data.x}
-                               label={(labels && labels.x) ? labels.x : 'X'} className={styles.input}/>
+                               label={(labels && labels.x) ? labels.x : 'X'} className={styles.input} type="number"/>
                     <TextField onChange={handleChange} name="y" value={data.y}
-                               label={(labels && labels.y) ? labels.y : 'Y'} className={styles.input}/>
+                               label={(labels && labels.y) ? labels.y : 'Y'} className={styles.input} type="number"/>
                 </div>
                 <div className={styles.inputRow}>
                     <TextField onChange={handleChange} label={(labels && labels.width) ? labels.width : 'Width'}
+                               type="number"
                                name="width"
                                value={data.width}
                                className={styles.input}/>
                     <TextField onChange={handleChange} label={(labels && labels.height) ? labels.height : 'Height'}
+                               type="number"
                                name="height"
                                value={data.height}
                                className={styles.input}/>
@@ -65,7 +67,7 @@ export interface ActionVectorFormProps {
 }
 
 export const ActionVectorForm = ({title, data, onChange}: ActionVectorFormProps) => {
-    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent, index: number) => {
         const {target: {name, value}} = e;
         const newData = [...data];
         newData[index] = {...newData[index], [name]: value}
@@ -121,16 +123,16 @@ export const ActionVectorForm = ({title, data, onChange}: ActionVectorFormProps)
                         </Button>
                     </div>
                     <div className={styles.inputRow}>
-                        <TextField onChange={(e) => handleChange(e, index)} name="x" value={x}
+                        <TextField onChange={(e) => handleChange(e, index)} name="x" value={x} type="number"
                                    label={'X'} className={styles.input}/>
-                        <TextField onChange={(e) => handleChange(e, index)} name="y" value={y}
+                        <TextField onChange={(e) => handleChange(e, index)} name="y" value={y} type="number"
                                    label={'Y'} className={styles.input}/>
                     </div>
                     <div className={styles.inputRow}>
-                        <TextField onChange={(e) => handleChange(e, index)} label={'Width'} name="width"
+                        <TextField onChange={(e) => handleChange(e, index)} label={'Width'} name="width" type="number"
                                    value={width}
                                    className={styles.input}/>
-                        <TextField onChange={(e) => handleChange(e, index)} label={'Height'} name="height"
+                        <TextField onChange={(e) => handleChange(e, index)} label={'Height'} name="height" type="number"
                                    value={height}
                                    className={styles.input}/>
                     </div>

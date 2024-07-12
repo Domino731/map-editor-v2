@@ -99,18 +99,23 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
     const handleChangeGroundPlaceVector = useCallback((data: Vector) => {
         const newGroundPlaceVectors = [...groundPlaceVectors];
         newGroundPlaceVectors[stage] = data;
-        setGroundCollisionVectors(newGroundPlaceVectors);
+        setGroundPlaceVectors(newGroundPlaceVectors);
     }, [groundPlaceVectors, stage])
 
     const handleChangeActionCollisionVectors = useCallback((data: ActionVector[]) => {
         const newActionCollisionVectors = [...actionCollisionVectors];
         newActionCollisionVectors[stage] = data;
-        console.log('newActionCollisionVectors', newActionCollisionVectors);
         setActionCollisionVectors(newActionCollisionVectors);
     }, [actionCollisionVectors, stage])
 
-    const objectX = (gridRows * gridSize) / 2;
-    const objectY = (gridCols * gridSize) / 2;
+    const objectX = useMemo(() => {
+        return (gridRows * gridSize) / 2;
+    }, [groundPlaceVectors, stage]);
+
+    const objectY = useMemo(() => {
+        return (gridCols * gridSize) / 2;
+    }, [groundPlaceVectors, stage]);
+
     return <div className={styles.container}>
 
         <div className={styles.section}>
@@ -199,34 +204,34 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                             </div>)}
                         </div>
 
+                        {/*Object image*/}
                         <div style={{
                             position: 'absolute',
                             top: 0,
                             left: 0,
-                            transform: `translate(${objectX - objectStageData.ground_place.texture_x_offset}px, ${objectY - objectStageData.ground_place.texture_y_offset}px)`,
+                            transform: `translate(${objectX - groundPlaceVectors[stage]?.x ?? 0}px, ${objectY - groundPlaceVectors[stage]?.y ?? 0}px)`,
                         }}>
-                            <ObjectImage
-                                x={objectStageData.x}
-                                y={objectStageData.y}
-                                width={objectStageData.width}
-                                height={objectStageData.height}
+                            {textureVectors[stage] && <ObjectImage
+                                x={textureVectors[stage].x}
+                                y={textureVectors[stage].y}
+                                width={textureVectors[stage].width}
+                                height={textureVectors[stage].height}
                                 type={objectData.type}
                                 isBorder={isTextureBorder}
-                            />
+                            />}
                         </div>
 
-                        <div style={{
+                        {groundPlaceVectors[stage] && <div style={{
                             position: 'absolute',
                             top: 0,
                             left: 0,
-                            width: `${objectStageData.ground_place.width * gridSize}px`,
-                            height: `${objectStageData.ground_place.height * gridSize}px`,
+                            width: `${groundPlaceVectors[stage].width * gridSize}px`,
+                            height: `${groundPlaceVectors[stage].height * gridSize}px`,
                             border: '1px solid red',
                             transform: `translate(${objectX}px, ${objectY}px)`,
 
-                        }}>
+                        }}/>}
 
-                        </div>
                     </div>
                 </div>
             </Box>
