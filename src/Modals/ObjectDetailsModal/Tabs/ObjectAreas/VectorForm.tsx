@@ -26,7 +26,7 @@ export interface VectorFormProps {
 export const VectorForm = ({title, data, onChange, labels}: VectorFormProps) => {
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const {target: {name, value}} = e;
-        onChange({...data, [name]: value})
+        onChange({...data, [name]: Number(value)})
     }, [data, onChange])
 
     return <div>
@@ -70,7 +70,7 @@ export const ActionVectorForm = ({title, data, onChange}: ActionVectorFormProps)
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent, index: number) => {
         const {target: {name, value}} = e;
         const newData = [...data];
-        newData[index] = {...newData[index], [name]: value}
+        newData[index] = {...newData[index], [name]: Number(value)}
         onChange(newData)
     }, [data, onChange]);
 

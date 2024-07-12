@@ -111,11 +111,11 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
 
     const objectX = useMemo(() => {
         return (gridRows * gridSize) / 2;
-    }, [groundPlaceVectors, stage]);
+    }, []);
 
     const objectY = useMemo(() => {
         return (gridCols * gridSize) / 2;
-    }, [groundPlaceVectors, stage]);
+    }, []);
 
     return <div className={styles.container}>
 
@@ -187,7 +187,7 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                          style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
 
                         {/*Grass grid*/}
-                        <MapGrid size={gridMapSize} isGridBorderVisible={isGrid}/>
+                        <MapGrid isBlackBackground={isBlackBg} size={gridMapSize} isGridBorderVisible={isGrid}/>
 
 
                         {/*Object image*/}
@@ -207,7 +207,8 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                             />}
                         </div>
 
-                        {groundPlaceVectors[stage] && <div style={{
+                        {/* GROUND AREA */}
+                        {(groundPlaceVectors[stage] && isGroundArea) && <div style={{
                             position: 'absolute',
                             top: 0,
                             left: 0,
@@ -215,9 +216,33 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                             height: `${groundPlaceVectors[stage].height * gridSize}px`,
                             border: '1px solid red',
                             transform: `translate(${objectX}px, ${objectY}px)`,
-
                         }}/>}
 
+                        {groundCollisionVectors[stage] && <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: `${groundCollisionVectors[stage].width}px`,
+                            height: `${groundCollisionVectors[stage].height}px`,
+                            border: '1px solid purple',
+                            transform: `translate(${objectX + groundCollisionVectors[stage].x}px, ${objectY + groundCollisionVectors[stage].y}px)`,
+                        }}/>}
+
+
+                        {actionCollisionVectors[stage] && <>
+                            {actionCollisionVectors[stage].map(({x, y, width, height, color}, index) => <div
+                                // TODO: use uuid instead of index
+                                key={`object-action-collision-${index}`}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: `${width}px`,
+                                    height: `${height}px`,
+                                    border: `1px dotted ${color}`,
+                                    transform: `translate(${objectX + x}px, ${objectY + y}px)`,
+                                }}/>)}
+                        </>}
                     </div>
                 </div>
             </Box>
