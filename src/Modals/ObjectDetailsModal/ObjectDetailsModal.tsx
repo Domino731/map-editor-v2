@@ -9,6 +9,8 @@ import {TreeModel} from "../../models/tree.ts";
 import {ObjectDetailsModelTabs} from "./ObjectDetailsModel.const.ts";
 import {ObjectGeneralInfo} from "./Tabs/ObjectGeneralInfo";
 import {ObjectAreas} from "./Tabs/ObjectAreas";
+import Button from "@mui/material/Button";
+import {downloadJSON} from "../../utils/json.ts";
 
 interface ObjectDetailsModalProps {
     isOpen: boolean;
@@ -33,7 +35,11 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
             default:
                 return null;
         }
-    }, [tab])
+    }, [objectData, tab])
+
+    const handleDownloadJsonFile = useCallback(() => {
+        downloadJSON({test: '123'}, objectData.id)
+    }, [objectData.id])
 
     return <Modal
         open={isOpen}
@@ -42,10 +48,13 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
         aria-describedby="modal-modal-description"
         className={styles.modal}
     >
-        <Box className={styles.box}>
-            <Typography id="modal-modal-title" variant="h5" component="h2">
-                Object details: {objectData.name}
-            </Typography>
+        <div className={styles.box}>
+            <div className={styles.titleBar}>
+                <Typography id="modal-modal-title" variant="h5" component="h2">
+                    Object details: {objectData.name}
+                </Typography>
+                <Button variant="outlined" color="success" onClick={handleDownloadJsonFile}>Download .json</Button>
+            </div>
             <Tabs value={tab} aria-label="right-column-tabs" className={styles.tabs} variant="fullWidth">
                 <Tab label="General" value={ObjectDetailsModelTabs.General}
                      onClick={() => setTab(ObjectDetailsModelTabs.General)}/>
@@ -53,6 +62,6 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
                      onClick={() => setTab(ObjectDetailsModelTabs.Areas)}/>
             </Tabs>
             <TabComponent/>
-        </Box>
+        </div>
     </Modal>
 }
