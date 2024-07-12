@@ -7,7 +7,9 @@
       "x": 49,
       "y": 297,
       "width": 16,
-      "height": 21
+      "height": 21,
+      "offset_x": 0,
+      "offset_y": -5
     },
     "stages": [
       {
@@ -203,8 +205,8 @@
         "ground_place": {
           "width": 1,
           "height": 1,
-          "texture_x_offset": 0,
-          "texture_y_offset": 16
+          "texture_x_offset": -16,
+          "texture_y_offset": -80
         }
       }
     ]

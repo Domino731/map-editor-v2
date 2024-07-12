@@ -56,6 +56,8 @@ export interface TreeModel {
             y: number;
             width: number;
             height: number;
+            offset_x: number;
+            offset_y: number;
         },
         stages: Array<TreeStageModel>;
     }

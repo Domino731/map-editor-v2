@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import styles from './VectorForm.module.scss';
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography} from "@mui/material";
 import {Vector} from "../../../../types.ts";
 import {ChangeEvent, useCallback} from "react";
 import {ActionVector} from "../../../../models/tree.ts";
@@ -20,10 +20,17 @@ export interface VectorFormProps {
         y?: string;
         width?: string;
         height?: string;
+    },
+    isInputHidden?: {
+        x?: boolean;
+        y?: boolean;
+        width?: boolean;
+        height?: boolean;
     }
+    color?: string;
 }
 
-export const VectorForm = ({title, data, onChange, labels}: VectorFormProps) => {
+export const VectorForm = ({title, data, onChange, labels, color, isInputHidden}: VectorFormProps) => {
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const {target: {name, value}} = e;
         onChange({...data, [name]: Number(value)})
@@ -33,27 +40,35 @@ export const VectorForm = ({title, data, onChange, labels}: VectorFormProps) => 
         <Accordion defaultExpanded>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon/>}
+                className={styles.accordionSummary}
             >
-                {title}
+                {color && <span style={{background: color}} className={styles.accordionSummaryColorBox}/>}
+                <Typography>
+                    {title}
+                </Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <div className={styles.inputRow}>
-                    <TextField onChange={handleChange} name="x" value={data.x}
-                               label={(labels && labels.x) ? labels.x : 'X'} className={styles.input} type="number"/>
-                    <TextField onChange={handleChange} name="y" value={data.y}
-                               label={(labels && labels.y) ? labels.y : 'Y'} className={styles.input} type="number"/>
+                    {!isInputHidden?.x && <TextField onChange={handleChange} name="x" value={data.x}
+                                                     label={(labels && labels.x) ? labels.x : 'X'}
+                                                     className={styles.input} type="number"/>}
+                    {!isInputHidden?.y && <TextField onChange={handleChange} name="y" value={data.y}
+                                                     label={(labels && labels.y) ? labels.y : 'Y'}
+                                                     className={styles.input} type="number"/>}
                 </div>
                 <div className={styles.inputRow}>
-                    <TextField onChange={handleChange} label={(labels && labels.width) ? labels.width : 'Width'}
-                               type="number"
-                               name="width"
-                               value={data.width}
-                               className={styles.input}/>
-                    <TextField onChange={handleChange} label={(labels && labels.height) ? labels.height : 'Height'}
-                               type="number"
-                               name="height"
-                               value={data.height}
-                               className={styles.input}/>
+                    {!isInputHidden?.width &&
+                        <TextField onChange={handleChange} label={(labels && labels.width) ? labels.width : 'Width'}
+                                   type="number"
+                                   name="width"
+                                   value={data.width}
+                                   className={styles.input}/>}
+                    {!isInputHidden?.height &&
+                        <TextField onChange={handleChange} label={(labels && labels.height) ? labels.height : 'Height'}
+                                   type="number"
+                                   name="height"
+                                   value={data.height}
+                                   className={styles.input}/>}
                 </div>
             </AccordionDetails>
         </Accordion>
