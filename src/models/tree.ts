@@ -1,3 +1,6 @@
+import {Vector} from "../types.ts";
+import {ObjectActionsUnion} from "../const/app.ts";
+
 export interface ObjectDropModel {
     id: string;
     chance: number[];
@@ -16,6 +19,7 @@ export interface ObjectActionCollisionModel {
     y: number;
     width: number;
     height: number;
+    action_type: ObjectActionsUnion;
 }
 
 export interface GroundPlaceModel {
@@ -33,8 +37,13 @@ export interface TreeStageModel {
     next_stage: number;
     drop: Array<ObjectDropModel>;
     ground_collision: ObjectGroundCollisionModel;
-    action_collision: ObjectActionCollisionModel;
+    action_collisions: Array<ObjectActionCollisionModel>;
     ground_place: GroundPlaceModel
+}
+
+export interface ActionVector extends Vector {
+    actionType: ObjectActionsUnion;
+    color: string;
 }
 
 export interface TreeModel {

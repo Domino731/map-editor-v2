@@ -1,16 +1,17 @@
 import styles from './ObjectAreas.module.scss';
-import {TreeModel} from "../../../../models/tree.ts";
+import {ActionVector, TreeModel} from "../../../../models/tree.ts";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {ObjectImage} from "../../../../RightColumn/Objects/components/ObjectImage";
-import {Checkbox, FormControlLabel, FormGroup, IconButton, Typography, useTheme} from "@mui/material";
+import {Box, Checkbox, FormControlLabel, FormGroup, IconButton, Typography, useTheme} from "@mui/material";
 
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import {CELL_SIZE} from "../../../../const/app.ts";
 import {create2DArray} from "../../../../utils/array.ts";
 import {defaultCellData} from "../../../../Map/Map.tsx";
-import {VectorForm} from "./VectorForm.tsx";
+import {ActionVectorForm, VectorForm} from "./VectorForm.tsx";
 import {Vector} from "../../../../types.ts";
+import {contrastColors} from "../../ObjectDetailsModel.const.ts";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -39,13 +40,14 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
 
     const [textureVectors, setTextureVectors] = useState<Vector[]>([]);
     const [groundCollisionVectors, setGroundCollisionVectors] = useState<Vector[]>([]);
-    const [actionCollisionVectors, setActionCollisionVectors] = useState<Vector[][]>([]);
+    const [actionCollisionVectors, setActionCollisionVectors] = useState<ActionVector[][]>([]);
     const [groundPlaceVectors, setGroundPlaceVectors] = useState<Vector[]>([]);
 
     useEffect(() => {
         const texturesVectors: Vector[] = [];
         const groundCollisionsVectorsData: Vector[] = [];
         const groundPlaceVectorsData: Vector[] = [];
+        const actionCollisionVectorsData: ActionVector[][] = [];
 
         objectData.specs.stages.forEach(el => {
             texturesVectors.push({
@@ -65,11 +67,20 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                 y: el.ground_place.texture_y_offset,
                 width: el.ground_place.width,
                 height: el.ground_place.height
-            })
+            });
+            actionCollisionVectorsData.push(el.action_collisions.map((el, index) => ({
+                x: el.x,
+                y: el.y,
+                width: el.width,
+                height: el.height,
+                actionType: el.action_type,
+                color: contrastColors[index]
+            })));
         });
         setTextureVectors(texturesVectors);
         setGroundCollisionVectors(groundCollisionsVectorsData);
         setGroundPlaceVectors(groundPlaceVectorsData);
+        setActionCollisionVectors(actionCollisionVectorsData);
     }, [objectData.specs.stages])
 
 
@@ -90,6 +101,13 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         newGroundPlaceVectors[stage] = data;
         setGroundCollisionVectors(newGroundPlaceVectors);
     }, [groundPlaceVectors, stage])
+
+    const handleChangeActionCollisionVectors = useCallback((data: ActionVector[]) => {
+        const newActionCollisionVectors = [...actionCollisionVectors];
+        newActionCollisionVectors[stage] = data;
+        console.log('newActionCollisionVectors', newActionCollisionVectors);
+        setActionCollisionVectors(newActionCollisionVectors);
+    }, [actionCollisionVectors, stage])
 
     const objectX = (gridRows * gridSize) / 2;
     const objectY = (gridCols * gridSize) / 2;
@@ -146,63 +164,73 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                     x: "Texture x offset",
                     y: "Texture y offset"
                 }}/>}
+            {actionCollisionVectors[stage] && <ActionVectorForm
+                title="Actions"
+                data={actionCollisionVectors[stage]}
+                onChange={handleChangeActionCollisionVectors}
+            />}
         </div>
 
         <div className={styles.section}>
-            <div className={styles.textureSectionWrapper} style={{
-                background: isBlackBg ? 'black' : 'transparent'
-            }}>
-                <div className={styles.textureSection}
-                     style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
 
-                    {/*Grass grid*/}
-                    <div>
-                        {mapData.map((mapCol, index) => <div key={`object-grid-col-${index}`} style={{display: 'flex'}}>
-                            {mapCol.map((mapRow, mapRowIndex) => <div
-                                key={`object-grid-col-${mapRowIndex}`}
-                                style={{
-                                    width: `${gridSize}px`,
-                                    height: `${gridSize}px`,
-                                    backgroundImage: `url(${defaultCellData.src})`,
-                                    backgroundPosition: `${defaultCellData.x * -1}px ${defaultCellData.y * -1}px`,
-                                    borderRight: isGrid ? '1px solid grey' : 'none',
-                                    borderBottom: isGrid ? '1px solid grey' : 'none'
-                                }}
-                            >
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <div className={styles.textureSectionWrapper} style={{
+                    background: isBlackBg ? 'black' : 'transparent'
+                }}>
+                    <div className={styles.textureSection}
+                         style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
+
+                        {/*Grass grid*/}
+                        <div>
+                            {mapData.map((mapCol, index) => <div key={`object-grid-col-${index}`}
+                                                                 style={{display: 'flex'}}>
+                                {mapCol.map((_, mapRowIndex) => <div
+                                    key={`object-grid-col-${mapRowIndex}`}
+                                    style={{
+                                        width: `${gridSize}px`,
+                                        height: `${gridSize}px`,
+                                        backgroundImage: `url(${defaultCellData.src})`,
+                                        backgroundPosition: `${defaultCellData.x * -1}px ${defaultCellData.y * -1}px`,
+                                        borderRight: isGrid ? '1px solid grey' : 'none',
+                                        borderBottom: isGrid ? '1px solid grey' : 'none'
+                                    }}
+                                >
+                                </div>)}
                             </div>)}
-                        </div>)}
-                    </div>
+                        </div>
 
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        transform: `translate(${objectX - objectStageData.ground_place.texture_x_offset}px, ${objectY - objectStageData.ground_place.texture_y_offset}px)`,
-                    }}>
-                        <ObjectImage
-                            x={objectStageData.x}
-                            y={objectStageData.y}
-                            width={objectStageData.width}
-                            height={objectStageData.height}
-                            type={objectData.type}
-                            isBorder={isTextureBorder}
-                        />
-                    </div>
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            transform: `translate(${objectX - objectStageData.ground_place.texture_x_offset}px, ${objectY - objectStageData.ground_place.texture_y_offset}px)`,
+                        }}>
+                            <ObjectImage
+                                x={objectStageData.x}
+                                y={objectStageData.y}
+                                width={objectStageData.width}
+                                height={objectStageData.height}
+                                type={objectData.type}
+                                isBorder={isTextureBorder}
+                            />
+                        </div>
 
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: `${objectStageData.ground_place.width * gridSize}px`,
-                        height: `${objectStageData.ground_place.height * gridSize}px`,
-                        border: '1px solid red',
-                        transform: `translate(${objectX}px, ${objectY}px)`,
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: `${objectStageData.ground_place.width * gridSize}px`,
+                            height: `${objectStageData.ground_place.height * gridSize}px`,
+                            border: '1px solid red',
+                            transform: `translate(${objectX}px, ${objectY}px)`,
 
-                    }}>
+                        }}>
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Box>
+
 
             <div className={styles.scaleSection}>
                 <div>

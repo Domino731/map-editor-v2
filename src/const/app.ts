@@ -1,10 +1,12 @@
 export const CELL_SIZE = 16;
 
 export enum ObjectActions {
-    Cut,
-    Harvest,
-    Water
+    Cut = "Cut",
+    Harvest = "Harvest",
+    Water = "Water"
 }
+
+export type ObjectActionsUnion = keyof typeof ObjectActions;
 
 export const OBJECTS_ACTIONS_OPTIONS = [
     {

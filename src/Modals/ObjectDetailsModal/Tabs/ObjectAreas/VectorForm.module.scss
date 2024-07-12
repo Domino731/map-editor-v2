@@ -8,3 +8,30 @@
   margin-bottom: 10px;
   width: 50%;
 }
+
+.actionTypeRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionFormBox {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.actionTypeSelect {
+  width: 100%;
+  margin-bottom: 15px !important;
+  display: flex;
+  gap: 10px;
+}
+
+.actionSelect {
+  width: 80%;
+}
+
+.deleteActionButton {
+  width: 20%;
+  height: 56px;
+}
