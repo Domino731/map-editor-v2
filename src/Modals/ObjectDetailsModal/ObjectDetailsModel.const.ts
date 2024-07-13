@@ -1,6 +1,7 @@
 export enum ObjectDetailsModelTabs {
     General = 'General',
-    Areas = 'Areas'
+    Areas = 'Areas',
+    Drop = "Drop"
 }
 
 export const contrastColors = [

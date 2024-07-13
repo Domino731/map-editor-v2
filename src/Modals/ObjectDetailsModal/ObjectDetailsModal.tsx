@@ -1,4 +1,4 @@
-import {Box, Modal, Tab, Tabs, Typography} from "@mui/material";
+import {Modal, Tab, Tabs, Typography} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {AppSliceActions} from "../../store/AppReducer.ts";
 import styles from './ObjectDetailsModal.module.scss';
@@ -11,6 +11,7 @@ import {ObjectGeneralInfo} from "./Tabs/ObjectGeneralInfo";
 import {ObjectAreas} from "./Tabs/ObjectAreas";
 import Button from "@mui/material/Button";
 import {downloadJSON} from "../../utils/json.ts";
+import {ObjectDrop} from "./Tabs/ObjectDrop";
 
 interface ObjectDetailsModalProps {
     isOpen: boolean;
@@ -20,7 +21,7 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
     const dispatch = useDispatch();
     const id = TreesData[1].id;
 
-    const [tab, setTab] = useState<ObjectDetailsModelTabs>(ObjectDetailsModelTabs.Areas);
+    const [tab, setTab] = useState<ObjectDetailsModelTabs>(ObjectDetailsModelTabs.Drop);
 
     const objectData = useMemo((): TreeModel => {
         return AllObjects.find(el => el.id === id);
@@ -32,6 +33,8 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
                 return <ObjectGeneralInfo/>
             case ObjectDetailsModelTabs.Areas:
                 return <ObjectAreas objectData={objectData}/>
+            case ObjectDetailsModelTabs.Drop:
+                return <ObjectDrop objectData={objectData}/>
             default:
                 return null;
         }
@@ -60,6 +63,8 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
                      onClick={() => setTab(ObjectDetailsModelTabs.General)}/>
                 <Tab label="Areas" value={ObjectDetailsModelTabs.Areas}
                      onClick={() => setTab(ObjectDetailsModelTabs.Areas)}/>
+                <Tab label="Drop" value={ObjectDetailsModelTabs.Drop}
+                     onClick={() => setTab(ObjectDetailsModelTabs.Drop)}/>
             </Tabs>
             <TabComponent/>
         </div>

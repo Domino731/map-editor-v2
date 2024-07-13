@@ -3,8 +3,8 @@ import {ObjectActionsUnion} from "../const/app.ts";
 
 export interface ObjectDropModel {
     id: string;
-    chance: number[];
-    amount: number;
+    chance: number[] | number;
+    amount: number[] | number;
 }
 
 export interface ObjectGroundCollisionModel {

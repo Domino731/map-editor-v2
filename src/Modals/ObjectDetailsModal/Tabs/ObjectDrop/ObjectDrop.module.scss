@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.table {
+  width: 66.66%;
+}
+
+.form {
+  width: 33.33%;
+  padding: 20px;
+  padding-top: 0;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
