@@ -1,7 +1,7 @@
 import {FormikFormData} from "./AddNewDropForm.types.ts";
 
 export const formikInitialValues: FormikFormData = {
-    objectId: '',
+    itemId: '',
     isChanceRange: false,
     isAmountRange: true,
     chance: 0,

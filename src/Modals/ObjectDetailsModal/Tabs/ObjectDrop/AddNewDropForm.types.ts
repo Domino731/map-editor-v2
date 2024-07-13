@@ -1,5 +1,5 @@
 export interface FormikFormData {
-    objectId: string;
+    itemId: string;
     isChanceRange: boolean;
     isAmountRange: boolean;
     chance: number | number[];

@@ -5,6 +5,7 @@ export interface ObjectDropModel {
     id: string;
     chance: number[] | number;
     amount: number[] | number;
+    uuid: string;
 }
 
 export interface ObjectGroundCollisionModel {

@@ -1,38 +1,53 @@
 import {
-    Box,
     Checkbox,
     FormControl,
     FormControlLabel,
     FormGroup,
     InputLabel,
     MenuItem,
-    Select, Slider, TextField,
+    Select, Slider,
     Typography
 } from "@mui/material";
 import {Formik} from "formik";
 import {formikInitialValues} from "./AddNewDropForm.const.ts";
 import styles from './AddNewDropForm.module.scss';
-import FormControlContext from "@mui/material/FormControl/FormControlContext";
 import Button from "@mui/material/Button";
+import {useDispatch} from "react-redux";
+import {useCallback} from "react";
+import {FormikFormData} from "./AddNewDropForm.types.ts";
+import {objectDetailsModalSliceActions} from "../../store.ts";
+import {generateUUID} from "../../../../utils/string.ts";
+import {AllItems} from "../../../../const/allItems.ts";
 
 export const AddNewDropForm = () => {
+    const dispatch = useDispatch();
+
+    const handleAddDrop = useCallback((formikValues: FormikFormData) => {
+        dispatch(objectDetailsModalSliceActions.addDrop({
+            uuid: generateUUID(),
+            id: formikValues.itemId,
+            chance: formikValues.chance,
+            amount: formikValues.amount
+        }))
+    }, [dispatch])
+
     return <div>
         <Typography variant="h6" className={styles.title}>Add new drop</Typography>
-        <Formik initialValues={formikInitialValues} onSubmit={v => alert('TODO')}>
-            {({values, handleChange, setFieldValue, setValues}) => <FormGroup className={styles.form}>
+        <Formik initialValues={formikInitialValues} onSubmit={handleAddDrop}>
+            {({values, handleChange, setValues, handleSubmit}) => <FormGroup
+                className={styles.form}>
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Object Id</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Item Id</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Object Id"
-                        name="objectId"
-                        value={values.objectId}
+                        label="Item Id"
+                        name="itemId"
+                        value={values.itemId}
                         onChange={handleChange}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {AllItems.map(({id, name}) => <MenuItem key={`add-new-drop-form-item-id-${id}`}
+                                                                value={id}>{name}</MenuItem>)}
                     </Select>
                 </FormControl>
 
@@ -94,7 +109,7 @@ export const AddNewDropForm = () => {
                         label="Is drop amount in range"/>
                 </FormControl>
 
-                <Button variant="contained" color="success">Add drop</Button>
+                <Button onClick={handleSubmit} type="submit" variant="contained" color="success">Add drop</Button>
             </FormGroup>}
         </Formik>
     </div>

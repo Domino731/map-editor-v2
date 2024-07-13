@@ -5,6 +5,7 @@ import oak from '../assets/objects/trees/oak.json';
 import palmMedium from '../assets/objects/trees/palm-medium.json';
 import palmSmall from '../assets/objects/trees/palm-small.json';
 import pine from '../assets/objects/trees/pine.json';
+import {generateUUID} from "../utils/string.ts";
 
 export const TreesData = [
     mushroom,
@@ -14,4 +15,10 @@ export const TreesData = [
     palmMedium,
     palmSmall,
     pine,
-]
+].map(el => ({
+    ...el,
+    specs: {
+        ...el.specs,
+        stages: el.specs.stages.map(stage => ({...stage, uuid: generateUUID()}))
+    }
+}))

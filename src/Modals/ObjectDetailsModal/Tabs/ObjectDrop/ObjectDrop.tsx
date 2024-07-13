@@ -13,9 +13,13 @@ import {useMemo, useState} from "react";
 import Button from "@mui/material/Button";
 import styles from './ObjectDrop.module.scss';
 import {AddNewDropForm} from "./AddNewDropForm.tsx";
+import {findItem} from "../../../../const/allItems.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {objectDetailsModalSelectors} from "../../store.selectors.ts";
+import {objectDetailsModalSliceActions} from "../../store.ts";
 
 interface Column {
-    id: 'id' | 'chance' | 'amount'
+    id: 'id' | 'name' | 'chance' | 'amount'
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -24,6 +28,7 @@ interface Column {
 
 const columns: readonly Column[] = [
     {id: 'id', label: 'ID', format: (v: string | number | number[]) => `${v}`},
+    {id: 'name', label: 'Name', format: (v: string | number | number[]) => findItem(v as string)?.name ?? '[Unknown]'},
     {
         id: 'chance', label: 'Chance', format: (v: string | number | number[]) => {
             if (Array.isArray(v)) {
@@ -45,11 +50,13 @@ const columns: readonly Column[] = [
 ];
 
 
-interface ObjectDropProps {
-    objectData: TreeModel;
-}
+export const ObjectDrop = () => {
+    const dispatch = useDispatch();
 
-export const ObjectDrop = ({objectData}: ObjectDropProps) => {
+    const objectData = useSelector(objectDetailsModalSelectors.objectData);
+    const objectStage = useSelector(objectDetailsModalSelectors.objectStage) ?? 0;
+
+    if (!objectData) return <>Loading...</>
     return (
         <div className={styles.container}>
             <div className={styles.table}>
@@ -73,13 +80,13 @@ export const ObjectDrop = ({objectData}: ObjectDropProps) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {objectData.specs.stages[0].drop
+                            {objectData.specs.stages[objectStage].drop
                                 .map((row) => {
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                             <TableCell>
                                                 <Button color="error" variant="contained" onClick={() => {
-                                                    alert("TODO")
+                                                    dispatch(objectDetailsModalSliceActions.deleteDrop(row.uuid))
                                                 }}>
                                                     DELETE
                                                 </Button>
@@ -89,7 +96,7 @@ export const ObjectDrop = ({objectData}: ObjectDropProps) => {
                                                 const value = row[column.id];
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
-                                                        {column.format(value)}
+                                                        {column.format(column.id === 'name' ? row.id : value)}
                                                     </TableCell>
                                                 );
                                             })}
