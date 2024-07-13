@@ -34,20 +34,20 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
     const [isActionCollisions, setIsActiveCollisons] = useState<boolean>(false);
     const [isBlackBg, setIsBlackBg] = useState<boolean>(false);
     const [gridScale, setGridScale] = useState<number>(initialGridScale);
+    const [isZIndexLine, setIsZIndexLine] = useState<boolean>(false);
     const [treeTrunkOffset, setTreeTrunkOffset] = useState({x: 0, y: 0});
-
-    const objectStageData = useMemo(() => objectData.specs.stages[stage], [objectData.specs.stages, stage]);
-
     const [textureVectors, setTextureVectors] = useState<Vector[]>([]);
     const [groundCollisionVectors, setGroundCollisionVectors] = useState<Vector[]>([]);
     const [actionCollisionVectors, setActionCollisionVectors] = useState<ActionVector[][]>([]);
     const [groundPlaceVectors, setGroundPlaceVectors] = useState<Vector[]>([]);
+    const [zIndexLines, setZIndexLines] = useState<Vector[]>([]);
 
     useEffect(() => {
         const texturesVectors: Vector[] = [];
         const groundCollisionsVectorsData: Vector[] = [];
         const groundPlaceVectorsData: Vector[] = [];
         const actionCollisionVectorsData: ActionVector[][] = [];
+        const zIndexLinesData: Vector[] = [];
 
         if (objectData.type === 'tree') {
             setTreeTrunkOffset({
@@ -84,12 +84,19 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                 actionType: el.action_type,
                 color: contrastColors[index]
             })));
+            zIndexLinesData.push({
+                x: el.z_index.x,
+                y: el.z_index.y,
+                width: el.z_index.width,
+                height: el.z_index.height
+            })
         });
         setTextureVectors(texturesVectors);
         setGroundCollisionVectors(groundCollisionsVectorsData);
         setGroundPlaceVectors(groundPlaceVectorsData);
         setActionCollisionVectors(actionCollisionVectorsData);
-    }, [objectData.specs.stages])
+        setZIndexLines(zIndexLinesData);
+    }, [objectData])
 
 
     const handleChangeTextureVector = useCallback((data: Vector) => {
@@ -116,6 +123,12 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         setActionCollisionVectors(newActionCollisionVectors);
     }, [actionCollisionVectors, stage])
 
+    const handleChangeZIndexLines = useCallback((data: Vector) => {
+        const newZIndexLines = [...zIndexLines];
+        newZIndexLines[stage] = data;
+        setZIndexLines(newZIndexLines);
+    }, [stage, zIndexLines])
+
     const objectX = useMemo(() => {
         return (gridRows * gridSize) / 2;
     }, []);
@@ -124,20 +137,6 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         return (gridCols * gridSize) / 2;
     }, []);
 
-    const objectOrigin = useMemo(() => {
-        if (!groundPlaceVectors[stage]) {
-            return {
-                x: 0, y: 0
-            }
-        }
-        let x = (gridRows * gridSize) / 2;
-        x += groundPlaceVectors[stage].x * CELL_SIZE;
-        let y = (gridCols * gridSize) / 2;
-        y += groundPlaceVectors[stage].y * CELL_SIZE;
-        return {
-            x, y
-        }
-    }, [groundPlaceVectors, stage])
 
     if (!groundPlaceVectors[stage]) return null;
 
@@ -183,6 +182,10 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                         control={<Checkbox checked={isActionCollisions}
                                            onClick={() => setIsActiveCollisons(prev => !prev)}/>}
                         label="Show actions collisions"/>
+                    <FormControlLabel
+                        control={<Checkbox checked={isZIndexLine}
+                                           onClick={() => setIsZIndexLine(prev => !prev)}/>}
+                        label="Show z index line"/>
                 </FormGroup>
             </div>
         </div>
@@ -202,6 +205,9 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                     x: "Texture x offset",
                     y: "Texture y offset"
                 }}/>}
+            {zIndexLines[stage] &&
+                <VectorForm color={objectAreasColors.zIndexLine} title="Z Index line" data={zIndexLines[stage]}
+                            onChange={handleChangeZIndexLines}/>}
             {actionCollisionVectors[stage] && <ActionVectorForm
                 title="Actions"
                 data={actionCollisionVectors[stage]}
@@ -274,6 +280,17 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                             height: `${groundPlaceVectors[stage].height * gridSize}px`,
                             border: isGroundArea ? `1px solid ${objectAreasColors.groundArea}` : undefined,
                             transform: `translate(${objectX}px, ${objectY}px)`,
+                        }}/>}
+
+                        {/* Z INDEX AREA */}
+                        {(zIndexLines[stage] && isZIndexLine) && <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: `${zIndexLines[stage].width}px`,
+                            height: `${zIndexLines[stage].height}px`,
+                            border: `1px solid ${objectAreasColors.zIndexLine}`,
+                            transform: `translate(${objectX + zIndexLines[stage].x}px, ${objectY + zIndexLines[stage].y}px)`,
                         }}/>}
 
                         {groundCollisionVectors[stage] && <div style={{

@@ -38,7 +38,8 @@ export interface TreeStageModel {
     drop: Array<ObjectDropModel>;
     ground_collision: ObjectGroundCollisionModel;
     action_collisions: Array<ObjectActionCollisionModel>;
-    ground_place: GroundPlaceModel
+    ground_place: GroundPlaceModel;
+    z_index: Vector;
 }
 
 export interface ActionVector extends Vector {

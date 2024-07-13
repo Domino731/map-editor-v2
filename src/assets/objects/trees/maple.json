@@ -48,6 +48,12 @@
           "height": 1,
           "texture_x_offset": 0,
           "texture_y_offset": 0
+        },
+        "z_index": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
         }
       },
       {
@@ -86,6 +92,12 @@
           "height": 1,
           "texture_x_offset": 0,
           "texture_y_offset": 0
+        },
+        "z_index": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
         }
       },
       {
@@ -121,6 +133,12 @@
           "height": 1,
           "texture_x_offset": 0,
           "texture_y_offset": 0
+        },
+        "z_index": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
         }
       },
       {
@@ -164,6 +182,12 @@
           "height": 1,
           "texture_x_offset": 0,
           "texture_y_offset": 16
+        },
+        "z_index": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
         }
       },
       {
@@ -207,6 +231,12 @@
           "height": 1,
           "texture_x_offset": -16,
           "texture_y_offset": -80
+        },
+        "z_index": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
         }
       }
     ]
