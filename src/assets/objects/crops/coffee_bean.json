@@ -3,12 +3,6 @@
   "name": "Coffee Bean",
   "type": "crop",
   "specs": {
-    "trunk": {
-      "x": 48,
-      "y": 647,
-      "width": 16,
-      "height": 21
-    },
     "stages": [
       {
         "name": "crops",
