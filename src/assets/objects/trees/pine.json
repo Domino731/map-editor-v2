@@ -34,13 +34,15 @@
           "width": 8,
           "height": 7
         },
-        "action_collision": {
-          "x": 4,
-          "y": 2,
-          "width": 10,
-          "height": 10,
-          "action_type": "Cut"
-        },
+        "action_collisions": [
+          {
+            "x": 4,
+            "y": 2,
+            "width": 10,
+            "height": 10,
+            "action_type": "Cut"
+          }
+        ],
         "ground_place": {
           "width": 1,
           "height": 1,
@@ -76,13 +78,15 @@
           "width": 11,
           "height": 12
         },
-        "action_collision": {
-          "x": 2,
-          "y": 2,
-          "width": 13,
-          "height": 13,
-          "action_type": "Cut"
-        },
+        "action_collisions": [
+          {
+            "x": 4,
+            "y": 2,
+            "width": 10,
+            "height": 10,
+            "action_type": "Cut"
+          }
+        ],
         "ground_place": {
           "width": 1,
           "height": 1,
@@ -117,13 +121,15 @@
           "width": 14,
           "height": 15
         },
-        "action_collision": {
-          "x": 0,
-          "y": 0,
-          "width": 16,
-          "height": 16,
-          "action_type": "Cut"
-        },
+        "action_collisions": [
+          {
+            "x": 4,
+            "y": 2,
+            "width": 10,
+            "height": 10,
+            "action_type": "Cut"
+          }
+        ],
         "ground_place": {
           "width": 1,
           "height": 1,
@@ -166,13 +172,15 @@
           "width": 13,
           "height": 16
         },
-        "action_collision": {
-          "x": 0,
-          "y": 0,
-          "width": 14,
-          "height": 14,
-          "action_type": "Cut"
-        },
+        "action_collisions": [
+          {
+            "x": 4,
+            "y": 2,
+            "width": 10,
+            "height": 10,
+            "action_type": "Cut"
+          }
+        ],
         "ground_place": {
           "width": 1,
           "height": 1,
@@ -215,13 +223,15 @@
           "width": 16,
           "height": 16
         },
-        "action_collision": {
-          "x": 0,
-          "y": 0,
-          "width": 18,
-          "height": 18,
-          "action_type": "Cut"
-        },
+        "action_collisions": [
+          {
+            "x": 4,
+            "y": 2,
+            "width": 10,
+            "height": 10,
+            "action_type": "Cut"
+          }
+        ],
         "ground_place": {
           "width": 1,
           "height": 1,
