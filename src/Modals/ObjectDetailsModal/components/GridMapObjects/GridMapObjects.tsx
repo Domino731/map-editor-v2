@@ -103,7 +103,7 @@ export const MapObjectImage = () => {
                 y={texture.y}
                 width={texture.width}
                 height={texture.height}
-                type={objectData.type}
+                type={objectData.type as 'tree'}
                 isBorder={isTextureHighlighted}
             />}
         </div>

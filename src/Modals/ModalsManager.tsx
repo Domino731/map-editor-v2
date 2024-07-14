@@ -5,10 +5,11 @@ import {ObjectDetailsModal} from "./ObjectDetailsModal";
 
 export const ModalsManager = () => {
     const activeModal = useSelector(AppSelectors.activeModal);
+    const modalProps = useSelector(AppSelectors.modalProps);
 
     switch (activeModal) {
         case Modals.ObjectDetails:
-            return <ObjectDetailsModal isOpen/>
+            return <ObjectDetailsModal isOpen objectId={modalProps?.objectId as string}/>
         default:
             return null;
     }

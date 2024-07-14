@@ -6,11 +6,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import styles from './MultiStageList.module.scss';
 import {ObjectImage} from "../components/ObjectImage";
-import {useTheme} from "@mui/material";
+import {Box, IconButton, Tooltip, useTheme} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
 import {getObjectSprite} from "../components/ObjectImage/ObjectImage.utils.ts";
+import {Modals} from "../../../Modals/ModalManager.types.ts";
+import InfoIcon from "@mui/icons-material/Info";
 
 interface MultiStageListProps {
     objects: any[];
@@ -34,10 +36,32 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
                         id="panel1-header"
                         className={styles.accordionSummary}
                     >
-                        <p style={{
-                            margin: 0,
-                            color: currentObjectId === object.id ? theme.palette.primary.main : 'white'
-                        }}> {object.name} {!object.specs.stages && 'No stages'}</p>
+                        <Box sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                        }}>
+                            <p style={{
+                                margin: 0,
+                                color: currentObjectId === object.id ? theme.palette.primary.main : 'white'
+                            }}> {object.name}</p>
+                            <Tooltip title="Details">
+                                <IconButton
+                                    onClick={(e) => {
+                                        console.log('open');
+                                        e.preventDefault();
+                                        dispatch(AppSliceActions.setActiveModel({
+                                            modalName: Modals.ObjectDetails, modalProps: {
+                                                objectId: object.id
+                                            }
+                                        }))
+                                    }}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+
 
                     </AccordionSummary>
                     <AccordionDetails className={styles.accordionDetails}>
@@ -59,7 +83,6 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
                                 }}>
                                     Stage {stageIndex + 1}
                                 </p>
-
                             </li>)}
 
                         </ul>

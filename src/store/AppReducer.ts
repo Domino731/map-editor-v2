@@ -3,6 +3,7 @@ import {AppState, SetActiveModelActionProps} from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {Modals} from "../Modals/ModalManager.types.ts";
+import {TreesData} from "../const/trees.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 
@@ -12,7 +13,10 @@ const initialState: AppState = {
     selectedTile: null,
     rightColumnType: RightColumnTabs.Tiles,
     objectStage: null,
-    activeModel: Modals.ObjectDetails
+    activeModel: Modals.ObjectDetails,
+    modalProps: {
+        objectId: TreesData[1].id
+    }
 }
 
 const appSlice = createSlice({
@@ -21,6 +25,7 @@ const appSlice = createSlice({
     reducers: {
         setActiveModel: (state, action: PayloadAction<SetActiveModelActionProps>) => {
             state.activeModel = action.payload.modalName;
+            state.modalProps = action.payload.modalProps;
         },
         setObjectId: (state, action: PayloadAction<AppState['objectId']>) => {
             state.objectId = action.payload;
@@ -37,8 +42,9 @@ const appSlice = createSlice({
         setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
             state.selectedTile = action.payload;
         },
-        closeModel: (state) => {
-            state.activeModel = initialState.activeModel;
+        closeModal: (state) => {
+            state.activeModel = null;
+            state.modalProps = null;
         }
     },
 });

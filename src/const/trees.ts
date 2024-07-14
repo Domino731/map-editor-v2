@@ -7,6 +7,7 @@ import palmSmall from '../assets/objects/trees/palm-small.json';
 import pine from '../assets/objects/trees/pine.json';
 import {generateUUID} from "../utils/string.ts";
 
+
 export const TreesData = [
     mushroom,
     maple,

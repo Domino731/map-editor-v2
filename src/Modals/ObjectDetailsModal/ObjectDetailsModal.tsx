@@ -2,10 +2,7 @@ import {Modal, Tab, Tabs, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSliceActions} from "../../store/AppReducer.ts";
 import styles from './ObjectDetailsModal.module.scss';
-import {TreesData} from "../../const/trees.ts";
-import {useCallback, useEffect, useMemo, useState} from "react";
-import {AllObjects} from "../../const/allObjects.ts";
-import {TreeModel} from "../../models/tree.ts";
+import {useCallback, useEffect, useState} from "react";
 import {ObjectDetailsModelTabs} from "./ObjectDetailsModel.const.ts";
 import {ObjectGeneralInfo} from "./Tabs/ObjectGeneralInfo";
 import {ObjectAreas} from "./Tabs/ObjectAreas";
@@ -15,18 +12,21 @@ import {ObjectDrop} from "./Tabs/ObjectDrop";
 import {objectDetailsModalSliceActions} from "./store.ts";
 import {objectDetailsModalSelectors} from "./store.selectors.ts";
 
-interface ObjectDetailsModalProps {
+export interface ObjectDetailsModalProps {
     isOpen: boolean;
+    objectId: string;
 }
 
-export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
+export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) => {
     const dispatch = useDispatch();
 
     const [tab, setTab] = useState<ObjectDetailsModelTabs>(ObjectDetailsModelTabs.Drop);
 
     useEffect(() => {
-        dispatch(objectDetailsModalSliceActions.setObjectDataById(TreesData[1].id));
-    }, [dispatch])
+        dispatch(objectDetailsModalSliceActions.setObjectDataById(objectId));
+    }, [dispatch]);
+
+
     const objectData = useSelector(objectDetailsModalSelectors.objectData);
     const TabComponent = useCallback(() => {
         switch (tab) {
@@ -49,7 +49,7 @@ export const ObjectDetailsModal = ({isOpen}: ObjectDetailsModalProps) => {
 
     return <Modal
         open={isOpen}
-        onClose={() => dispatch(AppSliceActions.closeModel())}
+        onClose={() => dispatch(AppSliceActions.closeModal())}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className={styles.modal}

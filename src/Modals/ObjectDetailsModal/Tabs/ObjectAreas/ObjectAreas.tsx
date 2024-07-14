@@ -6,7 +6,7 @@ import {ObjectAreasDebugSettings} from "../../components/ObjectAreasDebugSetting
 import {ObjectVectors} from "../../components/ObjectVectors";
 import {GridScale} from "../../components/GridScale";
 import {GroundArea, GroundCollision, ObjectActionCollisions, ZIndexLine} from "../../components/GridMapObjects";
-import {MapObjectImage} from "../../components/GridMapObjects/GridMapObjects.tsx";
+import {MapObjectImage} from "../../components/GridMapObjects";
 import {useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 

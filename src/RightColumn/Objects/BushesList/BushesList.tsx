@@ -35,7 +35,11 @@ export const BushesList = ({objects}: BushesListProps) => {
                 </div>
                 <Tooltip title="Details">
                     <IconButton
-                        onClick={() => dispatch(AppSliceActions.setActiveModel({modalName: Modals.ObjectDetails}))}>
+                        onClick={() => dispatch(AppSliceActions.setActiveModel({
+                            modalName: Modals.ObjectDetails, modalProps: {
+                                objectId: el.id
+                            }
+                        }))}>
                         <InfoIcon/>
                     </IconButton>
                 </Tooltip>
