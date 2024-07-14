@@ -10,7 +10,7 @@ export interface GameObjectTexture {
 
 export interface GameObjectDrop {
     id: string;
-    change: number | number[];
+    chance: number | number[];
     amount: number | number[];
 }
 
@@ -39,7 +39,7 @@ export interface GameObjectBase {
     }
 }
 
-export interface MineObject extends GameObjectBase {
+export interface MineObjectModel extends GameObjectBase {
 }
 
 

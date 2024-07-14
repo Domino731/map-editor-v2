@@ -22,6 +22,7 @@
         "chance": 4
       }
     ],
+    "exp": 100,
     "ground_collision": {
       "width": 16,
       "height": 16,

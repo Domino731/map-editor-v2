@@ -6,14 +6,14 @@ export interface MineJsonModel {
     specs: {
         texture: {
             name: string;
-            width: string;
-            height: string;
+            width: number;
+            height: number;
             x: number;
             y: number;
         },
         drop: Array<{
             id: string;
-            change: number | number[];
+            chance: number | number[];
             amount: number | number[];
         }>;
         exp: number;

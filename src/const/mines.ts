@@ -1,3 +1,5 @@
+import {processMineData} from "./mines.process.ts";
+
 import alienStroneLarge from '../assets/objects/mines/alien_stone_large.json';
 import amethystOre from '../assets/objects/mines/amethyst_ore.json';
 import aquamarine from '../assets/objects/mines/aquamarine_ore.json';
@@ -27,35 +29,36 @@ import stoneLarge from '../assets/objects/mines/stone_large.json';
 import topazOre from '../assets/objects/mines/topaz_ore.json';
 import trunkBig from '../assets/objects/mines/trunk_big.json';
 import valcanoRockLarge from '../assets/objects/mines/volcano_rockl_large.json';
+import {MineObjectModel} from "../models/GameObject.ts";
 
-export const MinesData = [
-    alienStroneLarge,
-    amethystOre,
-    aquamarine,
-    blueGemActivelarge,
-    blueGemLarge,
-    boneNode,
-    cinderShard,
-    clayNode,
-    coalRockLarge,
-    copperNode,
-    diamondOre,
-    emeraldOre,
-    frozenGeodeNode,
-    gemOre,
-    geodeNode,
-    iridiumOre,
-    ironNode,
-    jadeNode,
-    logLarge,
-    magmaGeodeNode,
-    musselNode,
-    mysticStone,
-    omniGeodeNode,
-    radioactiveNode,
-    rubyOre,
-    stoneLarge,
-    topazOre,
-    trunkBig,
-    valcanoRockLarge
+export const MinesData: Array<MineObjectModel> = [
+    processMineData(alienStroneLarge),
+    processMineData(amethystOre),
+    processMineData(aquamarine),
+    processMineData(blueGemActivelarge),
+    processMineData(blueGemLarge),
+    processMineData(boneNode),
+    processMineData(cinderShard),
+    processMineData(clayNode),
+    processMineData(coalRockLarge),
+    processMineData(copperNode),
+    processMineData(diamondOre),
+    processMineData(emeraldOre),
+    processMineData(frozenGeodeNode),
+    processMineData(gemOre),
+    processMineData(geodeNode),
+    processMineData(iridiumOre),
+    processMineData(ironNode),
+    processMineData(jadeNode),
+    processMineData(logLarge),
+    processMineData(magmaGeodeNode),
+    processMineData(musselNode),
+    processMineData(mysticStone),
+    processMineData(omniGeodeNode),
+    processMineData(radioactiveNode),
+    processMineData(rubyOre),
+    processMineData(stoneLarge),
+    processMineData(topazOre),
+    processMineData(trunkBig),
+    processMineData(valcanoRockLarge)
 ]
