@@ -5,24 +5,14 @@ import oak from '../assets/objects/trees/oak.json';
 import palmMedium from '../assets/objects/trees/palm-medium.json';
 import palmSmall from '../assets/objects/trees/palm-small.json';
 import pine from '../assets/objects/trees/pine.json';
-import {generateUUID} from "../utils/string.ts";
-
+import {processTreeData} from "./trees.process.ts";
 
 export const TreesData = [
-    mushroom,
-    maple,
-    mahogany,
-    oak,
-    palmMedium,
-    palmSmall,
-    pine,
-].map(el => ({
-    ...el,
-    specs: {
-        ...el.specs,
-        stages: el.specs.stages.map(stage => ({
-            ...stage,
-            drop: stage.drop.map((drop => ({...drop, uuid: generateUUID()})))
-        }))
-    }
-}))
+    processTreeData(mushroom),
+    processTreeData(maple),
+    processTreeData(mahogany),
+    processTreeData(oak),
+    processTreeData(palmMedium),
+    processTreeData(palmSmall),
+    processTreeData(pine),
+];

@@ -1,9 +1,9 @@
-import {MineObjectModel} from "../models/GameObject.ts";
 import {MineJsonModel} from "./types.ts";
 import {processObjectActionType, processObjectTexture, processObjectType} from "./utils.ts";
+import {MineObjectModel} from "../models/GameObject.ts";
 import {generateUUID} from "../utils/string.ts";
 
-export const processMineData = (data: MineJsonModel): MineObjectModel => ({
+export const processBushData = (data: MineJsonModel): MineObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),

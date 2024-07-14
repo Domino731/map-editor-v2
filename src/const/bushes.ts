@@ -21,29 +21,30 @@ import bush20 from '../assets/objects/bushes/bush_20.json'
 import bush21 from '../assets/objects/bushes/bush_21.json'
 import bush22 from '../assets/objects/bushes/bush_22.json'
 import bush23 from '../assets/objects/bushes/bush_23.json'
+import {processBushData} from "./bushes.process.ts";
 
 export const BushesData = [
-    bush1,
-    bush2,
-    bush3,
-    bush4,
-    bush5,
-    bush6,
-    bush7,
-    bush8,
-    bush9,
-    bush10,
-    bush11,
-    bush12,
-    bush13,
-    bush14,
-    bush15,
-    bush16,
-    bush17,
-    bush18,
-    bush19,
-    bush20,
-    bush21,
-    bush22,
-    bush23
+    processBushData(bush1),
+    processBushData(bush2),
+    processBushData(bush3),
+    processBushData(bush4),
+    processBushData(bush5),
+    processBushData(bush6),
+    processBushData(bush7),
+    processBushData(bush8),
+    processBushData(bush9),
+    processBushData(bush10),
+    processBushData(bush11),
+    processBushData(bush12),
+    processBushData(bush13),
+    processBushData(bush14),
+    processBushData(bush15),
+    processBushData(bush16),
+    processBushData(bush17),
+    processBushData(bush18),
+    processBushData(bush19),
+    processBushData(bush20),
+    processBushData(bush21),
+    processBushData(bush22),
+    processBushData(bush23)
 ]

@@ -22,6 +22,8 @@ export const processObjectTexture = (objectTexture: string) => {
             return GameObjectTextureName.Crops;
         case "trees":
             return GameObjectTextureName.Trees;
+        case "bushes":
+            return GameObjectTextureName.Bushes;
         default:
             console.error(`processObjectTexture(): no match for ${objectTexture}`)
             return GameObjectTextureName.Trees;

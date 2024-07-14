@@ -19,11 +19,26 @@
       "x": 0,
       "y": 0
     },
-    "action_collision": {
-      "width": 36,
-      "height": 36,
-      "x": -2,
-      "y": -2
+    "action_collisions": [
+      {
+        "x": 4,
+        "y": 2,
+        "width": 10,
+        "height": 10,
+        "action_type": "Cut"
+      }
+    ],
+    "z_index": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "ground_place": {
+      "width": 1,
+      "height": 1,
+      "texture_x_offset": 0,
+      "texture_y_offset": 0
     }
   }
 }

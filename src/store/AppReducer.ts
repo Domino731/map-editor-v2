@@ -13,10 +13,8 @@ const initialState: AppState = {
     selectedTile: null,
     rightColumnType: RightColumnTabs.Tiles,
     objectStage: null,
-    activeModel: Modals.ObjectDetails,
-    modalProps: {
-        objectId: TreesData[1].id
-    }
+    activeModel: null,
+    modalProps: null
 }
 
 const appSlice = createSlice({

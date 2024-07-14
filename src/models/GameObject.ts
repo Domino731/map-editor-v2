@@ -16,6 +16,7 @@ export interface GameObjectDrop {
 
 export interface GameObjectActionCollision extends Vector {
     actionType: GameObjectActionsUnion;
+    uuid: string;
 }
 
 export interface GameObjectGroundPlace {
@@ -25,6 +26,7 @@ export interface GameObjectGroundPlace {
     textureYOffset: number;
 }
 
+
 export interface GameObjectBase {
     id: string;
     name: string;
@@ -33,6 +35,7 @@ export interface GameObjectBase {
         texture: GameObjectTexture;
         drop: Array<GameObjectDrop>;
         exp: number;
+        groundCollision: Vector;
         actionCollisions: Array<GameObjectActionCollision>;
         zIndex: Vector;
         groundPlace: GameObjectGroundPlace;
@@ -42,12 +45,46 @@ export interface GameObjectBase {
 export interface MineObjectModel extends GameObjectBase {
 }
 
+export interface TreeStageModel {
+    texture: GameObjectTextureNameUnion;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
+    nextStage: number;
+    drop: Array<GameObjectDrop>;
+    groundCollision: Vector;
+    actionCollisions: Array<GameObjectActionCollision>;
+    zIndex: Vector;
+    groundPlace: GameObjectGroundPlace;
+}
+
+export interface TreeTrunkModel {
+    x: number,
+    y: number,
+    width: number;
+    height: number;
+    offsetX: number;
+    offsetY: number;
+}
+
+export interface TreeObjectModel {
+    id: string;
+    name: string;
+    type: GameObjectTypeUnion;
+    specs: {
+        treeTrunk: TreeTrunkModel;
+        stages: Array<TreeStageModel>;
+    }
+}
+
 
 // ENUMS
 export enum GameObjectType {
     Mine = 'Mine',
     Tree = 'Tree',
-    Crop = 'Crop'
+    Crop = 'Crop',
+    Bush = "Bush"
 }
 
 export type GameObjectTypeUnion = keyof typeof GameObjectType;
@@ -55,7 +92,8 @@ export type GameObjectTypeUnion = keyof typeof GameObjectType;
 export enum GameObjectTextureName {
     Mines = 'Mines',
     Trees = 'Trees',
-    Crops = 'Crops'
+    Crops = 'Crops',
+    Bushes = "Bushes"
 }
 
 export type GameObjectTextureNameUnion = keyof typeof GameObjectTextureName;
