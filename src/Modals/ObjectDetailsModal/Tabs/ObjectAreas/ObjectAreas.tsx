@@ -11,6 +11,9 @@ import {Vector} from "../../../../types.ts";
 import {contrastColors} from "../../ObjectDetailsModel.const.ts";
 import {MapGrid} from "../../../../components/MapGrid";
 import {objectAreasColors} from "./ObjectAreas.const.ts";
+import {ObjectStageSelect} from "../../components/ObjectStageSelect";
+import {ObjectAreasDebugSettings} from "../../components/ObjectAreasDebugSettings";
+import {ObjectVectors} from "../../components/ObjectVectors";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -145,83 +148,17 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
         <div className={styles.section}>
             <Typography variant="h6" sx={{borderBottom: '1px solid grey', marginBottom: '24px'}}>Settings</Typography>
             <div className={styles.settingsSection}>
-                <Typography className={styles.title}>Object Stage</Typography>
-                <ul className={styles.settingsSectionStageList}>
-                    {objectData.specs.stages.map((_, index) => {
-                        return <li
-                            key={`object-stages-list-${index}`}
-                            className={styles.settingsSectionStageListItem}
-                            onClick={() => setStage(index)}
-                            style={{border: `${stage === index ? 2 : 1}px solid ${stage === index ? theme.palette.primary.main : 'grey'}`}}
-                        >
-                            {index + 1}
-                        </li>
-                    })}
-                </ul>
+                <ObjectStageSelect/>
             </div>
 
             <div className={styles.settingsSection}>
-                <Typography className={styles.title}>Debug Settings</Typography>
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox checked={isTextureBorder}
-                                                         onClick={() => setIsTextureBorder(prev => !prev)}/>}
-                                      label="Show texture red border"/>
-                    <FormControlLabel
-                        control={<Checkbox checked={isBlackBg} onClick={() => setIsBlackBg(prev => !prev)}/>}
-                        label="Show black background"/>
-                    <FormControlLabel control={<Checkbox checked={isGrid} onClick={() => setIsGrid(prev => !prev)}/>}
-                                      label="Show grid"/>
-                    <FormControlLabel
-                        control={<Checkbox checked={isGroundArea} onClick={() => setIsGroundArea(prev => !prev)}/>}
-                        label="Show ground area"/>
-                    <FormControlLabel
-                        control={<Checkbox checked={isGroundCollision}
-                                           onClick={() => setIsGroundCollision(prev => !prev)}/>}
-                        label="Show ground collision"/>
-                    <FormControlLabel
-                        control={<Checkbox checked={isActionCollisions}
-                                           onClick={() => setIsActiveCollisons(prev => !prev)}/>}
-                        label="Show actions collisions"/>
-                    <FormControlLabel
-                        control={<Checkbox checked={isZIndexLine}
-                                           onClick={() => setIsZIndexLine(prev => !prev)}/>}
-                        label="Show z index line"/>
-                </FormGroup>
+                <ObjectAreasDebugSettings/>
             </div>
         </div>
 
         <div className={styles.section}>
             <Typography variant="h6" sx={{borderBottom: '1px solid grey', marginBottom: '24px'}}>Areas</Typography>
-            {textureVectors[stage] &&
-                <VectorForm color={objectAreasColors.texture} title="Texture" data={textureVectors[stage]}
-                            onChange={handleChangeTextureVector}/>}
-            {groundCollisionVectors[stage] &&
-                <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
-                            data={groundCollisionVectors[stage]}
-                            onChange={handleChangeGroundCollisonVector}/>}
-            {groundPlaceVectors[stage] &&
-                <VectorForm color={objectAreasColors.groundArea} title="Ground place" data={groundPlaceVectors[stage]}
-                            onChange={handleChangeGroundPlaceVector} labels={{
-                    x: "Texture x offset",
-                    y: "Texture y offset"
-                }}/>}
-            {zIndexLines[stage] &&
-                <VectorForm color={objectAreasColors.zIndexLine} title="Z Index line" data={zIndexLines[stage]}
-                            onChange={handleChangeZIndexLines}/>}
-            {actionCollisionVectors[stage] && <ActionVectorForm
-                title="Actions"
-                data={actionCollisionVectors[stage]}
-                onChange={handleChangeActionCollisionVectors}
-            />}
-            {(stage === objectData.specs.stages.length - 1 && objectData.type === 'tree') &&
-                <VectorForm title="Tree trunk"
-                            data={{width: 0, height: 0, ...treeTrunkOffset}}
-                            onChange={({x, y}) => setTreeTrunkOffset({x, y})}
-                            isInputHidden={{
-                                width: true,
-                                height: true
-                            }}
-                />}
+            <ObjectVectors/>
         </div>
 
         <div className={styles.section}>

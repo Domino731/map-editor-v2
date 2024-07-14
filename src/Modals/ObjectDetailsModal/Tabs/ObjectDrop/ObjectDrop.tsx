@@ -1,15 +1,9 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import {TreeModel} from "../../../../models/tree.ts";
-import {Checkbox} from "@mui/material";
-import {useMemo, useState} from "react";
 import Button from "@mui/material/Button";
 import styles from './ObjectDrop.module.scss';
 import {AddNewDropForm} from "./AddNewDropForm.tsx";
