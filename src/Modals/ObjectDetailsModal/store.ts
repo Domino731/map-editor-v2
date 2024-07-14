@@ -19,6 +19,7 @@ const initialState: ObjectDetailsModalState = {
             isGroundCollisionHighlighted: false,
             isActionsCollisionsHighlighted: false,
             isZIndexLineHighlighted: false,
+            gridScale: 3
         },
         vectors: {
             texture: [],
@@ -38,6 +39,9 @@ const objectDetailsModalSlice = createSlice({
     name: OBJECT_DETAILS_MODAL_REDUCER_NAME,
     initialState,
     reducers: {
+        setGridScale: (state, {payload}: PayloadAction<ObjectAreasSettings['gridScale']>) => {
+            state.objectAreas.settings.gridScale = payload;
+        },
         setObjectAreasVectors: (state, {payload}: PayloadAction<{
             vector: Vector,
             name: keyof ObjectDetailsObjectAreasVectors

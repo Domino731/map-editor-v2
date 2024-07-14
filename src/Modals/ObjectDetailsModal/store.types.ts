@@ -27,4 +27,5 @@ export interface ObjectAreasSettings {
     isGroundCollisionHighlighted: boolean;
     isActionsCollisionsHighlighted: boolean;
     isZIndexLineHighlighted: boolean;
+    gridScale: number;
 }

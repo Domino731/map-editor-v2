@@ -14,6 +14,9 @@ import {objectAreasColors} from "./ObjectAreas.const.ts";
 import {ObjectStageSelect} from "../../components/ObjectStageSelect";
 import {ObjectAreasDebugSettings} from "../../components/ObjectAreasDebugSettings";
 import {ObjectVectors} from "../../components/ObjectVectors";
+import {GridScale} from "../../components/GridScale";
+import {GroundArea, GroundCollision, ObjectActionCollisions, ZIndexLine} from "../../components/GridMapObjects";
+import {MapObjectImage} from "../../components/GridMapObjects/GridMapObjects.tsx";
 
 interface ObjectAreasProps {
     objectData: TreeModel;
@@ -169,112 +172,18 @@ export const ObjectAreas = ({objectData}: ObjectAreasProps) => {
                 }}>
                     <div className={styles.textureSection}
                          style={{backgroundImage: isGrid ? undefined : 'none', transform: `scale(${gridScale})`}}>
-
-                        {/*Grass grid*/}
                         <MapGrid isBlackBackground={isBlackBg} size={gridMapSize} isGridBorderVisible={isGrid}/>
-
-
-                        {(objectData.type === 'tree' && stage === objectData.specs.stages.length - 1) && <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            transform: `translate(${objectX + treeTrunkOffset.x}px, ${objectY + treeTrunkOffset.y}px)`,
-                        }}>
-                            <ObjectImage
-                                x={objectData.specs.trunk.x}
-                                y={objectData.specs.trunk.y}
-                                width={objectData.specs.trunk.width}
-                                height={objectData.specs.trunk.height}
-                                type={objectData.type}
-                                isBorder={isTextureBorder}
-                            />
-                        </div>}
-
-                        {/*Object image*/}
-                        <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            transform: `translate(${objectX + groundPlaceVectors[stage]?.x ?? 0}px, ${objectY + groundPlaceVectors[stage]?.y ?? 0}px)`,
-                        }}>
-                            {textureVectors[stage] && <ObjectImage
-                                x={textureVectors[stage].x}
-                                y={textureVectors[stage].y}
-                                width={textureVectors[stage].width}
-                                height={textureVectors[stage].height}
-                                type={objectData.type}
-                                isBorder={isTextureBorder}
-                            />}
-                        </div>
-
-
-                        {/* GROUND AREA */}
-                        {(groundPlaceVectors[stage] && isGroundArea) && <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: `${groundPlaceVectors[stage].width * gridSize}px`,
-                            height: `${groundPlaceVectors[stage].height * gridSize}px`,
-                            border: isGroundArea ? `1px solid ${objectAreasColors.groundArea}` : undefined,
-                            transform: `translate(${objectX}px, ${objectY}px)`,
-                        }}/>}
-
-                        {/* Z INDEX AREA */}
-                        {(zIndexLines[stage] && isZIndexLine) && <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: `${zIndexLines[stage].width}px`,
-                            height: `${zIndexLines[stage].height}px`,
-                            border: `1px solid ${objectAreasColors.zIndexLine}`,
-                            transform: `translate(${objectX + zIndexLines[stage].x}px, ${objectY + zIndexLines[stage].y}px)`,
-                        }}/>}
-
-                        {groundCollisionVectors[stage] && <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: `${groundCollisionVectors[stage].width}px`,
-                            height: `${groundCollisionVectors[stage].height}px`,
-                            border: isGroundCollision ? `1px solid ${objectAreasColors.groundCollision}` : undefined,
-                            transform: `translate(${objectX + groundCollisionVectors[stage].x}px, ${objectY + groundCollisionVectors[stage].y}px)`,
-                        }}/>}
-
-
-                        {(actionCollisionVectors[stage] && isActionCollisions) && <>
-                            {actionCollisionVectors[stage].map(({x, y, width, height, color}, index) => <div
-                                // TODO: use uuid instead of index
-                                key={`object-action-collision-${index}`}
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: `${width}px`,
-                                    height: `${height}px`,
-                                    border: `1px dotted ${color}`,
-                                    transform: `translate(${objectX + x}px, ${objectY + y}px)`,
-                                }}/>)}
-                        </>}
+                        <MapObjectImage/>
+                        <GroundArea/>
+                        <ZIndexLine/>
+                        <GroundCollision/>
+                        <ObjectActionCollisions/>
                     </div>
                 </div>
             </Box>
 
 
-            <div className={styles.scaleSection}>
-                <div>
-                    <IconButton onClick={() => setGridScale(prev => Number((prev - 0.1).toFixed(1)))}>
-                        <RemoveIcon/>
-                    </IconButton>
-                    <Typography className={styles.scaleSectionText}>
-                        {gridScale}
-                    </Typography>
-
-                    <IconButton onClick={() => setGridScale(prev => Number((prev + 0.1).toFixed(1)))}>
-                        <AddIcon/>
-                    </IconButton>
-                </div>
-                <button onClick={() => setGridScale(initialGridScale)}>Reset scale</button>
-            </div>
+            <GridScale/>
 
         </div>
 

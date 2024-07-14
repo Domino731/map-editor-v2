@@ -1,0 +1,19 @@
+.scaleSection {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.scaleSectionText {
+  font-size: 18px;
+  font-weight: bold;
+}

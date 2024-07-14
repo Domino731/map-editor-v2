@@ -10,11 +10,13 @@ const objectStage = createSelector(root, (state) => state.objectStage);
 const areasSettings = createSelector(root, (state) => state.objectAreas.settings);
 const objectAreasVectors = createSelector(root, state => state.objectAreas.vectors);
 const objectTreeTrunk = createSelector(root, state => state.objectAreas.treeTrunk)
+const gridScale = createSelector(root, (state) => state.objectAreas.settings.gridScale);
 
 export const objectDetailsModalSelectors = {
     objectData,
     objectStage,
     areasSettings,
     objectAreasVectors,
-    objectTreeTrunk
+    objectTreeTrunk,
+    gridScale
 }
