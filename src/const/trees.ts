@@ -19,6 +19,9 @@ export const TreesData = [
     ...el,
     specs: {
         ...el.specs,
-        stages: el.specs.stages.map(stage => ({...stage, uuid: generateUUID()}))
+        stages: el.specs.stages.map(stage => ({
+            ...stage,
+            drop: stage.drop.map((drop => ({...drop, uuid: generateUUID()})))
+        }))
     }
 }))

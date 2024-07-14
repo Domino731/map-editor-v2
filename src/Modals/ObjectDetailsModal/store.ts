@@ -14,6 +14,9 @@ const objectDetailsModalSlice = createSlice({
     name: OBJECT_DETAILS_MODAL_REDUCER_NAME,
     initialState,
     reducers: {
+        setObjectStage: (stage, action: PayloadAction<ObjectDetailsModalState['objectStage']>) => {
+            stage.objectStage = action.payload;
+        },
         setObjectDataById: (state, action: PayloadAction<string>) => {
             state.objectData = AllObjects.find(({id}) => id === action.payload);
             state.objectStage = 0;

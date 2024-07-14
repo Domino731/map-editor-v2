@@ -17,6 +17,7 @@ import {findItem} from "../../../../const/allItems.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";
+import {ObjectStageSelect} from "../../components/ObjectStageSelect";
 
 interface Column {
     id: 'id' | 'name' | 'chance' | 'amount'
@@ -83,7 +84,7 @@ export const ObjectDrop = () => {
                             {objectData.specs.stages[objectStage].drop
                                 .map((row) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.uuid}>
                                             <TableCell>
                                                 <Button color="error" variant="contained" onClick={() => {
                                                     dispatch(objectDetailsModalSliceActions.deleteDrop(row.uuid))
@@ -108,6 +109,7 @@ export const ObjectDrop = () => {
                 </TableContainer>
             </div>
             <div className={styles.form}>
+                <ObjectStageSelect/>
                 <AddNewDropForm/>
             </div>
         </div>
