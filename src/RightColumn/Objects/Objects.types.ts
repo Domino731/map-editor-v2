@@ -7,5 +7,6 @@ export enum ObjectsTypes {
     StaticTrees,
     Mines,
     Grass,
-    Building
+    Building,
+    Flooring
 }
