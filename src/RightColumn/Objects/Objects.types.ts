@@ -8,5 +8,6 @@ export enum ObjectsTypes {
     Mines,
     Grass,
     Building,
-    Flooring
+    Flooring,
+    HoeDirt
 }

@@ -12,6 +12,7 @@ import {GrassData} from "../../const/objects/grass/grass.ts";
 import {FruitTreesData} from "../../const/objects/fruitTree/fruit-trees.ts";
 import {BuildingsData} from "../../const/objects/buildings/buildings.ts";
 import {FlooringData} from "../../const/objects/flooring/flooring.ts";
+import {HoeDirtData} from "../../const/objects/hoeDirt/hoeDirt.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
@@ -39,5 +40,6 @@ export const Objects = () => {
         {objectsType === ObjectsTypes.Grass && <BushesList objects={GrassData}/>}
         {objectsType === ObjectsTypes.Building && <BushesList objects={BuildingsData}/>}
         {objectsType === ObjectsTypes.Flooring && <BushesList objects={FlooringData}/>}
+        {objectsType === ObjectsTypes.HoeDirt && <BushesList objects={HoeDirtData}/>}
     </div>
 }

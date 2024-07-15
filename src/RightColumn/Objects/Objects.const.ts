@@ -40,5 +40,9 @@ export const objectTypeOptions = [
     {
         label: "Flooring",
         type: ObjectsTypes.Flooring
+    },
+    {
+        label: "Hoe Dirt",
+        type: ObjectsTypes.HoeDirt
     }
 ]

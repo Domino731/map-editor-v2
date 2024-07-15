@@ -5,6 +5,7 @@ import {CropsData} from "./crops/crops.ts";
 import {GrassData} from "./grass/grass.ts";
 import {FruitTreesData} from "./fruitTree/fruit-trees.ts";
 import {BuildingsData} from "./buildings/buildings.ts";
+import {HoeDirtData} from "./hoeDirt/hoeDirt.ts";
 
 export const AllObjects = [
     ...BushesData,
@@ -13,5 +14,6 @@ export const AllObjects = [
     ...CropsData,
     ...GrassData,
     ...FruitTreesData,
-    ...BuildingsData
+    ...BuildingsData,
+    ...HoeDirtData,
 ];

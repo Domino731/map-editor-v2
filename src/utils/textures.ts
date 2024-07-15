@@ -40,6 +40,8 @@ import buildingStonePetBowl from '../assets/map/buildings/stone_pet_bowl.png';
 import buildingTrailerCabin from '../assets/map/buildings/treiler_cabin.png';
 import buildingWaterObelisk from '../assets/map/buildings/water_obelisk.png';
 import buildingWell from '../assets/map/buildings/well.png';
+import terrainFeaturesHoeDirt from '../assets/map/terrainFeatures/hoeDirt.png';
+import terrainFeatuesFlooring from '../assets/map/terrainFeatures/Flooring.png';
 
 const textures = {
     [GameObjectTextureName.Mines]: minesSprite,
@@ -83,6 +85,8 @@ const textures = {
     [GameObjectTextureName.BuildingTreilerCabin]: buildingTrailerCabin,
     [GameObjectTextureName.BuildingWaterObelisk]: buildingWaterObelisk,
     [GameObjectTextureName.BuildingWell]: buildingWell,
+    [GameObjectTextureName.HoeDirt]: terrainFeaturesHoeDirt,
+    [GameObjectTextureName.Flooring]: terrainFeatuesFlooring
 }
 
 export const getTexture = (textureName: GameObjectTextureNameUnion) => {

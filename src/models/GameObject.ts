@@ -109,7 +109,9 @@ export enum GameObjectType {
     Bush = "Bush",
     Grass = "Grass",
     FruitTree = 'FruitTree',
-    Building = "Building"
+    Building = "Building",
+    Flooring = "Flooring",
+    HoeDirt = "HoeDirt"
 }
 
 export type GameObjectTypeUnion = keyof typeof GameObjectType;
@@ -156,7 +158,9 @@ export enum GameObjectTextureName {
     BuildingStonePetBowl = "BuildingStonePetBowl",
     BuildingTreilerCabin = "BuildingTreilerCabin",
     BuildingWaterObelisk = "BuildingWaterObelisk",
-    BuildingWell = "BuildingWell"
+    BuildingWell = "BuildingWell",
+    HoeDirt = "HoeDirt",
+    Flooring = "Flooring"
 }
 
 export type GameObjectTextureNameUnion = keyof typeof GameObjectTextureName;

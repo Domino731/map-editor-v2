@@ -21,6 +21,10 @@ export const processObjectType = (objectType: string) => {
             return GameObjectType.Bush;
         case 'building':
             return GameObjectType.Building;
+        case 'flooring':
+            return GameObjectType.Flooring;
+        case "hoeDirt":
+            return GameObjectType.HoeDirt;
         default:
             console.error(`processObjectType(): no match for ${objectType}`)
             return GameObjectType.Tree;
@@ -69,6 +73,8 @@ export const processObjectTexture = (objectTexture: string) => {
         ['BuildingTreilerCabin']: GameObjectTextureName.BuildingTreilerCabin,
         ['BuildingWaterObelisk']: GameObjectTextureName.BuildingWaterObelisk,
         ['BuildingWell']: GameObjectTextureName.BuildingWell,
+        ['HoeDirt']: GameObjectTextureName.HoeDirt,
+        ['Flooring']: GameObjectTextureName.Flooring
     }
     if (data[objectTexture]) {
         return data[objectTexture];
