@@ -51,6 +51,9 @@ export interface BushObjectModel extends GameObjectBase {
 export interface GrassObjectModel extends GameObjectBase {
 }
 
+export interface BuildingObjectModel extends GameObjectBase {
+}
+
 export interface TreeStageModel {
     texture: GameObjectTexture;
     nextStage: number;
@@ -106,6 +109,7 @@ export enum GameObjectType {
     Bush = "Bush",
     Grass = "Grass",
     FruitTree = 'FruitTree',
+    Building = "Building"
 }
 
 export type GameObjectTypeUnion = keyof typeof GameObjectType;

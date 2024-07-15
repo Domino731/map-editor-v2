@@ -1,11 +1,5 @@
-import bushSprite from '../../assets/map/objects/environment/bushes.png';
-import minesSprite from '../../assets/map/objects/environment/mines.png';
-import treesSprite from '../../assets/map/objects/environment/trees.png';
-import cropsSprite from '../../assets/map/objects/environment/crops.png';
-import grassSprite from '../../assets/map/objects/environment/grass.png';
-import fruitTreesSprite from '../../assets/map/objects/environment/fruit-trees.png';
-import {useMemo} from "react";
-import {GameObjectTexture, GameObjectTextureName} from "../../models/GameObject.ts";
+import {GameObjectTexture} from "../../models/GameObject.ts";
+import {getTexture} from "../../utils/textures.ts";
 
 interface ObjectImageProps {
     texture: GameObjectTexture;
@@ -21,22 +15,7 @@ export const ObjectImage = ({texture, isBorder}: ObjectImageProps) => {
     console.log('textureName: ', textureName)
 
     const spriteSrc = () => {
-        switch (textureName) {
-            case GameObjectTextureName.Bushes:
-                return bushSprite;
-            case GameObjectTextureName.Mines:
-                return minesSprite;
-            case GameObjectTextureName.Trees:
-                return treesSprite;
-            case GameObjectTextureName.Crops:
-                return cropsSprite;
-            case GameObjectTextureName.Grass:
-                return grassSprite;
-            case GameObjectTextureName.FruitTree:
-                return fruitTreesSprite;
-            default:
-                return '';
-        }
+        return getTexture(textureName);
     }
 
 

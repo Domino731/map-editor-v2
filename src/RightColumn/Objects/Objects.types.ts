@@ -6,5 +6,6 @@ export enum ObjectsTypes {
     FruitTrees,
     StaticTrees,
     Mines,
-    Grass
+    Grass,
+    Building
 }
