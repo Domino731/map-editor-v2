@@ -7,6 +7,7 @@ import {Objects} from "./Objects";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../store/AppReducer.ts";
+import {Entities} from "./Entities";
 
 export const RightColumn = () => {
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const RightColumn = () => {
         </Tabs>
         {rightColumnType === RightColumnTabs.Tiles && <Tiles/>}
         {rightColumnType === RightColumnTabs.Objects && <Objects/>}
-        {rightColumnType === RightColumnTabs.Entities && <>Entities</>}
+        {rightColumnType === RightColumnTabs.Entities && <Entities/>}
         {rightColumnType === RightColumnTabs.Special && <>Special</>}
     </div>
 }

@@ -19,11 +19,11 @@ export const Objects = () => {
 
     return <div>
         <FormControl fullWidth>
-            <InputLabel>Tiles</InputLabel>
+            <InputLabel>Object type</InputLabel>
             <Select
                 id="object-type-select"
                 value={objectsType}
-                label="Tiles"
+                label="Object type"
                 onChange={(e) => setObjectsType(Number(e.target.value))}
             >
                 {objectTypeOptions.map(({type, label}) => <MenuItem value={type}
