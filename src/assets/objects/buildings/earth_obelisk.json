@@ -1,0 +1,44 @@
+{
+  "id": "building_earth_obelisk",
+  "name": "Earth Obelisk",
+  "type": "building",
+  "specs": {
+    "texture": {
+      "name": "BuildingEarthObelisk",
+      "width": 48,
+      "height": 128,
+      "x": 0,
+      "y": 0
+    },
+    "drop": [],
+    "action": "cut_tree",
+    "exp": 10,
+    "ground_collision": {
+      "width": 32,
+      "height": 32,
+      "x": 0,
+      "y": 0
+    },
+    "action_collisions": [
+      {
+        "x": 4,
+        "y": 2,
+        "width": 10,
+        "height": 10,
+        "action_type": "Cut"
+      }
+    ],
+    "z_index": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "ground_place": {
+      "width": 1,
+      "height": 1,
+      "texture_x_offset": 0,
+      "texture_y_offset": 0
+    }
+  }
+}
