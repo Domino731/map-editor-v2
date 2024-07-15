@@ -1,5 +1,5 @@
 import {useCallback, useMemo, useState} from "react";
-import {TilesData} from "../../const/tiles.ts";
+import {TilesData} from "../../const/tiles/tiles.ts";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import styles from './Tiles.module.scss';
 import {create2DArray} from "../../utils/array.ts";

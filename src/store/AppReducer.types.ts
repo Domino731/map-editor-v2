@@ -1,4 +1,4 @@
-import {TileData} from "../const/tiles.ts";
+import {TileData} from "../const/tiles/tiles.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {ModalsUnion} from "../Modals/ModalManager.types.ts";
 import {ObjectDetailsModalProps} from "../Modals/ObjectDetailsModal/ObjectDetailsModal.tsx";

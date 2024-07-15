@@ -2,8 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppState, SetActiveModelActionProps} from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
-import {Modals} from "../Modals/ModalManager.types.ts";
-import {TreesData} from "../const/trees.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 

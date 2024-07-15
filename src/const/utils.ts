@@ -8,6 +8,12 @@ export const processObjectType = (objectType: string) => {
             return GameObjectType.Crop;
         case "tree":
             return GameObjectType.Tree;
+        case 'grass':
+            return GameObjectType.Grass;
+        case 'fruitTree':
+            return GameObjectType.FruitTree;
+        case 'bush':
+            return GameObjectType.Bush;
         default:
             console.error(`processObjectType(): no match for ${objectType}`)
             return GameObjectType.Tree;
@@ -24,6 +30,8 @@ export const processObjectTexture = (objectTexture: string) => {
             return GameObjectTextureName.Trees;
         case "bushes":
             return GameObjectTextureName.Bushes;
+        case "grass":
+            return GameObjectTextureName.Grass;
         default:
             console.error(`processObjectTexture(): no match for ${objectTexture}`)
             return GameObjectTextureName.Trees;

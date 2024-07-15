@@ -1,8 +1,9 @@
-import {ActionVector, TreeModel} from "../../models/tree.ts";
+import {ActionVector} from "../../models/tree.ts";
 import {Vector} from "../../types.ts";
+import {TreeObjectModel} from "../../models/GameObject.ts";
 
 export interface ObjectDetailsModalState {
-    objectData: TreeModel | null;
+    objectData: TreeObjectModel | null;
     objectStage: number | null;
     objectAreas: {
         settings: ObjectAreasSettings,

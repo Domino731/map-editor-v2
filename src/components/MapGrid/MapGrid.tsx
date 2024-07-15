@@ -2,7 +2,7 @@ import {memo, useMemo} from "react";
 import {create2DArray} from "../../utils/array.ts";
 import {CELL_SIZE} from "../../const/app.ts";
 import {MapTileData} from "../../store/AppReducer.types.ts";
-import {TilesData} from "../../const/tiles.ts";
+import {TilesData} from "../../const/tiles/tiles.ts";
 import {b} from "vite/dist/node/types.d-aGj9QkWt";
 
 export const defaultCellDataFirst: MapTileData = {

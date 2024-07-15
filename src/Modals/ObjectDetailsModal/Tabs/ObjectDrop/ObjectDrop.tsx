@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from "@mui/material/Button";
 import styles from './ObjectDrop.module.scss';
 import {AddNewDropForm} from "./AddNewDropForm.tsx";
-import {findItem} from "../../../../const/allItems.ts";
+import {findItem} from "../../../../const/items/allItems.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";

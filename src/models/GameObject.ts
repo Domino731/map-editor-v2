@@ -45,12 +45,14 @@ export interface GameObjectBase {
 export interface MineObjectModel extends GameObjectBase {
 }
 
+export interface BushObjectModel extends GameObjectBase {
+}
+
+export interface GrassObjectModel extends GameObjectBase {
+}
+
 export interface TreeStageModel {
-    texture: GameObjectTextureNameUnion;
-    width: number;
-    height: number;
-    x: number;
-    y: number;
+    texture: GameObjectTexture;
     nextStage: number;
     drop: Array<GameObjectDrop>;
     groundCollision: Vector;
@@ -78,13 +80,32 @@ export interface TreeObjectModel {
     }
 }
 
+export interface FruitTreeObjectModel {
+    id: string;
+    name: string;
+    type: GameObjectTypeUnion;
+    specs: {
+        stages: Array<TreeStageModel>;
+    }
+}
+
+export interface CropObjectModel {
+    id: string;
+    name: string;
+    type: GameObjectTypeUnion;
+    specs: {
+        stages: Array<TreeStageModel>;
+    }
+}
 
 // ENUMS
 export enum GameObjectType {
     Mine = 'Mine',
     Tree = 'Tree',
     Crop = 'Crop',
-    Bush = "Bush"
+    Bush = "Bush",
+    Grass = "Grass",
+    FruitTree = 'FruitTree',
 }
 
 export type GameObjectTypeUnion = keyof typeof GameObjectType;
@@ -93,7 +114,9 @@ export enum GameObjectTextureName {
     Mines = 'Mines',
     Trees = 'Trees',
     Crops = 'Crops',
-    Bushes = "Bushes"
+    Bushes = "Bushes",
+    FruitTree = "FruitTree",
+    Grass = "Grass"
 }
 
 export type GameObjectTextureNameUnion = keyof typeof GameObjectTextureName;

@@ -17,7 +17,7 @@ import {useCallback} from "react";
 import {FormikFormData} from "./AddNewDropForm.types.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";
 import {generateUUID} from "../../../../utils/string.ts";
-import {AllItems} from "../../../../const/allItems.ts";
+import {AllItems} from "../../../../const/items/allItems.ts";
 
 export const AddNewDropForm = () => {
     const dispatch = useDispatch();

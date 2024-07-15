@@ -1,4 +1,4 @@
-import {ObjectImage} from "../components/ObjectImage";
+import {ObjectImage} from "../../../components/ObjectImage";
 import styles from './BushesList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
@@ -16,18 +16,13 @@ export const BushesList = ({objects}: BushesListProps) => {
     const dispatch = useDispatch();
 
     const currentObjectId = useSelector(AppSelectors.objectId);
-
     return <ul className={styles.list}>
         {objects.map(el => {
             return <li key={`bushes-list-item-${el.id}`} onClick={() => dispatch(AppSliceActions.setObjectId(el.id))}
                        className={styles.listItem}>
                 <div>
                     <ObjectImage
-                        type={el.type}
-                        x={el.specs.texture.x}
-                        y={el.specs.texture.y}
-                        width={el.specs.texture.width}
-                        height={el.specs.texture.height}
+                        texture={el.specs.texture}
                     />
                     <p style={{color: el.id === currentObjectId ? theme.palette.primary.main : 'white'}}>
                         {el.name}

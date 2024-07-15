@@ -5,12 +5,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import styles from './MultiStageList.module.scss';
-import {ObjectImage} from "../components/ObjectImage";
+import {ObjectImage} from "../../../components/ObjectImage";
 import {Box, IconButton, Tooltip, useTheme} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
-import {getObjectSprite} from "../components/ObjectImage/ObjectImage.utils.ts";
+import {getObjectSprite} from "../../../components/ObjectImage/ObjectImage.utils.ts";
 import {Modals} from "../../../Modals/ModalManager.types.ts";
 import InfoIcon from "@mui/icons-material/Info";
 
@@ -74,9 +74,7 @@ export const MultiStageList = ({objects}: MultiStageListProps) => {
                                     stage: stageIndex
                                 }))}
                             >
-                                <ObjectImage sprite={getObjectSprite(stage.texture)} x={stage.x} y={stage.y}
-                                             width={stage.width} height={stage.height}
-                                             type={object.type}/>
+                                <ObjectImage texture={stage.texture}/>
                                 <p style={{
                                     margin: 0,
                                     color: (currentObjectId === object.id && objectStage === stageIndex) ? theme.palette.primary.main : 'white'

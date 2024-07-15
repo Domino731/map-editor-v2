@@ -1,9 +1,9 @@
-import {MineJsonModel} from "./types.ts";
-import {processObjectActionType, processObjectTexture, processObjectType} from "./utils.ts";
-import {MineObjectModel} from "../models/GameObject.ts";
-import {generateUUID} from "../utils/string.ts";
+import {BushJsonModel} from "../../types.ts";
+import {processObjectActionType, processObjectTexture, processObjectType} from "../../utils.ts";
+import {BushObjectModel} from "../../../models/GameObject.ts";
+import {generateUUID} from "../../../utils/string.ts";
 
-export const processBushData = (data: MineJsonModel): MineObjectModel => ({
+export const processBushData = (data: BushJsonModel): BushObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
@@ -42,10 +42,10 @@ export const processBushData = (data: MineJsonModel): MineObjectModel => ({
             textureYOffset: data.specs.ground_place.texture_y_offset,
         },
         groundCollision: {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0
+            x: data.specs.ground_collision.x,
+            y: data.specs.ground_collision.y,
+            width: data.specs.ground_collision.width,
+            height: data.specs.ground_collision.height
         }
     }
 })

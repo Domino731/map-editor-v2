@@ -1,8 +1,10 @@
-import {ActionVector, TreeModel} from "../../models/tree.ts";
+import {ActionVector} from "../../models/tree.ts";
 import {Vector} from "../../types.ts";
 import {contrastColors} from "./ObjectDetailsModel.const.ts";
+import {GameObjectType, TreeObjectModel} from "../../models/GameObject.ts";
 
-export const createAreaVectors = (objectData: TreeModel) => {
+
+export const createAreaVectors = (objectData: TreeObjectModel) => {
     const texturesVectors: Vector[] = [];
     const groundCollisionsVectors: Vector[] = [];
     const groundPlaceVectors: Vector[] = [];
@@ -10,44 +12,44 @@ export const createAreaVectors = (objectData: TreeModel) => {
     const zIndexLines: Vector[] = [];
     const treeTrunk = {x: 0, y: 0}
 
-    if (objectData.type === 'tree') {
-        treeTrunk.x = objectData.specs.trunk.offset_x;
-        treeTrunk.y = objectData.specs.trunk.offset_y;
+    if (objectData.type === GameObjectType.Tree) {
+        treeTrunk.x = objectData.specs.treeTrunk.offsetX;
+        treeTrunk.y = objectData.specs.treeTrunk.offsetY;
     }
 
 
     objectData.specs.stages.forEach(el => {
         texturesVectors.push({
-            x: el.x,
-            y: el.y,
-            width: el.width,
-            height: el.height
+            x: el.texture.x,
+            y: el.texture.y,
+            width: el.texture.width,
+            height: el.texture.height
         });
         groundCollisionsVectors.push({
-            x: el.ground_collision.x,
-            y: el.ground_collision.y,
-            width: el.ground_collision.width,
-            height: el.ground_collision.height
+            x: el.groundCollision.x,
+            y: el.groundCollision.y,
+            width: el.groundCollision.width,
+            height: el.groundCollision.height
         });
         groundPlaceVectors.push({
-            x: el.ground_place.texture_x_offset,
-            y: el.ground_place.texture_y_offset,
-            width: el.ground_place.width,
-            height: el.ground_place.height
+            x: el.groundPlace.textureXOffset,
+            y: el.groundPlace.textureYOffset,
+            width: el.groundPlace.width,
+            height: el.groundPlace.height,
         });
-        actionCollisionVectors.push(el.action_collisions.map((el, index) => ({
+        actionCollisionVectors.push(el.actionCollisions.map((el, index) => ({
             x: el.x,
             y: el.y,
             width: el.width,
             height: el.height,
-            actionType: el.action_type,
+            actionType: el.actionType,
             color: contrastColors[index]
         })));
         zIndexLines.push({
-            x: el.z_index.x,
-            y: el.z_index.y,
-            width: el.z_index.width,
-            height: el.z_index.height
+            x: el.zIndex.x,
+            y: el.zIndex.y,
+            width: el.zIndex.width,
+            height: el.zIndex.height
         })
     });
 

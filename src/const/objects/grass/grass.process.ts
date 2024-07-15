@@ -1,15 +1,15 @@
-import {MineObjectModel} from "../models/GameObject.ts";
-import {MineJsonModel} from "./types.ts";
-import {processObjectActionType, processObjectTexture, processObjectType} from "./utils.ts";
-import {generateUUID} from "../utils/string.ts";
+import {GrassJsonModel} from "../../types.ts";
+import {processObjectActionType, processObjectType} from "../../utils.ts";
+import {generateUUID} from "../../../utils/string.ts";
+import {GameObjectTextureName, GrassObjectModel} from "../../../models/GameObject.ts";
 
-export const processMineData = (data: MineJsonModel): MineObjectModel => ({
+export const processGrassData = (data: GrassJsonModel): GrassObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
     specs: {
         texture: {
-            name: processObjectTexture(data.specs.texture.name),
+            name: GameObjectTextureName.Grass,
             x: data.specs.texture.x,
             y: data.specs.texture.y,
             width: data.specs.texture.width,

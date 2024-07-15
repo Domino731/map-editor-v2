@@ -1,7 +1,8 @@
 import {objectAreasColors} from "../../Tabs/ObjectAreas/ObjectAreas.const.ts";
 import {useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
-import {ObjectImage} from "../../../../RightColumn/Objects/components/ObjectImage";
+import {ObjectImage} from "../../../../components/ObjectImage";
+import {GameObjectTextureName} from "../../../../models/GameObject.ts";
 
 const gridSize = 16;
 const gridMapSize = 20;
@@ -82,11 +83,13 @@ export const MapObjectImage = () => {
             transform: `translate(${objectX + objectTreeTrunk.x}px, ${objectY + objectTreeTrunk.y}px)`,
         }}>
             <ObjectImage
-                x={objectData.specs.trunk.x}
-                y={objectData.specs.trunk.y}
-                width={objectData.specs.trunk.width}
-                height={objectData.specs.trunk.height}
-                type={objectData.type}
+                texture={{
+                    x: objectData.specs.trunk.x,
+                    y: objectData.specs.trunk.y,
+                    width: objectData.specs.trunk.width,
+                    height: objectData.specs.trunk.height,
+                    name: GameObjectTextureName.Trees
+                }}
                 isBorder={isTextureHighlighted}
             />
         </div>}
@@ -99,11 +102,13 @@ export const MapObjectImage = () => {
             transform: `translate(${objectX + groundArea.x ?? 0}px, ${objectY + groundArea.y ?? 0}px)`,
         }}>
             {texture && <ObjectImage
-                x={texture.x}
-                y={texture.y}
-                width={texture.width}
-                height={texture.height}
-                type={objectData.type as 'tree'}
+                texture={{
+                    x: texture.x,
+                    y: texture.y,
+                    width: texture.width,
+                    height: texture.height,
+                    name: objectData.specs.stages[objectStage].texture.name
+                }}
                 isBorder={isTextureHighlighted}
             />}
         </div>

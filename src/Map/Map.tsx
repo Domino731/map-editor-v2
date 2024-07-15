@@ -4,10 +4,10 @@ import {useSelector} from "react-redux";
 import {AppSelectors} from "../store/AppReducer.selectors.ts";
 import {useCallback, useMemo, useRef, useState} from "react";
 import {MapTileData} from "../store/AppReducer.types.ts";
-import {TilesData} from "../const/tiles.ts";
+import {TilesData} from "../const/tiles/tiles.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
-import {AllObjects} from "../const/allObjects.ts";
-import {ObjectImage} from "../RightColumn/Objects/components/ObjectImage";
+import {AllObjects} from "../const/objects/allObjects.ts";
+import {ObjectImage} from "../components/ObjectImage";
 import {generateUUID} from "../utils/string.ts";
 
 export const defaultCellData: MapTileData = {
@@ -61,10 +61,8 @@ export const Map = () => {
 
 
     const onMapMouseOver = useCallback((event: MouseEvent) => {
-        console.log(123);
         if (rightColumnType !== RightColumnTabs.Objects || !mapRef.current) return;
         const rect = mapRef.current.getBoundingClientRect();
-        console.log(123);
         setObjectsCords({
             x: Math.floor((event.clientX - rect.left) / 16),
             y: Math.floor((event.clientY - rect.top) / 16)
@@ -82,13 +80,14 @@ export const Map = () => {
         let height = object?.specs?.texture?.height;
         let x = object?.specs?.texture?.x;
         let y = object?.specs?.texture?.y;
-
+        let name = object?.specs?.texture?.name;
         if (objectStage !== null) {
-            const stage = object?.specs.stages[objectStage];
+            const stage = object?.specs.stages[objectStage]?.texture;
             width = stage.width;
             height = stage.height;
             x = stage.x;
             y = stage.y;
+            name = stage.name
         }
 
         return <div
@@ -102,8 +101,13 @@ export const Map = () => {
                 left: 0,
                 transform: `translate(${(objectCords.x) * 16}px, ${(objectCords.y) * 16}px)`
             }}>
-            <ObjectImage type={object?.type ?? 'bush'} x={x} y={y}
-                         width={width} height={height}/>
+            <ObjectImage texture={{
+                width,
+                height,
+                x,
+                y,
+                name
+            }}/>
         </div>
     }, [object, objectCords, objectStage])
 
@@ -124,13 +128,14 @@ export const Map = () => {
                         let height = object?.specs?.texture?.height;
                         let x = object?.specs?.texture?.x;
                         let y = object?.specs?.texture?.y;
-
+                        let name = object?.specs?.texture?.name;
                         if (objectOnMap.stage !== null) {
-                            const stage = object?.specs.stages[objectStage];
+                            const stage = object?.specs.stages[objectStage]?.texture;
                             width = stage.width;
                             height = stage.height;
                             x = stage.x;
                             y = stage.y;
+                            name = stage.name;
                         }
 
                         return <div
@@ -140,10 +145,9 @@ export const Map = () => {
                                 top: `${objectOnMap.y * 16}px`,
                                 left: `${objectOnMap.x * 16}px`
                             }}>
-                            <ObjectImage type={object?.type ?? 'bush'} x={x}
-                                         y={y}
-                                         width={width}
-                                         height={height}/>
+                            <ObjectImage texture={{
+                                width, height, x, y, name
+                            }}/>
                         </div>
                     })}
                 </div>

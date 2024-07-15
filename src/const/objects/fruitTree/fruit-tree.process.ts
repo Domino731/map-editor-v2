@@ -1,27 +1,21 @@
-import {GameObjectTextureName, TreeObjectModel} from "../models/GameObject.ts";
-import {TreeJsonModel} from "./types.ts";
-import {processObjectActionType, processObjectType} from "./utils.ts";
-import {generateUUID} from "../utils/string.ts";
+import {FruitTreeJsonModel} from "../../types.ts";
+import {processObjectActionType, processObjectType} from "../../utils.ts";
+import {generateUUID} from "../../../utils/string.ts";
+import {FruitTreeObjectModel, GameObjectTextureName} from "../../../models/GameObject.ts";
 
-export const processTreeData = (data: TreeJsonModel): TreeObjectModel => ({
+export const processFruitTreeData = (data: FruitTreeJsonModel): FruitTreeObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
     specs: {
-        treeTrunk: {
-            x: data.specs.trunk.x,
-            y: data.specs.trunk.y,
-            width: data.specs.trunk.width,
-            height: data.specs.trunk.height,
-            offsetX: data.specs.trunk.offset_x,
-            offsetY: data.specs.trunk.offset_y
-        },
         stages: data.specs.stages.map(el => ({
-            texture: GameObjectTextureName.Trees,
-            x: el.x,
-            y: el.y,
-            width: el.width,
-            height: el.height,
+            texture: {
+                name: GameObjectTextureName.FruitTree,
+                x: el.texture.x,
+                y: el.texture.y,
+                width: el.texture.width,
+                height: el.texture.height,
+            },
             nextStage: el.next_stage,
             drop: el.drop.map(el => ({
                 id: el.id,
