@@ -14,13 +14,17 @@ const initialState: AppState = {
     objectStage: null,
     activeModel: null,
     modalProps: null,
-    actorType: GameActorType.Tile
+    actorType: GameActorType.Tile,
+    mapTool: null
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setMapTool: (state, {payload}: PayloadAction<AppState['mapTool']>) => {
+            state.mapTool = payload;
+        },
         setActiveModel: (state, action: PayloadAction<SetActiveModelActionProps>) => {
             state.activeModel = action.payload.modalName;
             state.modalProps = action.payload.modalProps;
@@ -37,6 +41,11 @@ const appSlice = createSlice({
         },
         setRightColumnType: (state, action: PayloadAction<AppState['rightColumnType']>) => {
             state.rightColumnType = action.payload;
+            state.objectStage = initialState.objectStage;
+            state.objectId = initialState.objectId;
+            state.actorType = initialState.actorType;
+            state.mapTool = initialState.mapTool;
+            state.selectedTile = initialState.selectedTile;
         },
         setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
             state.selectedTile = action.payload;

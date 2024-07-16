@@ -41,4 +41,13 @@
 
   border-right: 1px solid grey;
   border-bottom: 1px solid grey;
+
+  & > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 47%, red 47%, red 53%, transparent 53%),
+    linear-gradient(-45deg, transparent 47%, red 47%, red 53%, transparent 53%);
+
+  }
 }

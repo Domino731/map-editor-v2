@@ -1,0 +1,32 @@
+.list {
+  padding-left: 0;
+  height: 84vh;
+  overflow: auto;
+}
+
+.listItem {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid grey;
+  padding-right: 14px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.blockWall {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid red;
+
+}

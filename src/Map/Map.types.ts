@@ -10,3 +10,9 @@ export interface ActorOnMap {
     stage: number | null;
     texture: GameObjectTexture;
 }
+
+export enum MapTool {
+    Walls = "Walls"
+}
+
+export type MapToolUnion = keyof typeof MapTool;

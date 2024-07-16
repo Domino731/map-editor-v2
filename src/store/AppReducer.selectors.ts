@@ -12,6 +12,7 @@ const objectStage = createSelector(root, (state) => state.objectStage);
 const activeModal = createSelector(root, (state) => state.activeModel);
 const modalProps = createSelector(root, state => state.modalProps)
 const actorType = createSelector(root, state => state.actorType);
+const mapTool = createSelector(root, state => state.mapTool);
 
 export const AppSelectors = {
     mapTilesData,
@@ -21,5 +22,6 @@ export const AppSelectors = {
     objectStage,
     activeModal,
     modalProps,
-    actorType
+    actorType,
+    mapTool
 }

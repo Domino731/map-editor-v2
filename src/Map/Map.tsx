@@ -13,6 +13,7 @@ import {CELL_SIZE} from "../const/app.ts";
 import {GameActorType} from "../models/game.ts";
 import {GameObjectTextureName, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
 import {AllEntities} from "../const/characters/characters.ts";
+import {Cords} from "../types.ts";
 
 export const defaultCellData: MapTileData = {
     ...TilesData[33],
@@ -23,10 +24,17 @@ export const defaultCellData: MapTileData = {
 const MapCell = () => {
     const selectedTile = useSelector(AppSelectors.selectedTile);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
+    const mapTool = useSelector(AppSelectors.mapTool);
 
     const [tile, setTile] = useState<MapTileData>(defaultCellData);
+    const [isWall, setIsWall] = useState<boolean>(false);
 
     const handleTileClick = () => {
+        if (mapTool) {
+            setIsWall(true)
+            return;
+        }
+
         if (!selectedTile || rightColumnType !== RightColumnTabs.Tiles) return;
         setTile(selectedTile);
     }
@@ -38,7 +46,9 @@ const MapCell = () => {
         })
     }, [tile.src, tile.x, tile.y])
 
-    return <div className={styles.cell} style={cellStyles} onClick={handleTileClick}></div>
+    return <div className={styles.cell} style={cellStyles} onClick={handleTileClick}>
+        {isWall && <span/>}
+    </div>
 }
 
 export const Map = () => {
@@ -49,11 +59,18 @@ export const Map = () => {
     const objectId = useSelector(AppSelectors.objectId);
     const objectStage = useSelector(AppSelectors.objectStage);
     const actorType = useSelector(AppSelectors.actorType);
+    const mapTool = useSelector(AppSelectors.mapTool);
 
-    const isTileMode = useMemo(() => actorType === GameActorType.Tile, [])
+    const isTileMode = useMemo(() => {
+        const isTile = actorType === GameActorType.Tile;
+        const isTool = rightColumnType === RightColumnTabs.Special && mapTool
+        return isTile || isTool;
+    }, [actorType, mapTool, rightColumnType])
 
     const [objectCords, setObjectsCords] = useState<{ x: number; y: number }>({x: 0, y: 0});
     const [objectsOnMap, setObjectsOnMap] = useState<Array<ActorOnMap>>([]);
+    const [walls, setWalls] = useState<Array<Cords>>([]);
+
 
     const selectedActorData = useMemo((): ActorOnMap | undefined => {
         if (isTileMode || !objectId) return;
