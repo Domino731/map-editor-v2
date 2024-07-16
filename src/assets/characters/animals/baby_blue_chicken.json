@@ -1,5 +1,6 @@
 {
   "id": "baby_blue_chicken",
+  "name": "Baby Blue Chicken",
   "texture": {
     "name": "BabyBlueChicken",
     "width": 16,
@@ -108,5 +109,7 @@
         48
       ]
     ]
-  }
+  },
+  "hp": 100,
+  "exp": 10
 }

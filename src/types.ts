@@ -4,3 +4,8 @@ export interface Vector {
     width: number;
     height: number;
 }
+
+export interface Cords {
+    x: number;
+    y: number;
+}
