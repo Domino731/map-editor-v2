@@ -1,0 +1,112 @@
+{
+  "id": "baby_blue_chicken",
+  "texture": {
+    "name": "BabyBlueChicken",
+    "width": 16,
+    "height": 16
+  },
+  "presentation_texture_cords": {
+    "x": 0,
+    "y": 0
+  },
+  "ground_place": {
+    "x": 0,
+    "y": 0,
+    "width": 1,
+    "height": 1
+  },
+  "ground_collision": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "z_index": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "action_collisions": [],
+  "drop": [],
+  "hit_box": {
+    "x": 0,
+    "h": 0,
+    "width": 0,
+    "height": 0
+  },
+  "animations": {
+    "runDown": [
+      [
+        0,
+        0
+      ],
+      [
+        16,
+        0
+      ],
+      [
+        32,
+        0
+      ],
+      [
+        48,
+        0
+      ]
+    ],
+    "runRight": [
+      [
+        0,
+        16
+      ],
+      [
+        16,
+        16
+      ],
+      [
+        32,
+        16
+      ],
+      [
+        48,
+        16
+      ]
+    ],
+    "runUp": [
+      [
+        0,
+        32
+      ],
+      [
+        16,
+        32
+      ],
+      [
+        32,
+        32
+      ],
+      [
+        48,
+        32
+      ]
+    ],
+    "runLeft": [
+      [
+        0,
+        48
+      ],
+      [
+        16,
+        48
+      ],
+      [
+        32,
+        48
+      ],
+      [
+        48,
+        48
+      ]
+    ]
+  }
+}
