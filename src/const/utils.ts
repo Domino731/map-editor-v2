@@ -74,7 +74,8 @@ export const processObjectTexture = (objectTexture: string) => {
         ['BuildingWaterObelisk']: GameObjectTextureName.BuildingWaterObelisk,
         ['BuildingWell']: GameObjectTextureName.BuildingWell,
         ['HoeDirt']: GameObjectTextureName.HoeDirt,
-        ['Flooring']: GameObjectTextureName.Flooring
+        ['Flooring']: GameObjectTextureName.Flooring,
+        ['BabyBlueChicken']: GameObjectTextureName.BabyBlueChicken
     }
     if (data[objectTexture]) {
         return data[objectTexture];

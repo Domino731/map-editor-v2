@@ -6,9 +6,14 @@ import {AppSliceActions} from "../../../store/AppReducer.ts";
 import {IconButton, Tooltip, useTheme} from "@mui/material";
 import InfoIcon from '@mui/icons-material/Info';
 import {Modals} from "../../../Modals/ModalManager.types.ts";
+import {GameObjectTexture} from "../../../models/GameObject.ts";
 
 interface BushesListProps {
-    objects: any[];
+    objects: Array<{
+        id: string;
+        texture: GameObjectTexture;
+        name: string;
+    }>
 }
 
 export const BushesList = ({objects}: BushesListProps) => {
@@ -22,7 +27,7 @@ export const BushesList = ({objects}: BushesListProps) => {
                        className={styles.listItem}>
                 <div>
                     <ObjectImage
-                        texture={el.specs.texture}
+                        texture={el.texture}
                     />
                     <p style={{color: el.id === currentObjectId ? theme.palette.primary.main : 'white'}}>
                         {el.name}

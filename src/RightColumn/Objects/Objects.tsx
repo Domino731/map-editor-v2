@@ -13,6 +13,7 @@ import {FruitTreesData} from "../../const/objects/fruitTree/fruit-trees.ts";
 import {BuildingsData} from "../../const/objects/buildings/buildings.ts";
 import {FlooringData} from "../../const/objects/flooring/flooring.ts";
 import {HoeDirtData} from "../../const/objects/hoeDirt/hoeDirt.ts";
+import {createSingleStageObjects} from "./Objects.utils.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
@@ -31,15 +32,15 @@ export const Objects = () => {
             </Select>
         </FormControl>
 
-        {objectsType === ObjectsTypes.Bushes && <BushesList objects={BushesData}/>}
-        {objectsType === ObjectsTypes.Mines && <BushesList objects={MinesData}/>}
+        {objectsType === ObjectsTypes.Bushes && <BushesList objects={createSingleStageObjects(BushesData)}/>}
+        {objectsType === ObjectsTypes.Mines && <BushesList objects={createSingleStageObjects(MinesData)}/>}
         {objectsType === ObjectsTypes.Trees && <MultiStageList objects={TreesData}/>}
         {objectsType === ObjectsTypes.FruitTrees && <MultiStageList objects={FruitTreesData}/>}
         {/*{objectsType === ObjectsTypes.StaticTrees && <MultiStageList objects={StaticTreesData}/>}*/}
         {objectsType === ObjectsTypes.Crops && <MultiStageList objects={CropsData}/>}
-        {objectsType === ObjectsTypes.Grass && <BushesList objects={GrassData}/>}
-        {objectsType === ObjectsTypes.Building && <BushesList objects={BuildingsData}/>}
-        {objectsType === ObjectsTypes.Flooring && <BushesList objects={FlooringData}/>}
-        {objectsType === ObjectsTypes.HoeDirt && <BushesList objects={HoeDirtData}/>}
+        {objectsType === ObjectsTypes.Grass && <BushesList objects={createSingleStageObjects(GrassData)}/>}
+        {objectsType === ObjectsTypes.Building && <BushesList objects={createSingleStageObjects(BuildingsData)}/>}
+        {objectsType === ObjectsTypes.Flooring && <BushesList objects={createSingleStageObjects(FlooringData)}/>}
+        {objectsType === ObjectsTypes.HoeDirt && <BushesList objects={createSingleStageObjects(HoeDirtData)}/>}
     </div>
 }

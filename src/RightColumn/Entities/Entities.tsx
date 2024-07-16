@@ -2,6 +2,9 @@ import {useState} from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {entityTypeOptions} from "./Entities.const.ts";
 import {EntityType, EntityTypeUnion} from "../../models/Entities.ts";
+import {BushesList} from "../Objects/BushesList";
+import {createSingleStageObjects} from "./Entities.utils.ts";
+import {AnimalsData} from "../../const/characters/animals/animals.ts";
 
 export const Entities = () => {
     const [entityType, setEntityType] = useState<EntityTypeUnion>(EntityType.Animal);
@@ -19,5 +22,7 @@ export const Entities = () => {
                                                                      key={`object-type-select-${value}`}>{label}</MenuItem>)}
             </Select>
         </FormControl>
+
+        {entityType === EntityType.Animal && <BushesList objects={createSingleStageObjects(AnimalsData)}/>}
     </>
 }
