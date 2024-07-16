@@ -5,6 +5,7 @@ import {
     GameObjectGroundPlace,
     GameObjectTextureNameUnion
 } from "./GameObject.ts";
+import {GameActorType} from "./game.ts";
 
 export enum EntityType {
     Animal = "Animal",
@@ -30,6 +31,7 @@ export interface EntityModel {
     id: string;
     name: string;
     texture: EntityTextureModel;
+    actorType: GameActorType.Entity;
     presentationTextureCords: Cords;
     groundPlace: GameObjectGroundPlace;
     groundCollision: Vector;

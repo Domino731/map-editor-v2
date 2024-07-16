@@ -12,8 +12,6 @@ export const ObjectImage = ({texture, isBorder}: ObjectImageProps) => {
     }
     const {x, y, width, height, name: textureName} = texture;
 
-    console.log('textureName: ', textureName)
-
     const spriteSrc = () => {
         return getTexture(textureName);
     }

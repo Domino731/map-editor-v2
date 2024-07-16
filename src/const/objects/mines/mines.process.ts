@@ -2,11 +2,13 @@ import {MineObjectModel} from "../../../models/GameObject.ts";
 import {MineJsonModel} from "../../types.ts";
 import {processObjectActionType, processObjectTexture, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processMineData = (data: MineJsonModel): MineObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         texture: {
             name: processObjectTexture(data.specs.texture.name),

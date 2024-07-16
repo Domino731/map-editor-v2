@@ -1,11 +1,13 @@
 import {HoeDirtJsonData} from "./hoeDirt.types.ts";
 import {processObjectActionType, processObjectTexture, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processHoeDirtData = (data: HoeDirtJsonData) => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         texture: {
             name: processObjectTexture(data.specs.texture.name),

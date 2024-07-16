@@ -7,12 +7,14 @@ import {IconButton, Tooltip, useTheme} from "@mui/material";
 import InfoIcon from '@mui/icons-material/Info';
 import {Modals} from "../../../Modals/ModalManager.types.ts";
 import {GameObjectTexture} from "../../../models/GameObject.ts";
+import {GameActorTypeUnion} from "../../../models/game.ts";
 
 interface BushesListProps {
     objects: Array<{
         id: string;
         texture: GameObjectTexture;
         name: string;
+        actorType: GameActorTypeUnion;
     }>
 }
 
@@ -23,7 +25,10 @@ export const BushesList = ({objects}: BushesListProps) => {
     const currentObjectId = useSelector(AppSelectors.objectId);
     return <ul className={styles.list}>
         {objects.map(el => {
-            return <li key={`bushes-list-item-${el.id}`} onClick={() => dispatch(AppSliceActions.setObjectId(el.id))}
+            return <li key={`bushes-list-item-${el.id}`} onClick={() => dispatch(AppSliceActions.setObjectId({
+                objectId: el.id,
+                actorType: el.actorType
+            }))}
                        className={styles.listItem}>
                 <div>
                     <ObjectImage

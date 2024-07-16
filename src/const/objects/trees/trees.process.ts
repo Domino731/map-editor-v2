@@ -2,11 +2,13 @@ import {GameObjectTextureName, TreeObjectModel} from "../../../models/GameObject
 import {TreeJsonModel} from "../../types.ts";
 import {processObjectActionType, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processTreeData = (data: TreeJsonModel): TreeObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         treeTrunk: {
             x: data.specs.trunk.x,

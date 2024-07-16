@@ -2,11 +2,13 @@ import {CropJsonModel} from "../../types.ts";
 import {processObjectActionType, processObjectType} from "../../utils.ts";
 import {CropObjectModel, GameObjectTextureName} from "../../../models/GameObject.ts";
 import {generateUUID} from "../../../utils/string.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processCropData = (data: CropJsonModel): CropObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         stages: data.specs.stages.map(el => ({
             texture: {

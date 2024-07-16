@@ -2,11 +2,13 @@ import {BuildingJsonData} from "./buildings.types.ts";
 import {processObjectActionType, processObjectTexture, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
 import {BuildingObjectModel} from "../../../models/GameObject.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processBuildingData = (data: BuildingJsonData): BuildingObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         texture: {
             name: processObjectTexture(data.specs.texture.name),

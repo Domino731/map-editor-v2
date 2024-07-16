@@ -16,7 +16,7 @@ export const Entities = () => {
                 id="object-type-select"
                 value={entityType}
                 label="Entity type"
-                onChange={(e) => setEntityType(e.target.value)}
+                onChange={(e) => setEntityType(e.target.value as EntityTypeUnion)}
             >
                 {entityTypeOptions.map(({value, label}) => <MenuItem value={value}
                                                                      key={`object-type-select-${value}`}>{label}</MenuItem>)}

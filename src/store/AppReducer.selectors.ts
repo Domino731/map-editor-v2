@@ -11,6 +11,8 @@ const rightColumnType = createSelector(root, (state) => state.rightColumnType);
 const objectStage = createSelector(root, (state) => state.objectStage);
 const activeModal = createSelector(root, (state) => state.activeModel);
 const modalProps = createSelector(root, state => state.modalProps)
+const actorType = createSelector(root, state => state.actorType);
+
 export const AppSelectors = {
     mapTilesData,
     selectedTile,
@@ -18,5 +20,6 @@ export const AppSelectors = {
     rightColumnType,
     objectStage,
     activeModal,
-    modalProps
+    modalProps,
+    actorType
 }

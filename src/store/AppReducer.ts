@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppState, SetActiveModelActionProps} from "./AppReducer.types.ts";
+import {AppState, SetActiveModelActionProps, SetObjectIdActionPayload} from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
+import {GameActorType} from "../models/game.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 
@@ -12,7 +13,8 @@ const initialState: AppState = {
     rightColumnType: RightColumnTabs.Tiles,
     objectStage: null,
     activeModel: null,
-    modalProps: null
+    modalProps: null,
+    actorType: GameActorType.Tile
 }
 
 const appSlice = createSlice({
@@ -23,8 +25,9 @@ const appSlice = createSlice({
             state.activeModel = action.payload.modalName;
             state.modalProps = action.payload.modalProps;
         },
-        setObjectId: (state, action: PayloadAction<AppState['objectId']>) => {
-            state.objectId = action.payload;
+        setObjectId: (state, action: PayloadAction<SetObjectIdActionPayload>) => {
+            state.objectId = action.payload.objectId;
+            state.actorType = action.payload.actorType;
             state.objectStage = initialState.objectStage;
         },
         setObjectIdWithStage: (state, action: PayloadAction<{ id: AppState['objectId'], stage: number }>) => {
@@ -37,6 +40,7 @@ const appSlice = createSlice({
         },
         setSelectedTile: (state, action: PayloadAction<AppState['selectedTile']>) => {
             state.selectedTile = action.payload;
+            state.actorType = GameActorType.Tile;
         },
         closeModal: (state) => {
             state.activeModel = null;

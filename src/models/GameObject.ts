@@ -1,4 +1,5 @@
 import {Vector} from "../types.ts";
+import {GameActorType} from "./game.ts";
 
 export interface GameObjectTexture {
     name: GameObjectTextureNameUnion;
@@ -31,6 +32,7 @@ export interface GameObjectBase {
     id: string;
     name: string;
     type: GameObjectTypeUnion;
+    actorType: GameActorType.Object;
     specs: {
         texture: GameObjectTexture;
         drop: Array<GameObjectDrop>;
@@ -77,6 +79,7 @@ export interface TreeObjectModel {
     id: string;
     name: string;
     type: GameObjectTypeUnion;
+    actorType: GameActorType.Object;
     specs: {
         treeTrunk: TreeTrunkModel;
         stages: Array<TreeStageModel>;
@@ -87,6 +90,7 @@ export interface FruitTreeObjectModel {
     id: string;
     name: string;
     type: GameObjectTypeUnion;
+    actorType: GameActorType.Object;
     specs: {
         stages: Array<TreeStageModel>;
     }
@@ -96,6 +100,7 @@ export interface CropObjectModel {
     id: string;
     name: string;
     type: GameObjectTypeUnion;
+    actorType: GameActorType.Object;
     specs: {
         stages: Array<TreeStageModel>;
     }

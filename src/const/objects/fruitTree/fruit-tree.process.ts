@@ -2,11 +2,13 @@ import {FruitTreeJsonModel} from "../../types.ts";
 import {processObjectActionType, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
 import {FruitTreeObjectModel, GameObjectTextureName} from "../../../models/GameObject.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processFruitTreeData = (data: FruitTreeJsonModel): FruitTreeObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),
+    actorType: GameActorType.Object,
     specs: {
         stages: data.specs.stages.map(el => ({
             texture: {

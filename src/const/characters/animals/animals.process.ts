@@ -2,10 +2,12 @@ import {AnimalJsonData} from "./animals.types.ts";
 import {AnimalModel} from "../../../models/Entities.ts";
 import {generateUUID} from "../../../utils/string.ts";
 import {processObjectActionType, processObjectTexture} from "../../utils.ts";
+import {GameActorType} from "../../../models/game.ts";
 
 export const processAnimalData = (data: AnimalJsonData): AnimalModel => ({
     id: data.id,
     name: data.name,
+    actorType: GameActorType.Entity,
     texture: {
         name: processObjectTexture(data.texture.name),
         width: data.texture.width,
