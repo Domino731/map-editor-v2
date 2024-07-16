@@ -38,4 +38,8 @@ export interface EntityModel {
 
 }
 
+export interface AnimalModel extends EntityModel {
+}
+
+
 export type EntityTypeUnion = keyof typeof EntityType;

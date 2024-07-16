@@ -11,10 +11,10 @@ export interface AnimalJsonData {
         y: number;
     },
     ground_place: {
-        x: number;
-        y: number;
         width: number;
         height: number;
+        texture_x_offset: number;
+        texture_y_offset: number;
     },
     ground_collision: {
         x: number;
@@ -28,7 +28,7 @@ export interface AnimalJsonData {
         width: number;
         height: number;
     },
-    "action_collisions": Array<{
+    action_collisions: Array<{
         width: number;
         height: number;
         x: number;
@@ -47,10 +47,11 @@ export interface AnimalJsonData {
         y: number;
     },
     animations: {
-        runDown: Array<Array<number>>;
-        runRight: Array<Array<number>>;
-        runUp: Array<Array<number>>;
-        runLeft: Array<Array<number>>;
+        run_down: Array<Array<number>>;
+        run_right: Array<Array<number>>;
+        run_up: Array<Array<number>>;
+        run_left: Array<Array<number>>;
     },
-    hp: number
+    hp: number;
+    exp: number;
 }

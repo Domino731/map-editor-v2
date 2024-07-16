@@ -11,8 +11,8 @@
     "y": 0
   },
   "ground_place": {
-    "x": 0,
-    "y": 0,
+    "texture_x_offset": 0,
+    "texture_y_offset": 0,
     "width": 1,
     "height": 1
   },
@@ -32,12 +32,12 @@
   "drop": [],
   "hit_box": {
     "x": 0,
-    "h": 0,
+    "y": 0,
     "width": 0,
     "height": 0
   },
   "animations": {
-    "runDown": [
+    "run_down": [
       [
         0,
         0
@@ -55,7 +55,7 @@
         0
       ]
     ],
-    "runRight": [
+    "run_right": [
       [
         0,
         16
@@ -73,7 +73,7 @@
         16
       ]
     ],
-    "runUp": [
+    "run_up": [
       [
         0,
         32
@@ -91,7 +91,7 @@
         32
       ]
     ],
-    "runLeft": [
+    "run_left": [
       [
         0,
         48
