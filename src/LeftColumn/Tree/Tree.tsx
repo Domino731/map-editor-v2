@@ -25,6 +25,9 @@ export const Tree = () => {
                           <span className={styles.listItemIndexBox}
                                 style={{background: theme.palette.primary.main}}>{index + 1}</span>
                         {el.displayName}
+                        <span style={{color: 'red'}}> &ensp;{el.x}</span>
+                        &ensp;/&ensp;
+                        <span style={{color: 'yellow'}}>{el.y}</span>
                     </div>
                     <Tooltip title="Delete this actor from map">
                         <IconButton onClick={() => dispatch(AppSliceActions.deleteActorOnMap(el.uuid))}>
