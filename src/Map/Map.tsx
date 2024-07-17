@@ -11,9 +11,10 @@ import {generateUUID} from "../utils/string.ts";
 import {ActorOnMap, MapTool} from "./Map.types.ts";
 import {CELL_SIZE} from "../const/app.ts";
 import {GameActorType} from "../models/game.ts";
-import {GameObjectTextureName, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
+import {GameObjectTextureName, GameObjectType, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
 import {AllEntities} from "../const/characters/characters.ts";
 import {AppSliceActions} from "../store/AppReducer.ts";
+import {AnimalModel} from "../models/Entities.ts";
 
 export const defaultCellData: MapTileData = {
     ...TilesData[33],
@@ -22,8 +23,6 @@ export const defaultCellData: MapTileData = {
 }
 
 const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
-    const dispatch = useDispatch();
-
     const selectedTile = useSelector(AppSelectors.selectedTile);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
     const mapTool = useSelector(AppSelectors.mapTool);
@@ -83,6 +82,7 @@ export const Map = () => {
     const actorType = useSelector(AppSelectors.actorType);
     const mapTool = useSelector(AppSelectors.mapTool);
     const actorsOnMap = useSelector(AppSelectors.actorsOnMap);
+    const treeHoveredObjectUuid = useSelector(AppSelectors.treeHoveredObjectUuid);
 
     const isTileMode = useMemo(() => {
         const isTile = actorType === GameActorType.Tile;
@@ -107,20 +107,24 @@ export const Map = () => {
                 y: 0,
                 height: 0,
                 width: 0
-            }
+            },
+            displayName: ''
         }
 
         if (actorType === GameActorType.Object) {
             const objectData: TreeObjectModel | MineObjectModel | undefined = AllObjects.find(el => el.id === objectId);
             if (!objectData) return;
             if (objectStage) {
-                actorOnMap.texture = (objectData as TreeObjectModel).specs.stages[objectStage].texture;
+                const stage = (objectData as TreeObjectModel).specs.stages[objectStage]
+                actorOnMap.texture = stage.texture;
+                actorOnMap.displayName = `${stage}, stage: ${objectStage}`;
             } else {
                 actorOnMap.texture = (objectData as MineObjectModel).specs.texture;
+                actorOnMap.displayName = (objectData as MineObjectModel).name;
             }
 
         } else if (actorType === GameActorType.Entity) {
-            const entityData = AllEntities.find(el => el.id === objectId);
+            const entityData: AnimalModel | undefined = AllEntities.find(el => el.id === objectId);
             if (!entityData) return;
             actorOnMap.texture = {
                 name: entityData.texture.name,
@@ -129,6 +133,7 @@ export const Map = () => {
                 height: entityData.texture.height,
                 width: entityData.texture.width
             }
+            actorOnMap.displayName = `${entityData.name}`
         }
 
         return actorOnMap;
@@ -164,7 +169,8 @@ export const Map = () => {
                 y: 0,
                 height: 0,
                 width: 0
-            }
+            },
+            displayName: selectedActorData.displayName
         }
 
         if (actorType === GameActorType.Object) {
@@ -247,7 +253,9 @@ export const Map = () => {
                                 x: texture.x,
                                 y: texture.y,
                                 name: texture.name
-                            }}/>
+                            }}
+                                         isBorder={treeHoveredObjectUuid === uuid}
+                            />
                         </div>
                     })}
                 </div>

@@ -22,6 +22,6 @@ export const ObjectImage = ({texture, isBorder}: ObjectImageProps) => {
         backgroundPosition: `${x * -1}px ${y * -1}px`,
         width: `${width}px`,
         height: `${height}px`,
-        border: isBorder ? '1px solid black' : 'none',
+        border: isBorder ? '2px solid pink' : 'none',
     }}></div>
 }

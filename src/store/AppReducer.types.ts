@@ -18,6 +18,7 @@ export interface AppState {
     mapLayers: Array<MapLayer>;
     mapLayer: number;
     actorsOnMap: Array<ActorOnMap>;
+    treeHoveredObjectUuid: string | null;
 }
 
 export interface MapLayer {

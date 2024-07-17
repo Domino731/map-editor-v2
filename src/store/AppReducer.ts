@@ -27,13 +27,17 @@ const initialState: AppState = {
         {isVisible: true},
     ],
     mapLayer: 0,
-    actorsOnMap: []
+    actorsOnMap: [],
+    treeHoveredObjectUuid: null
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setTreeHoveredObjectUuid: (state, {payload}: PayloadAction<AppState['treeHoveredObjectUuid']>) => {
+            state.treeHoveredObjectUuid = payload;
+        },
         addActorOnMap: (state, {payload}: PayloadAction<ActorOnMap>) => {
             state.actorsOnMap.push(payload)
         },

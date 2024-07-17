@@ -16,6 +16,7 @@ const mapTool = createSelector(root, state => state.mapTool);
 const mapLayer = createSelector(root, state => state.mapLayer);
 const mapLayers = createSelector(root, state => state.mapLayers);
 const actorsOnMap = createSelector(root, state => state.actorsOnMap);
+const treeHoveredObjectUuid = createSelector(root, state => state.treeHoveredObjectUuid);
 
 export const AppSelectors = {
     mapTilesData,
@@ -29,5 +30,6 @@ export const AppSelectors = {
     mapTool,
     mapLayer,
     mapLayers,
-    actorsOnMap
+    actorsOnMap,
+    treeHoveredObjectUuid
 }

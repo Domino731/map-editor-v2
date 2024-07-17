@@ -1,22 +1,37 @@
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import {List, ListItem} from "@mui/material";
+import {IconButton, List, ListItem, Tooltip, useTheme} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {AppSelectors} from "../../store/AppReducer.selectors.ts";
+import styles from './Tree.module.scss';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import {AppSliceActions} from "../../store/AppReducer.ts";
 
 export const Tree = () => {
+    const theme = useTheme();
+    const dispatch = useDispatch();
+
+    const actorsOnMap = useSelector(AppSelectors.actorsOnMap);
+
+
     return <div>
-        <Accordion>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon/>}
-            >
-                Trees
-            </AccordionSummary>
-            <AccordionDetails>
-                <List>
-                    <ListItem sx={{height: '30px !important'}}>123</ListItem>
-                </List>
-            </AccordionDetails>
-        </Accordion>
+        <List className={styles.list}>
+            {actorsOnMap.map((el, index) =>
+                <ListItem
+                    key={`actors-on-map-${el.uuid}`}
+                    className={styles.listItem}
+                    onMouseEnter={() => dispatch(AppSliceActions.setTreeHoveredObjectUuid(el.uuid))}
+                    onMouseLeave={() => dispatch(AppSliceActions.setTreeHoveredObjectUuid(null))}
+                >
+                    <div>
+                          <span className={styles.listItemIndexBox}
+                                style={{background: theme.palette.primary.main}}>{index + 1}</span>
+                        {el.displayName}
+                    </div>
+                    <Tooltip title="Delete this actor from map">
+                        <IconButton onClick={() => dispatch(AppSliceActions.deleteActorOnMap(el.uuid))}>
+                            <DeleteRoundedIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </ListItem>)}
+        </List>
     </div>
 }

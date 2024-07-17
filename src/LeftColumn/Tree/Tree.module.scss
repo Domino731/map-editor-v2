@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px !important;
+}
+
+.listItemIndexBox {
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  margin-right: 10px;
+}
+
+.listItem {
+  border-bottom: 1px solid grey !important;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+  height: 40px !important;
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+}

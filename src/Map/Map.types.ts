@@ -1,5 +1,5 @@
 import {GameActorTypeUnion} from "../models/game.ts";
-import {GameObjectTexture} from "../models/GameObject.ts";
+import {GameObjectTexture, GameObjectTypeUnion} from "../models/GameObject.ts";
 
 export interface ActorOnMap {
     x: number;
@@ -9,6 +9,7 @@ export interface ActorOnMap {
     uuid: string;
     stage: number | null;
     texture: GameObjectTexture;
+    displayName: string;
 }
 
 export enum MapTool {
