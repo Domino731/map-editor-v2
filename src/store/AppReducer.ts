@@ -7,6 +7,7 @@ import {
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {GameActorType} from "../models/game.ts";
+import {ActorOnMap} from "../Map/Map.types.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 
@@ -25,13 +26,20 @@ const initialState: AppState = {
         {isVisible: true},
         {isVisible: true},
     ],
-    mapLayer: 0
+    mapLayer: 0,
+    actorsOnMap: []
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        addActorOnMap: (state, {payload}: PayloadAction<ActorOnMap>) => {
+            state.actorsOnMap.push(payload)
+        },
+        deleteActorOnMap: (state, {payload}: PayloadAction<string>) => {
+            state.actorsOnMap = state.actorsOnMap.filter(el => el.uuid !== payload)
+        },
         toggleMapLayerVisibility: (state, {payload}: PayloadAction<ToggleMapLayerVisibilityPayload>) => {
             state.mapLayers[payload.layerIndex].isVisible = !state.mapLayers[payload.layerIndex].isVisible;
         },

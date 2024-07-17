@@ -13,7 +13,6 @@ import {CELL_SIZE} from "../const/app.ts";
 import {GameActorType} from "../models/game.ts";
 import {GameObjectTextureName, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
 import {AllEntities} from "../const/characters/characters.ts";
-import {Cords} from "../types.ts";
 import {AppSliceActions} from "../store/AppReducer.ts";
 
 export const defaultCellData: MapTileData = {
@@ -75,6 +74,7 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
 
 export const Map = () => {
     const mapRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     const mapData = useSelector(AppSelectors.mapTilesData);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
@@ -82,6 +82,7 @@ export const Map = () => {
     const objectStage = useSelector(AppSelectors.objectStage);
     const actorType = useSelector(AppSelectors.actorType);
     const mapTool = useSelector(AppSelectors.mapTool);
+    const actorsOnMap = useSelector(AppSelectors.actorsOnMap);
 
     const isTileMode = useMemo(() => {
         const isTile = actorType === GameActorType.Tile;
@@ -90,7 +91,6 @@ export const Map = () => {
     }, [actorType, mapTool, rightColumnType])
 
     const [objectCords, setObjectsCords] = useState<{ x: number; y: number }>({x: 0, y: 0});
-    const [objectsOnMap, setObjectsOnMap] = useState<Array<ActorOnMap>>([]);
 
     const selectedActorData = useMemo((): ActorOnMap | undefined => {
         if (isTileMode || !objectId) return;
@@ -189,9 +189,8 @@ export const Map = () => {
         } else {
             return;
         }
-
-        setObjectsOnMap(prev => [...prev, actorOnMap])
-    }, [actorType, selectedActorData, objectId, objectCords, objectStage])
+        dispatch(AppSliceActions.addActorOnMap(actorOnMap))
+    }, [mapTool, isTileMode, selectedActorData, objectId, objectCords, actorType, objectStage, dispatch])
 
     const ObjectComponent = useCallback(() => {
         if (!selectedActorData) return;
@@ -214,10 +213,10 @@ export const Map = () => {
     const handleClickOnMapObject = useCallback((uuid: string) => {
         if (rightColumnType === RightColumnTabs.Special) {
             if (mapTool === MapTool.DeleteObject || mapTool === MapTool.DeleteEntity) {
-                setObjectsOnMap(prev => prev.filter(el => el.uuid !== uuid));
+                dispatch(AppSliceActions.deleteActorOnMap(uuid));
             }
         }
-    }, [mapTool, rightColumnType])
+    }, [dispatch, mapTool, rightColumnType])
 
     return <section className={styles.container}>
         <div className={styles.map}>
@@ -233,7 +232,7 @@ export const Map = () => {
                 </div>
                 {/* All actors on map */}
                 <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
-                    {objectsOnMap.map(({uuid, texture, x, y}) => {
+                    {actorsOnMap.map(({uuid, texture, x, y}) => {
                         return <div
                             onClick={() => handleClickOnMapObject(uuid)}
                             key={`map-objects-${uuid}`}

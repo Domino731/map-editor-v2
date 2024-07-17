@@ -3,6 +3,7 @@ import {Tab, Tabs} from "@mui/material";
 import {LeftColumnTab, LeftColumnTabUnion} from "./LeftColumn.types.ts";
 import {Settings} from "./Settings";
 import {SaveLoad} from "./SaveLoad";
+import {Tree} from "./Tree";
 
 export const LeftColumn = () => {
     const [tab, setTab] = useState<LeftColumnTabUnion>(LeftColumnTab.Tree);
@@ -17,7 +18,7 @@ export const LeftColumn = () => {
                  onClick={() => setTab(LeftColumnTab.SaveLoad)}/>
         </Tabs>
 
-
+        {tab === LeftColumnTab.Tree && <Tree/>}
         {tab === LeftColumnTab.Settings && <Settings/>}
         {tab === LeftColumnTab.SaveLoad && <SaveLoad/>}
     </div>

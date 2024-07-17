@@ -3,7 +3,7 @@ import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {ModalsUnion} from "../Modals/ModalManager.types.ts";
 import {ObjectDetailsModalProps} from "../Modals/ObjectDetailsModal/ObjectDetailsModal.tsx";
 import {GameActorTypeUnion} from "../models/game.ts";
-import {MapToolUnion} from "../Map/Map.types.ts";
+import {ActorOnMap, MapToolUnion} from "../Map/Map.types.ts";
 
 export interface AppState {
     mapTilesData: Array<Array<TileData | null>>;
@@ -17,6 +17,7 @@ export interface AppState {
     mapTool: MapToolUnion | null;
     mapLayers: Array<MapLayer>;
     mapLayer: number;
+    actorsOnMap: Array<ActorOnMap>;
 }
 
 export interface MapLayer {
