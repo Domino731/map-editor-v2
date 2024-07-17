@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-    AddMapTileActionPayload,
     AppState,
     SetActiveModelActionProps,
     SetObjectIdActionPayload, ToggleMapLayerVisibilityPayload
@@ -26,8 +25,7 @@ const initialState: AppState = {
         {isVisible: true},
         {isVisible: true},
     ],
-    mapLayer: 0,
-    mapTiles: []
+    mapLayer: 0
 }
 
 const appSlice = createSlice({

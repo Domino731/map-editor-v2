@@ -1,4 +1,4 @@
-import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip} from "@mui/material";
+import {Box, FormControl, IconButton, InputLabel, List, ListItem, MenuItem, Select, Tooltip} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useMemo} from "react";
 import {AppSelectors} from "../../store/AppReducer.selectors.ts";
@@ -33,26 +33,16 @@ export const Settings = () => {
                     value={index}>{index + 1}</MenuItem>)}
             </Select>
 
-            {mapLayers.map(({isVisible}, index) => <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                >
-                    <Box>
-                        <Tooltip title="Toggle visibility">
-                            <IconButton onClick={(e) => handleToggleMapLayerVisibility(e, index)}>
-                                {isVisible ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
-                            </IconButton>
-                        </Tooltip>
-                        Layer {index + 1}
-                    </Box>
-                </AccordionSummary>
-                <AccordionDetails>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                </AccordionDetails>
-            </Accordion>)}
+            <List>
+                {mapLayers.map(({isVisible}, index) => <ListItem>
+                    <Tooltip title="Toggle visibility">
+                        <IconButton onClick={(e) => handleToggleMapLayerVisibility(e, index)}>
+                            {isVisible ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
+                        </IconButton>
+                    </Tooltip>
+                    Layer {index + 1}
+                </ListItem>)}
+            </List>
         </FormControl>
     </div>
 }

@@ -17,7 +17,6 @@ export interface AppState {
     mapTool: MapToolUnion | null;
     mapLayers: Array<MapLayer>;
     mapLayer: number;
-    mapTiles: Array<StoreMapTileData>;
 }
 
 export interface MapLayer {
@@ -42,12 +41,6 @@ export interface AddMapTileActionPayload {
 export interface SetObjectIdActionPayload {
     objectId: string;
     actorType: GameActorTypeUnion;
-}
-
-export interface StoreMapTileData {
-    x: number;
-    y: number;
-    tiles: Array<Required<MapTileData>>
 }
 
 export interface MapTileData extends TileData {
