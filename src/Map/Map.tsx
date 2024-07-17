@@ -8,7 +8,7 @@ import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {AllObjects} from "../const/objects/allObjects.ts";
 import {ObjectImage} from "../components/ObjectImage";
 import {generateUUID} from "../utils/string.ts";
-import {ActorOnMap} from "./Map.types.ts";
+import {ActorOnMap, MapTool} from "./Map.types.ts";
 import {CELL_SIZE} from "../const/app.ts";
 import {GameActorType} from "../models/game.ts";
 import {GameObjectTextureName, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
@@ -38,10 +38,13 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
 
 
     const handleTileClick = () => {
-        if (mapTool) {
-            setIsWall(prev => !prev);
-            return;
+        if (rightColumnType === RightColumnTabs.Special) {
+            if (mapTool === MapTool.Walls) {
+                setIsWall(prev => !prev);
+                return;
+            }
         }
+
 
         if (!selectedTile || rightColumnType !== RightColumnTabs.Tiles) return;
         const index = tilesData.findIndex(({zIndex}) => zIndex === mapLayer);
@@ -141,6 +144,7 @@ export const Map = () => {
     }, [])
 
     const onMapClick = useCallback(() => {
+        if (mapTool === MapTool.DeleteEntity || mapTool === MapTool.DeleteObject) return;
         if (isTileMode) {
             const {x, y} = objectCords;
             console.log(x, y);
@@ -207,6 +211,14 @@ export const Map = () => {
         </div>
     }, [selectedActorData, objectCords])
 
+    const handleClickOnMapObject = useCallback((uuid: string) => {
+        if (rightColumnType === RightColumnTabs.Special) {
+            if (mapTool === MapTool.DeleteObject || mapTool === MapTool.DeleteEntity) {
+                setObjectsOnMap(prev => prev.filter(el => el.uuid !== uuid));
+            }
+        }
+    }, [mapTool, rightColumnType])
+
     return <section className={styles.container}>
         <div className={styles.map}>
             <div
@@ -223,6 +235,7 @@ export const Map = () => {
                 <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
                     {objectsOnMap.map(({uuid, texture, x, y}) => {
                         return <div
+                            onClick={() => handleClickOnMapObject(uuid)}
                             key={`map-objects-${uuid}`}
                             style={{
                                 position: 'absolute',

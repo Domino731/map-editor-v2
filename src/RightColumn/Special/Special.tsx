@@ -23,6 +23,16 @@ export const Special = () => {
                 <span className={styles.blockWall}/>
                 <p style={{color: mapTool === MapTool.Walls ? theme.palette.primary.main : 'white'}}>Add block walls</p>
             </li>
+            <li className={styles.listItem} onClick={() => handleChangeMapTool(MapTool.DeleteObject)}>
+                <span className={styles.blockWall}/>
+                <p style={{color: mapTool === MapTool.DeleteObject ? theme.palette.primary.main : 'white'}}>Delete an
+                    object</p>
+            </li>
+            <li className={styles.listItem} onClick={() => handleChangeMapTool(MapTool.DeleteEntity)}>
+                <span className={styles.blockWall}/>
+                <p style={{color: mapTool === MapTool.DeleteEntity ? theme.palette.primary.main : 'white'}}>Delete an
+                    entity</p>
+            </li>
         </ul>
     </div>
 }

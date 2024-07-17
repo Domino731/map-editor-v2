@@ -12,7 +12,9 @@ export interface ActorOnMap {
 }
 
 export enum MapTool {
-    Walls = "Walls"
+    Walls = "Walls",
+    DeleteObject = "DeleteObject",
+    DeleteEntity = "DeleteEntity"
 }
 
 export type MapToolUnion = keyof typeof MapTool;
