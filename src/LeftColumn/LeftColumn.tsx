@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Tab, Tabs} from "@mui/material";
 import {LeftColumnTab, LeftColumnTabUnion} from "./LeftColumn.types.ts";
 import {Settings} from "./Settings";
+import {SaveLoad} from "./SaveLoad";
 
 export const LeftColumn = () => {
     const [tab, setTab] = useState<LeftColumnTabUnion>(LeftColumnTab.Tree);
@@ -18,5 +19,6 @@ export const LeftColumn = () => {
 
 
         {tab === LeftColumnTab.Settings && <Settings/>}
+        {tab === LeftColumnTab.SaveLoad && <SaveLoad/>}
     </div>
 }
