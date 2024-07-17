@@ -15,6 +15,8 @@ export interface AppState {
     modalProps: Omit<ObjectDetailsModalProps, 'isOpen'> | null;
     actorType: GameActorTypeUnion;
     mapTool: MapToolUnion | null;
+    mapLayers: number;
+    mapLayer: number;
 }
 
 export interface SetActiveModelActionProps {

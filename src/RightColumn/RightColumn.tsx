@@ -1,7 +1,6 @@
 import {useCallback} from "react";
 import {Tab, Tabs} from "@mui/material";
 import {RightColumnTabs} from "./RightColumn.const.ts";
-import styles from './RightColumn.module.scss';
 import {Tiles} from "./Tiles";
 import {Objects} from "./Objects";
 import {useDispatch, useSelector} from "react-redux";
@@ -20,7 +19,7 @@ export const RightColumn = () => {
     }, [dispatch])
 
     return <div>
-        <Tabs value={rightColumnType} aria-label="right-column-tabs" className={styles.tabs} variant="fullWidth">
+        <Tabs value={rightColumnType} aria-label="right-column-tabs" sx={{marginBottom: "40px"}} variant="fullWidth">
             <Tab label="Tiles" value={RightColumnTabs.Tiles}
                  onClick={() => handleChangeRightColumnType(RightColumnTabs.Tiles)}/>
             <Tab label="Objects" value={RightColumnTabs.Objects}

@@ -69,8 +69,6 @@ export const Map = () => {
 
     const [objectCords, setObjectsCords] = useState<{ x: number; y: number }>({x: 0, y: 0});
     const [objectsOnMap, setObjectsOnMap] = useState<Array<ActorOnMap>>([]);
-    const [walls, setWalls] = useState<Array<Cords>>([]);
-
 
     const selectedActorData = useMemo((): ActorOnMap | undefined => {
         if (isTileMode || !objectId) return;
@@ -115,16 +113,20 @@ export const Map = () => {
     }, [actorType, isTileMode, objectId, objectStage])
 
     const onMapMouseOver = useCallback((event: MouseEvent) => {
-        if (isTileMode || !mapRef.current) return;
+        if (!mapRef.current) return;
         const rect = mapRef.current.getBoundingClientRect();
         setObjectsCords({
             x: Math.floor((event.clientX - rect.left) / 16),
             y: Math.floor((event.clientY - rect.top) / 16)
         });
-    }, [isTileMode])
+    }, [])
 
     const onMapClick = useCallback(() => {
-        if (isTileMode || !selectedActorData || !objectId) return;
+        if (isTileMode) {
+            const {x, y} = objectCords;
+            console.log(x, y);
+        }
+        if (!selectedActorData || !objectId) return;
         const {x, y} = objectCords;
         const actorOnMap: ActorOnMap = {
             x,
@@ -190,12 +192,13 @@ export const Map = () => {
         <div className={styles.map}>
             <div style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
                  onClick={onMapClick}>
+
+
                 <div style={{width: '100%', height: '100%', position: 'relative', zIndex: 1}}>
                     {mapData.map((row, rowIndex) => <div className={styles.row} key={`map-row-${rowIndex}`}>
                         {row.map((_, i) => <MapCell cellX={i} cellY={rowIndex} key={`map-cell-${rowIndex}-${i}`}/>)}
                     </div>)}
                 </div>
-
                 {/* All actors on map */}
                 <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
                     {objectsOnMap.map(({uuid, texture, x, y}) => {

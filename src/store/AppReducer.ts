@@ -15,13 +15,18 @@ const initialState: AppState = {
     activeModel: null,
     modalProps: null,
     actorType: GameActorType.Tile,
-    mapTool: null
+    mapTool: null,
+    mapLayers: 3,
+    mapLayer: 0
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setMapLayer: (state, {payload}: PayloadAction<AppState['mapLayer']>) => {
+            state.mapLayer = payload;
+        },
         setMapTool: (state, {payload}: PayloadAction<AppState['mapTool']>) => {
             state.mapTool = payload;
         },
