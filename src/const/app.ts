@@ -1,3 +1,6 @@
+import {MapTileData} from "../store/AppReducer.types.ts";
+import {TilesData} from "./tiles/tiles.ts";
+
 export const CELL_SIZE = 16;
 
 export enum ObjectActions {
@@ -22,3 +25,9 @@ export const OBJECTS_ACTIONS_OPTIONS = [
         value: ObjectActions.Water
     }
 ]
+
+export const defaultCellData: MapTileData = {
+    ...TilesData[33],
+    x: 0,
+    y: 7 * 16
+}

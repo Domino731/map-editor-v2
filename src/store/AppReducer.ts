@@ -1,5 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppState, SetActiveModelActionProps, SetObjectIdActionPayload} from "./AppReducer.types.ts";
+import {
+    AddMapTileActionPayload,
+    AppState,
+    SetActiveModelActionProps,
+    SetObjectIdActionPayload
+} from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
 import {GameActorType} from "../models/game.ts";
@@ -17,13 +22,32 @@ const initialState: AppState = {
     actorType: GameActorType.Tile,
     mapTool: null,
     mapLayers: 3,
-    mapLayer: 0
+    mapLayer: 0,
+    mapTiles: []
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        addMapTile: (state, {payload}: PayloadAction<AddMapTileActionPayload>) => {
+            console.log('add tile');
+            state.mapTiles = state.mapTiles.map((tile) => {
+                if (tile.x === payload.x && payload.y === tile.y) {
+                    console.log('found');
+                    return {
+                        ...tile,
+                        tiles: payload.tiles
+                    }
+                } else {
+                    console.log('found');
+                    return {
+                        ...tile,
+                        tiles: payload.tiles
+                    }
+                }
+            });
+        },
         setMapLayer: (state, {payload}: PayloadAction<AppState['mapLayer']>) => {
             state.mapLayer = payload;
         },

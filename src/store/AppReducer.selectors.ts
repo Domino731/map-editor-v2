@@ -1,6 +1,7 @@
 import {RootState} from "./store.ts";
 import {APP_REDUCER_NAME} from "./AppReducer.ts";
 import {createSelector} from "@reduxjs/toolkit";
+import {useSelector} from "react-redux";
 
 const root = (root: RootState) => root[APP_REDUCER_NAME];
 
@@ -15,7 +16,7 @@ const actorType = createSelector(root, state => state.actorType);
 const mapTool = createSelector(root, state => state.mapTool);
 const mapLayer = createSelector(root, state => state.mapLayer);
 const mapLayers = createSelector(root, state => state.mapLayers);
-
+const mapTiles = createSelector(root, state => state.mapTiles);
 export const AppSelectors = {
     mapTilesData,
     selectedTile,
@@ -27,5 +28,6 @@ export const AppSelectors = {
     actorType,
     mapTool,
     mapLayer,
-    mapLayers
+    mapLayers,
+    mapTiles
 }

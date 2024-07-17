@@ -17,6 +17,7 @@ export interface AppState {
     mapTool: MapToolUnion | null;
     mapLayers: number;
     mapLayer: number;
+    mapTiles: Array<StoreMapTileData>;
 }
 
 export interface SetActiveModelActionProps {
@@ -24,12 +25,25 @@ export interface SetActiveModelActionProps {
     modalProps: Omit<ObjectDetailsModalProps, 'isOpen'>
 }
 
+export interface AddMapTileActionPayload {
+    x: number;
+    y: number;
+    tiles: Array<Required<MapTileData>>;
+}
+
 export interface SetObjectIdActionPayload {
     objectId: string;
     actorType: GameActorTypeUnion;
 }
 
+export interface StoreMapTileData {
+    x: number;
+    y: number;
+    tiles: Array<Required<MapTileData>>
+}
+
 export interface MapTileData extends TileData {
     x: number;
     y: number;
+    zIndex?: number;
 }

@@ -1,5 +1,5 @@
 import styles from './Map.module.scss';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../store/AppReducer.selectors.ts";
 import {useCallback, useMemo, useRef, useState} from "react";
 import {MapTileData} from "../store/AppReducer.types.ts";
@@ -14,6 +14,7 @@ import {GameActorType} from "../models/game.ts";
 import {GameObjectTextureName, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
 import {AllEntities} from "../const/characters/characters.ts";
 import {Cords} from "../types.ts";
+import {AppSliceActions} from "../store/AppReducer.ts";
 
 export const defaultCellData: MapTileData = {
     ...TilesData[33],
@@ -21,13 +22,19 @@ export const defaultCellData: MapTileData = {
     y: 7 * 16
 }
 
-const MapCell = () => {
+const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
+    const dispatch = useDispatch();
+
     const selectedTile = useSelector(AppSelectors.selectedTile);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
     const mapTool = useSelector(AppSelectors.mapTool);
+    const mapLayer = useSelector(AppSelectors.mapLayer);
 
-    const [tile, setTile] = useState<MapTileData>(defaultCellData);
     const [isWall, setIsWall] = useState<boolean>(false);
+    const [tilesData, setTilesData] = useState<Array<Required<MapTileData>>>([
+        {...defaultCellData, zIndex: 0}
+    ]);
+
 
     const handleTileClick = () => {
         if (mapTool) {
@@ -36,17 +43,25 @@ const MapCell = () => {
         }
 
         if (!selectedTile || rightColumnType !== RightColumnTabs.Tiles) return;
-        setTile(selectedTile);
+        const index = tilesData.findIndex(({zIndex}) => zIndex === mapLayer);
+        const newTilesData = [...tilesData];
+        if (index !== -1) {
+            newTilesData[index] = {...selectedTile, zIndex: mapLayer}
+        } else {
+            newTilesData.push({...selectedTile, zIndex: mapLayer})
+        }
+        setTilesData(newTilesData)
     }
 
-    const cellStyles = useMemo(() => {
+    const cellStyles = useCallback((tile: MapTileData) => {
         return ({
             backgroundImage: `url(${tile.src})`,
             backgroundPosition: `${tile.x * -1}px ${tile.y * -1}px`
         })
-    }, [tile.src, tile.x, tile.y])
+    }, [])
 
-    return <div className={styles.cell} style={cellStyles} onClick={handleTileClick}>
+    return <div className={styles.cell} onClick={handleTileClick}>
+        {tilesData.map(el => <div style={cellStyles(el)}></div>)}
         {isWall && <span/>}
     </div>
 }
@@ -190,8 +205,9 @@ export const Map = () => {
 
     return <section className={styles.container}>
         <div className={styles.map}>
-            <div style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
-                 onClick={onMapClick}>
+            <div
+                style={{width: `${40 * 16}px`, height: `${40 * 16}px`, position: 'relative'}}
+                onClick={onMapClick}>
 
 
                 <div style={{width: '100%', height: '100%', position: 'relative', zIndex: 1}}>
@@ -230,8 +246,7 @@ export const Map = () => {
                     left: 0,
                     zIndex: isTileMode ? -1 : 3
                 }}
-                     ref={mapRef}
-                     onMouseMove={onMapMouseOver}
+                     ref={mapRef} onMouseMove={onMapMouseOver}
                 >
                     <ObjectComponent/>
                 </div>
