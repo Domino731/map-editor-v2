@@ -39,7 +39,7 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
 
     const handleTileClick = () => {
         if (mapTool) {
-            setIsWall(true)
+            setIsWall(prev => !prev);
             return;
         }
 
