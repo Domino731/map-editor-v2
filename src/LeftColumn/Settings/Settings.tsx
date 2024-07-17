@@ -1,8 +1,14 @@
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {useMemo} from "react";
+import {useCallback, useMemo} from "react";
 import {AppSelectors} from "../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../store/AppReducer.ts";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export const Settings = () => {
     const dispatch = useDispatch();
@@ -10,10 +16,10 @@ export const Settings = () => {
     const mapLayer = useSelector(AppSelectors.mapLayer);
     const mapLayers = useSelector(AppSelectors.mapLayers);
 
-    const mapLayerOption = useMemo(() => {
-        console.log(mapLayers)
-        return Array.from(Array(mapLayers).keys())
-    }, [mapLayers])
+    const handleToggleMapLayerVisibility = useCallback((event, layerIndex: number) => {
+        event.preventDefault();
+        dispatch(AppSliceActions.toggleMapLayerVisibility({layerIndex}))
+    }, [dispatch])
 
     return <div>
         <FormControl fullWidth>
@@ -23,9 +29,30 @@ export const Settings = () => {
                 label="Age"
                 onChange={(e) => dispatch(AppSliceActions.setMapLayer(Number(e.target.value)))}
             >
-                {mapLayerOption.map((_, i) => <MenuItem
-                    value={i}>{i + 1}</MenuItem>)}
+                {mapLayers.map((_, index) => <MenuItem
+                    value={index}>{index + 1}</MenuItem>)}
             </Select>
+
+            {mapLayers.map(({isVisible}, index) => <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                >
+                    <Box>
+                        <Tooltip title="Toggle visibility">
+                            <IconButton onClick={(e) => handleToggleMapLayerVisibility(e, index)}>
+                                {isVisible ? <RemoveRedEyeIcon/> : <VisibilityOffIcon/>}
+                            </IconButton>
+                        </Tooltip>
+                        Layer {index + 1}
+                    </Box>
+                </AccordionSummary>
+                <AccordionDetails>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                </AccordionDetails>
+            </Accordion>)}
         </FormControl>
     </div>
 }

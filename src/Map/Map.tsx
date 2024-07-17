@@ -29,6 +29,7 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
     const mapTool = useSelector(AppSelectors.mapTool);
     const mapLayer = useSelector(AppSelectors.mapLayer);
+    const mapLayers = useSelector(AppSelectors.mapLayers);
 
     const [isWall, setIsWall] = useState<boolean>(false);
     const [tilesData, setTilesData] = useState<Array<Required<MapTileData>>>([
@@ -61,7 +62,10 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
     }, [])
 
     return <div className={styles.cell} onClick={handleTileClick}>
-        {tilesData.map(el => <div style={cellStyles(el)}></div>)}
+        {tilesData.map(el => {
+            if (!mapLayers[el.zIndex].isVisible) return;
+            return <div style={cellStyles(el)}></div>;
+        })}
         {isWall && <span/>}
     </div>
 }

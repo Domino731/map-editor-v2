@@ -15,14 +15,22 @@ export interface AppState {
     modalProps: Omit<ObjectDetailsModalProps, 'isOpen'> | null;
     actorType: GameActorTypeUnion;
     mapTool: MapToolUnion | null;
-    mapLayers: number;
+    mapLayers: Array<MapLayer>;
     mapLayer: number;
     mapTiles: Array<StoreMapTileData>;
+}
+
+export interface MapLayer {
+    isVisible: boolean;
 }
 
 export interface SetActiveModelActionProps {
     modalName: ModalsUnion;
     modalProps: Omit<ObjectDetailsModalProps, 'isOpen'>
+}
+
+export interface ToggleMapLayerVisibilityPayload {
+    layerIndex: number;
 }
 
 export interface AddMapTileActionPayload {

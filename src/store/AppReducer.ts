@@ -3,7 +3,7 @@ import {
     AddMapTileActionPayload,
     AppState,
     SetActiveModelActionProps,
-    SetObjectIdActionPayload
+    SetObjectIdActionPayload, ToggleMapLayerVisibilityPayload
 } from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
@@ -21,7 +21,11 @@ const initialState: AppState = {
     modalProps: null,
     actorType: GameActorType.Tile,
     mapTool: null,
-    mapLayers: 3,
+    mapLayers: [
+        {isVisible: true},
+        {isVisible: true},
+        {isVisible: true},
+    ],
     mapLayer: 0,
     mapTiles: []
 }
@@ -30,23 +34,8 @@ const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
-        addMapTile: (state, {payload}: PayloadAction<AddMapTileActionPayload>) => {
-            console.log('add tile');
-            state.mapTiles = state.mapTiles.map((tile) => {
-                if (tile.x === payload.x && payload.y === tile.y) {
-                    console.log('found');
-                    return {
-                        ...tile,
-                        tiles: payload.tiles
-                    }
-                } else {
-                    console.log('found');
-                    return {
-                        ...tile,
-                        tiles: payload.tiles
-                    }
-                }
-            });
+        toggleMapLayerVisibility: (state, {payload}: PayloadAction<ToggleMapLayerVisibilityPayload>) => {
+            state.mapLayers[payload.layerIndex].isVisible = !state.mapLayers[payload.layerIndex].isVisible;
         },
         setMapLayer: (state, {payload}: PayloadAction<AppState['mapLayer']>) => {
             state.mapLayer = payload;
