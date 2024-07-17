@@ -4,7 +4,7 @@ import {AppSelectors} from "../store/AppReducer.selectors.ts";
 import {useCallback, useMemo, useRef, useState} from "react";
 import {MapTileData} from "../store/AppReducer.types.ts";
 import {TilesData} from "../const/tiles/tiles.ts";
-import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
+import {RightColumnTabs} from "../RightColumn/MapContent.ts";
 import {AllObjects} from "../const/objects/allObjects.ts";
 import {ObjectImage} from "../components/ObjectImage";
 import {generateUUID} from "../utils/string.ts";

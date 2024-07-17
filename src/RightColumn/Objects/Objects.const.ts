@@ -1,6 +1,6 @@
-import {ObjectsTypes} from "./Objects.types.ts";
+import {ObjectsTypes, ObjectTypeOption} from "./Objects.types.ts";
 
-export const objectTypeOptions = [
+export const objectTypeOptions: Array<ObjectTypeOption> = [
     {
         label: 'Bushes',
         type: ObjectsTypes.Bushes

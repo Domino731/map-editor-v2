@@ -1,5 +1,5 @@
 import {TileData} from "../const/tiles/tiles.ts";
-import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
+import {RightColumnTabs} from "../RightColumn/MapContent.ts";
 import {ModalsUnion} from "../Modals/ModalManager.types.ts";
 import {ObjectDetailsModalProps} from "../Modals/ObjectDetailsModal/ObjectDetailsModal.tsx";
 import {GameActorTypeUnion} from "../models/game.ts";

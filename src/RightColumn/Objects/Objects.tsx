@@ -1,11 +1,11 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {ObjectsTypes} from "./Objects.types.ts";
 import {objectTypeOptions} from "./Objects.const.ts";
-import {BushesList} from "./BushesList";
+import {SingleStageList} from "../components/SingleStageList";
 import {BushesData} from "../../const/objects/bushes/bushes.ts";
 import {MinesData} from "../../const/objects/mines/mines.ts";
-import {MultiStageList} from "./MultiStageList";
+import {MultiStageList} from "../components/MultiStageList";
 import {TreesData} from "../../const/objects/trees/trees.ts";
 import {CropsData} from "../../const/objects/crops/crops.ts";
 import {GrassData} from "../../const/objects/grass/grass.ts";
@@ -17,6 +17,31 @@ import {createSingleStageObjects} from "./Objects.utils.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
+
+    const ObjectList = useMemo(() => {
+        switch (objectsType) {
+            case ObjectsTypes.Bushes:
+                return <SingleStageList objects={createSingleStageObjects(BushesData)}/>
+            case ObjectsTypes.Mines:
+                return <SingleStageList objects={createSingleStageObjects(MinesData)}/>
+            case ObjectsTypes.Trees:
+                return <MultiStageList objects={TreesData}/>
+            case ObjectsTypes.FruitTrees:
+                return <MultiStageList objects={FruitTreesData}/>
+            case ObjectsTypes.Crops:
+                return <MultiStageList objects={CropsData}/>
+            case ObjectsTypes.Grass:
+                return <SingleStageList objects={createSingleStageObjects(GrassData)}/>
+            case ObjectsTypes.Building:
+                return <SingleStageList objects={createSingleStageObjects(BuildingsData)}/>
+            case ObjectsTypes.Flooring:
+                return <SingleStageList objects={createSingleStageObjects(FlooringData)}/>
+            case ObjectsTypes.HoeDirt:
+                return <SingleStageList objects={createSingleStageObjects(HoeDirtData)}/>
+            default:
+                return null;
+        }
+    }, [objectsType])
 
     return <div>
         <FormControl fullWidth>
@@ -31,16 +56,6 @@ export const Objects = () => {
                                                                     key={`object-type-select-${type}`}>{label}</MenuItem>)}
             </Select>
         </FormControl>
-
-        {objectsType === ObjectsTypes.Bushes && <BushesList objects={createSingleStageObjects(BushesData)}/>}
-        {objectsType === ObjectsTypes.Mines && <BushesList objects={createSingleStageObjects(MinesData)}/>}
-        {objectsType === ObjectsTypes.Trees && <MultiStageList objects={TreesData}/>}
-        {objectsType === ObjectsTypes.FruitTrees && <MultiStageList objects={FruitTreesData}/>}
-        {/*{objectsType === ObjectsTypes.StaticTrees && <MultiStageList objects={StaticTreesData}/>}*/}
-        {objectsType === ObjectsTypes.Crops && <MultiStageList objects={CropsData}/>}
-        {objectsType === ObjectsTypes.Grass && <BushesList objects={createSingleStageObjects(GrassData)}/>}
-        {objectsType === ObjectsTypes.Building && <BushesList objects={createSingleStageObjects(BuildingsData)}/>}
-        {objectsType === ObjectsTypes.Flooring && <BushesList objects={createSingleStageObjects(FlooringData)}/>}
-        {objectsType === ObjectsTypes.HoeDirt && <BushesList objects={createSingleStageObjects(HoeDirtData)}/>}
+        {ObjectList}
     </div>
 }

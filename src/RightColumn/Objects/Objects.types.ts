@@ -1,3 +1,8 @@
+export interface ObjectTypeOption {
+    label: string;
+    type: ObjectsTypes
+}
+
 export enum ObjectsTypes {
     Bushes,
     Crops,

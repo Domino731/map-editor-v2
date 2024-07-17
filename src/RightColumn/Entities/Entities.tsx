@@ -2,7 +2,7 @@ import {useState} from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {entityTypeOptions} from "./Entities.const.ts";
 import {EntityType, EntityTypeUnion} from "../../models/Entities.ts";
-import {BushesList} from "../Objects/BushesList";
+import {SingleStageList} from "../components/SingleStageList";
 import {createSingleStageObjects} from "./Entities.utils.ts";
 import {AnimalsData} from "../../const/characters/animals/animals.ts";
 
@@ -23,6 +23,6 @@ export const Entities = () => {
             </Select>
         </FormControl>
 
-        {entityType === EntityType.Animal && <BushesList objects={createSingleStageObjects(AnimalsData)}/>}
+        {entityType === EntityType.Animal && <SingleStageList objects={createSingleStageObjects(AnimalsData)}/>}
     </>
 }

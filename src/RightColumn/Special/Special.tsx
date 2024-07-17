@@ -12,7 +12,6 @@ export const Special = () => {
 
     const mapTool = useSelector(AppSelectors.mapTool);
 
-
     const handleChangeMapTool = useCallback((mapTool: MapToolUnion) => {
         dispatch(AppSliceActions.setMapTool(mapTool));
     }, [dispatch])

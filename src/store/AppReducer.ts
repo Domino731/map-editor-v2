@@ -5,7 +5,7 @@ import {
     SetObjectIdActionPayload, ToggleMapLayerVisibilityPayload
 } from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
-import {RightColumnTabs} from "../RightColumn/RightColumn.const.ts";
+import {RightColumnTabs} from "../RightColumn/MapContent.ts";
 import {GameActorType} from "../models/game.ts";
 import {ActorOnMap} from "../Map/Map.types.ts";
 

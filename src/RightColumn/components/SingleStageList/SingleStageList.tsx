@@ -1,5 +1,5 @@
 import {ObjectImage} from "../../../components/ObjectImage";
-import styles from './BushesList.module.scss';
+import styles from './SignelStageList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
@@ -18,11 +18,12 @@ interface BushesListProps {
     }>
 }
 
-export const BushesList = ({objects}: BushesListProps) => {
+export const SingleStageList = ({objects}: BushesListProps) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const currentObjectId = useSelector(AppSelectors.objectId);
+    
     return <ul className={styles.list}>
         {objects.map(el => {
             return <li key={`bushes-list-item-${el.id}`} onClick={() => dispatch(AppSliceActions.setObjectId({
@@ -48,8 +49,6 @@ export const BushesList = ({objects}: BushesListProps) => {
                         <InfoIcon/>
                     </IconButton>
                 </Tooltip>
-
-
             </li>
         })}
     </ul>

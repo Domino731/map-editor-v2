@@ -1,6 +1,6 @@
 import {createTheme, ThemeProvider} from "@mui/material";
 import {LeftColumn} from "./LeftColumn";
-import {RightColumn} from "./RightColumn";
+import {MapContent} from "./RightColumn";
 import {Map} from "./Map";
 import styles from './App.module.scss';
 import {Provider} from "react-redux";
@@ -25,7 +25,7 @@ function App() {
                         <Map/>
                     </div>
                     <div className={styles.rightColumn}>
-                        <RightColumn/>
+                        <MapContent/>
                     </div>
                 </div>
                 <ModalsManager/>

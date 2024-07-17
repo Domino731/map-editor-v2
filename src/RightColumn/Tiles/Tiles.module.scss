@@ -1,10 +1,10 @@
 .tiles {
   margin-top: 44px;
   position: relative;
-  border-left: 1px solid grey;
-  border-top: 1px solid grey;
+  border: 1px solid grey;
   width: 100%;
   overflow: auto;
+  height: 80vh;
 }
 
 .tilesBackground {

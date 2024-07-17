@@ -1,3 +1,3 @@
-import {RightColumn} from "./RightColumn.tsx";
+import {MapContent} from "./MapContent.tsx";
 
-export {RightColumn}
+export {MapContent}

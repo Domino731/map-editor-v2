@@ -1,6 +1,6 @@
-import {useCallback} from "react";
+import {useCallback, useMemo} from "react";
 import {Tab, Tabs} from "@mui/material";
-import {RightColumnTabs} from "./RightColumn.const.ts";
+import {RightColumnTabs} from "./MapContent.ts";
 import {Tiles} from "./Tiles";
 import {Objects} from "./Objects";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,7 @@ import {AppSliceActions} from "../store/AppReducer.ts";
 import {Entities} from "./Entities";
 import {Special} from "./Special";
 
-export const RightColumn = () => {
+export const MapContent = () => {
     const dispatch = useDispatch();
 
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
@@ -17,6 +17,21 @@ export const RightColumn = () => {
     const handleChangeRightColumnType = useCallback((v: RightColumnTabs) => {
         dispatch(AppSliceActions.setRightColumnType(v))
     }, [dispatch])
+
+    const TabComponent = useMemo(() => {
+        switch (rightColumnType) {
+            case RightColumnTabs.Tiles:
+                return <Tiles/>
+            case RightColumnTabs.Objects:
+                return <Objects/>
+            case RightColumnTabs.Entities:
+                return <Entities/>
+            case RightColumnTabs.Special:
+                return <Special/>
+            default:
+                return;
+        }
+    }, [rightColumnType])
 
     return <div>
         <Tabs value={rightColumnType} aria-label="right-column-tabs" sx={{marginBottom: "40px"}} variant="fullWidth">
@@ -29,9 +44,6 @@ export const RightColumn = () => {
             <Tab label="Special" value={RightColumnTabs.Special}
                  onClick={() => handleChangeRightColumnType(RightColumnTabs.Special)}/>
         </Tabs>
-        {rightColumnType === RightColumnTabs.Tiles && <Tiles/>}
-        {rightColumnType === RightColumnTabs.Objects && <Objects/>}
-        {rightColumnType === RightColumnTabs.Entities && <Entities/>}
-        {rightColumnType === RightColumnTabs.Special && <Special/>}
+        {TabComponent}
     </div>
 }

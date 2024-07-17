@@ -1,21 +1,19 @@
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
 import styles from './MultiStageList.module.scss';
 import {ObjectImage} from "../../../components/ObjectImage";
 import {Box, IconButton, Tooltip, useTheme} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppSelectors} from "../../../store/AppReducer.selectors.ts";
 import {AppSliceActions} from "../../../store/AppReducer.ts";
-import {getObjectSprite} from "../../../components/ObjectImage/ObjectImage.utils.ts";
 import {Modals} from "../../../Modals/ModalManager.types.ts";
 import InfoIcon from "@mui/icons-material/Info";
+import {CropObjectModel, TreeObjectModel} from "../../../models/GameObject.ts";
 
 interface MultiStageListProps {
-    objects: any[];
+    objects: Array<TreeObjectModel | CropObjectModel>;
 }
 
 export const MultiStageList = ({objects}: MultiStageListProps) => {
