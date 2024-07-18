@@ -4,6 +4,8 @@ import {AllObjects} from "../../const/objects/allObjects.ts";
 import {ActionVector, ObjectDropModel} from "../../models/game.ts";
 import {Vector} from "../../types.ts";
 import {createAreaVectors} from "./store.utilts.ts";
+import {GameMultiStageObjectUnion, GameSingleStageObjectUnion} from "../../models/GameObject.ts";
+import {GameObjectDrop} from "../../models/GameObject.ts";
 
 export const OBJECT_DETAILS_MODAL_REDUCER_NAME = 'OBJECT_DETAILS_MODAL';
 
@@ -75,17 +77,27 @@ const objectDetailsModalSlice = createSlice({
                 state.objectAreas.treeTrunk = areasData.treeTrunk;
             }
         },
-        resetObjectData: (state) => {
+        resetState: (state) => {
             state.objectData = initialState.objectData;
         },
         addDrop: (state, {payload}: PayloadAction<ObjectDropModel>) => {
             if (!state.objectData || state.objectStage === null) return;
-            state.objectData.specs.stages[state.objectStage].drop.push(payload);
+            if ((state.objectData as GameMultiStageObjectUnion).specs.stages) {
+                (state.objectData as GameMultiStageObjectUnion).specs.stages[state.objectStage].drop.push(payload);
+            } else {
+                (state.objectData as GameSingleStageObjectUnion).specs.drop.push(payload);
+            }
         },
         deleteDrop: (state, {payload}: PayloadAction<string>) => {
             if (!state.objectData || state.objectStage === null) return;
-            state.objectData.specs.stages[state.objectStage].drop = state.objectData.specs.stages[state.objectStage]
-                .drop.filter(el => el.uuid !== payload)
+            if ((state.objectData as GameMultiStageObjectUnion).specs.stages) {
+                (state.objectData as GameMultiStageObjectUnion).specs.stages[state.objectStage].drop = (state.objectData as GameMultiStageObjectUnion).specs.stages[state.objectStage]
+                    .drop.filter((el: GameObjectDrop) => el.uuid !== payload)
+            } else {
+                (state.objectData as GameSingleStageObjectUnion).specs.drop = (state.objectData as GameSingleStageObjectUnion).specs
+                    .drop.filter((el: GameObjectDrop) => el.uuid !== payload)
+            }
+
         },
         setObjectAreasSettings: (state, {payload}: PayloadAction<ObjectAreasSettings>) => {
             state.objectAreas.settings = payload;

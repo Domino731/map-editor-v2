@@ -14,6 +14,7 @@ export interface GameObjectDrop {
     id: string;
     chance: number | number[];
     amount: number | number[];
+    uuid: string;
 }
 
 export interface GameObjectActionCollision extends Vector {

@@ -1,5 +1,5 @@
 import {ActionVector} from "../../models/game.ts";
-import {Vector} from "../../types.ts";
+import {Cords, Vector} from "../../types.ts";
 import {GameObjectUnion} from "../../models/GameObject.ts";
 
 export interface ObjectDetailsModalState {
@@ -8,7 +8,7 @@ export interface ObjectDetailsModalState {
     objectAreas: {
         settings: ObjectAreasSettings,
         vectors: ObjectDetailsObjectAreasVectors,
-        treeTrunk: { x: number, y: number }
+        treeTrunk: Cords | null;
     }
 }
 
