@@ -10,6 +10,7 @@ import {ActionVector} from "../../../../models/game.ts";
 import {ObjectActions, OBJECTS_ACTIONS_OPTIONS} from "../../../../const/app.ts";
 import Button from "@mui/material/Button";
 import {contrastColors} from "../../ObjectDetailsModel.const.ts";
+import {generateUUID} from "../../../../utils/string.ts";
 
 export interface VectorFormProps {
     title: string;
@@ -96,7 +97,8 @@ export const ActionVectorForm = ({title, data, onChange}: ActionVectorFormProps)
             width: 10,
             height: 10,
             actionType: ObjectActions.Cut,
-            color: contrastColors[data.length]
+            color: contrastColors[data.length],
+            uuid: generateUUID()
         }])
     }, [data, onChange])
 
@@ -115,10 +117,10 @@ export const ActionVectorForm = ({title, data, onChange}: ActionVectorFormProps)
             </AccordionSummary>
             <AccordionDetails>
                 {/*TODO: use uuid instead of index for key prop*/}
-                {data.map((({x, y, width, height, actionType, color}, index) => <div
+                {data.map((({x, y, width, height, actionType, color, uuid}, index) => <div
                     className={styles.actionFormBox}
                     style={{border: `2px solid ${color}`}}
-                    key={`action-vector-form-${index}`}>
+                    key={`action-vector-form-${uuid}`}>
                     <div className={styles.actionTypeSelect}>
                         <FormControl className={styles.actionSelect}>
                             <InputLabel>Action Type</InputLabel>

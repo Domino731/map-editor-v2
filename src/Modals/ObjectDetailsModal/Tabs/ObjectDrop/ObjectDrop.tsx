@@ -12,13 +12,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";
 import {ObjectStageSelect} from "../../components/ObjectStageSelect";
+import {useMemo} from "react";
+import {GameMultiStageObjectUnion, GameObjectDrop, GameSingleStageObjectUnion} from "../../../../models/GameObject.ts";
 
 interface Column {
     id: 'id' | 'name' | 'chance' | 'amount'
     label: string;
     minWidth?: number;
     align?: 'right';
-    format?: (value: number | string | number[]) => string;
+    format: (value: number | string | number[]) => string;
 }
 
 const columns: readonly Column[] = [
@@ -51,6 +53,16 @@ export const ObjectDrop = () => {
     const objectData = useSelector(objectDetailsModalSelectors.objectData);
     const objectStage = useSelector(objectDetailsModalSelectors.objectStage) ?? 0;
 
+    const objectDataDrop = useMemo((): GameObjectDrop[] => {
+        if (!objectData) return []
+        const multiStageObject = objectData as GameMultiStageObjectUnion;
+        const stages = multiStageObject.specs.stages;
+        if (stages) {
+            return stages[objectStage].drop;
+        }
+        return (objectData as GameSingleStageObjectUnion).specs.drop;
+    }, [objectData, objectStage])
+
     if (!objectData) return <>Loading...</>
     return (
         <div className={styles.container}>
@@ -75,8 +87,8 @@ export const ObjectDrop = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {objectData.specs.stages[objectStage].drop
-                                .map((row) => {
+                            {objectDataDrop
+                                .map((row: GameObjectDrop) => {
                                     return (
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.uuid}>
                                             <TableCell>
@@ -88,7 +100,7 @@ export const ObjectDrop = () => {
                                             </TableCell>
 
                                             {columns.map((column) => {
-                                                const value = row[column.id];
+                                                const value = row[column.id as keyof GameObjectDrop];
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
                                                         {column.format(column.id === 'name' ? row.id : value)}

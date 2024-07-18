@@ -109,7 +109,8 @@ export const AddNewDropForm = () => {
                         label="Is drop amount in range"/>
                 </FormControl>
 
-                <Button onClick={handleSubmit} type="submit" variant="contained" color="success">Add drop</Button>
+                <Button onClick={() => handleSubmit()} type="submit" variant="contained" color="success">Add
+                    drop</Button>
             </FormGroup>}
         </Formik>
     </div>
