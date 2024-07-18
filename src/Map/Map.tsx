@@ -29,6 +29,7 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
     const mapTool = useSelector(AppSelectors.mapTool);
     const mapLayer = useSelector(AppSelectors.mapLayer);
     const mapLayers = useSelector(AppSelectors.mapLayers);
+    const mapSettings = useSelector(AppSelectors.mapSettings);
 
     const [isWall, setIsWall] = useState<boolean>(false);
     const [tilesData, setTilesData] = useState<Array<Required<MapTileData>>>([
@@ -63,7 +64,12 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
         })
     }, [])
 
-    return <div className={styles.cell} onClick={handleTileClick}>
+    return <div className={styles.cell} style={{
+        display: mapSettings.isTilesHidden ? 'none' : undefined,
+        borderRight: mapSettings.isGridBorderHidden ? 'none' : undefined,
+        borderBottom: mapSettings.isGridBorderHidden ? 'none' : undefined
+    }}
+                onClick={handleTileClick}>
         {tilesData.map(el => {
             if (!mapLayers[el.zIndex].isVisible) return;
             return <div style={cellStyles(el)}></div>;
@@ -84,6 +90,7 @@ export const Map = () => {
     const mapTool = useSelector(AppSelectors.mapTool);
     const actorsOnMap = useSelector(AppSelectors.actorsOnMap);
     const treeHoveredObjectUuid = useSelector(AppSelectors.treeHoveredObjectUuid);
+    const mapSettings = useSelector(AppSelectors.mapSettings)
 
     const isTileMode = useMemo(() => {
         const isTile = actorType === GameActorType.Tile;
@@ -239,14 +246,22 @@ export const Map = () => {
                 </div>
                 {/* All actors on map */}
                 <div style={{top: 0, left: 0, position: 'absolute', zIndex: 2}}>
-                    {actorsOnMap.map(({uuid, texture, x, y}) => {
+                    {actorsOnMap.map(({uuid, texture, x, y, actorType}) => {
+                        let isHidden = false;
+                        if (actorType === GameActorType.Entity && mapSettings.isEntitiesHidden) {
+                            isHidden = true;
+                        } else if (actorType === GameActorType.Object && mapSettings.isObjectHidden) {
+                            isHidden = true;
+                        }
+
                         return <div
                             onClick={() => handleClickOnMapObject(uuid)}
                             key={`map-objects-${uuid}`}
                             style={{
                                 position: 'absolute',
                                 top: `${y * CELL_SIZE}px`,
-                                left: `${x * CELL_SIZE}px`
+                                left: `${x * CELL_SIZE}px`,
+                                display: isHidden ? 'none' : undefined
                             }}>
                             <ObjectImage texture={{
                                 width: texture.width,

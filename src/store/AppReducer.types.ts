@@ -4,6 +4,7 @@ import {ModalsUnion} from "../Modals/ModalManager.types.ts";
 import {ObjectDetailsModalProps} from "../Modals/ObjectDetailsModal/ObjectDetailsModal.tsx";
 import {GameActorTypeUnion} from "../models/game.ts";
 import {ActorOnMap, MapToolUnion} from "../Map/Map.types.ts";
+import {b} from "vite/dist/node/types.d-aGj9QkWt";
 
 export interface AppState {
     mapTilesData: Array<Array<TileData | null>>;
@@ -19,6 +20,14 @@ export interface AppState {
     mapLayer: number;
     actorsOnMap: Array<ActorOnMap>;
     treeHoveredObjectUuid: string | null;
+    mapSettings: MapSettings;
+}
+
+export interface MapSettings {
+    isTilesHidden: boolean;
+    isObjectHidden: boolean;
+    isEntitiesHidden: boolean;
+    isGridBorderHidden: boolean;
 }
 
 export interface MapLayer {

@@ -28,13 +28,22 @@ const initialState: AppState = {
     ],
     mapLayer: 0,
     actorsOnMap: [],
-    treeHoveredObjectUuid: null
+    treeHoveredObjectUuid: null,
+    mapSettings: {
+        isTilesHidden: false,
+        isObjectHidden: false,
+        isEntitiesHidden: false,
+        isGridBorderHidden: false
+    }
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setMapSettings: (state, {payload}: PayloadAction<AppState['mapSettings']>) => {
+            state.mapSettings = payload;
+        },
         setTreeHoveredObjectUuid: (state, {payload}: PayloadAction<AppState['treeHoveredObjectUuid']>) => {
             state.treeHoveredObjectUuid = payload;
         },
