@@ -9,6 +9,7 @@ import {
     GameSingleStageObjectUnion
 } from "../../models/GameObject.ts";
 import {ObjectActionsUnion} from "../../const/app.ts";
+import {generateUUID} from "../../utils/string.ts";
 
 
 export const createAreaVectors = (objectData: GameObjectUnion) => {
@@ -57,7 +58,8 @@ const processSpecs = (specs: Specs) => {
         width: el.width,
         height: el.height,
         actionType: el.actionType,
-        color: contrastColors[index]
+        color: contrastColors[index],
+        uuid: generateUUID()
     })));
     zIndexLines.push({
         x: specs.zIndex.x,

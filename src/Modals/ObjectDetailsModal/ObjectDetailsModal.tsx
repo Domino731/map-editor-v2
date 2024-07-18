@@ -7,7 +7,6 @@ import {ObjectDetailsModelTabs} from "./ObjectDetailsModel.const.ts";
 import {ObjectGeneralInfo} from "./Tabs/ObjectGeneralInfo";
 import {ObjectAreas} from "./Tabs/ObjectAreas";
 import Button from "@mui/material/Button";
-import {downloadJSON} from "../../utils/json.ts";
 import {ObjectDrop} from "./Tabs/ObjectDrop";
 import {objectDetailsModalSliceActions} from "./store.ts";
 import {objectDetailsModalSelectors} from "./store.selectors.ts";
@@ -24,7 +23,7 @@ export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) 
 
     useEffect(() => {
         dispatch(objectDetailsModalSliceActions.setObjectDataById(objectId));
-    }, [dispatch]);
+    }, [dispatch, objectId]);
 
 
     const objectData = useSelector(objectDetailsModalSelectors.objectData);
@@ -33,35 +32,33 @@ export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) 
             case ObjectDetailsModelTabs.General:
                 return <ObjectGeneralInfo/>
             case ObjectDetailsModelTabs.Areas:
-                return <ObjectAreas objectData={objectData}/>
+                return <ObjectAreas/>
             case ObjectDetailsModelTabs.Drop:
                 return <ObjectDrop/>
             default:
                 return null;
         }
-    }, [objectData, tab])
+    }, [tab])
 
     const handleDownloadJsonFile = useCallback(() => {
-        downloadJSON({test: '123'}, objectData?.id)
-    }, [objectData?.id])
+        alert("TODO: add download functionality")
+    }, [])
 
     if (!objectData) return <>Loading...</>
 
     return <Modal
         open={isOpen}
         onClose={() => dispatch(AppSliceActions.closeModal())}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
         className={styles.modal}
     >
         <div className={styles.box}>
             <div className={styles.titleBar}>
-                <Typography id="modal-modal-title" variant="h5" component="h2">
+                <Typography variant="h5" component="h2">
                     Object details: {objectData.name}
                 </Typography>
                 <Button variant="outlined" color="success" onClick={handleDownloadJsonFile}>Download .json</Button>
             </div>
-            <Tabs value={tab} aria-label="right-column-tabs" className={styles.tabs} variant="fullWidth">
+            <Tabs value={tab} className={styles.tabs} variant="fullWidth">
                 <Tab label="General" value={ObjectDetailsModelTabs.General}
                      onClick={() => setTab(ObjectDetailsModelTabs.General)}/>
                 <Tab label="Areas" value={ObjectDetailsModelTabs.Areas}

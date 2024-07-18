@@ -3,6 +3,8 @@ import {useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {ObjectImage} from "../../../../components/ObjectImage";
 import {GameObjectTextureName} from "../../../../models/textures.ts";
+import {GameMultiStageObjectUnion, GameSingleStageObjectUnion, TreeObjectModel} from "../../../../models/GameObject.ts";
+import {useMemo} from "react";
 
 const gridSize = 16;
 const gridMapSize = 20;
@@ -73,10 +75,23 @@ export const MapObjectImage = () => {
     const objectAreasVectors = useSelector(objectDetailsModalSelectors.objectAreasVectors);
     const groundArea = objectAreasVectors.groundVectors[objectStage];
     const texture = objectAreasVectors.texture[objectStage];
+
+    const textureName = useMemo(() => {
+        if (!objectData) return null;
+        const multiStageObjectData = objectData as GameMultiStageObjectUnion;
+        if (multiStageObjectData.specs.stages) {
+            return multiStageObjectData.specs.stages[objectStage].texture.name;
+        } else {
+            return (objectData as GameSingleStageObjectUnion).specs.texture.name;
+        }
+    }, [objectData, objectStage])
+
     if (!objectData) return null;
 
+    const treeObjectData = objectData as TreeObjectModel;
+
     return <>
-        {(objectData.type === 'tree' && objectStage === objectData.specs.stages.length - 1) && <div style={{
+        {(objectTreeTrunk && objectStage === treeObjectData.specs.stages.length - 1) && <div style={{
             position: 'absolute',
             top: 0,
             left: 0,
@@ -84,10 +99,10 @@ export const MapObjectImage = () => {
         }}>
             <ObjectImage
                 texture={{
-                    x: objectData.specs.trunk.x,
-                    y: objectData.specs.trunk.y,
-                    width: objectData.specs.trunk.width,
-                    height: objectData.specs.trunk.height,
+                    x: treeObjectData.specs.treeTrunk.x,
+                    y: treeObjectData.specs.treeTrunk.y,
+                    width: treeObjectData.specs.treeTrunk.width,
+                    height: treeObjectData.specs.treeTrunk.height,
                     name: GameObjectTextureName.Trees
                 }}
                 isBorder={isTextureHighlighted}
@@ -101,13 +116,13 @@ export const MapObjectImage = () => {
             left: 0,
             transform: `translate(${objectX + groundArea.x ?? 0}px, ${objectY + groundArea.y ?? 0}px)`,
         }}>
-            {texture && <ObjectImage
+            {(texture && textureName) && <ObjectImage
                 texture={{
                     x: texture.x,
                     y: texture.y,
                     width: texture.width,
                     height: texture.height,
-                    name: objectData.specs.stages[objectStage].texture.name
+                    name: textureName
                 }}
                 isBorder={isTextureHighlighted}
             />}
@@ -119,13 +134,13 @@ export const ObjectActionCollisions = () => {
     const objectStage = useSelector(objectDetailsModalSelectors.objectStage) ?? 0;
     const objectAreasVectors = useSelector(objectDetailsModalSelectors.objectAreasVectors);
     const actionCollisionVectors = objectAreasVectors.actionCollisionsVectors[objectStage];
-    const {isActionsCollisionsHighlighted} = useSelector(objectDetailsModalSelectors.areasSettings)
+    const {isActionsCollisionsHighlighted} = useSelector(objectDetailsModalSelectors.areasSettings);
+
     if (!actionCollisionVectors || !isActionsCollisionsHighlighted) return null;
 
     return <>
-        {actionCollisionVectors.map(({x, y, width, height, color}, index) => <div
-            // TODO: use uuid instead of index
-            key={`object-action-collision-${index}`}
+        {actionCollisionVectors.map(({x, y, width, height, color, uuid}) => <div
+            key={`object-action-collision-${uuid}`}
             style={{
                 position: 'absolute',
                 top: 0,

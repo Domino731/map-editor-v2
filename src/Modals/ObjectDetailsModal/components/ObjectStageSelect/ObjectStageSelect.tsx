@@ -3,6 +3,7 @@ import styles from './ObjectStageSelect.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";
+import {GameMultiStageObjectUnion} from "../../../../models/GameObject.ts";
 
 export const ObjectStageSelect = () => {
     const dispatch = useDispatch();
@@ -12,13 +13,15 @@ export const ObjectStageSelect = () => {
     const objectData = useSelector(objectDetailsModalSelectors.objectData);
 
     if (!objectData) return <>Loading...</>
-
+    const multiStageObject = objectStage as unknown as GameMultiStageObjectUnion
+    if (!multiStageObject.specs.stages) return null;
+    
     return <div>
         <Typography variant="h6">
             Object's stage
         </Typography>
         <ul className={styles.list}>
-            {objectData.specs.stages.map((_, index) => <li
+            {multiStageObject.specs.stages.map((_, index) => <li
                 className={styles.listItem}
                 style={{border: objectStage === index ? `1px solid ${theme.palette.primary.main}` : `1px  solid grey`}}
                 onClick={() => {

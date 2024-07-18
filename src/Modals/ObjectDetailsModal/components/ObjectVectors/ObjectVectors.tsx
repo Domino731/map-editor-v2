@@ -6,6 +6,7 @@ import {useCallback} from "react";
 import {Vector} from "../../../../types.ts";
 import {ObjectDetailsObjectAreasVectors} from "../../store.types.ts";
 import {objectDetailsModalSliceActions} from "../../store.ts";
+import {GameMultiStageObjectUnion} from "../../../../models/GameObject.ts";
 
 export const ObjectVectors = () => {
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export const ObjectVectors = () => {
             data={actionCollisions}
             onChange={(actionVectors) => dispatch(objectDetailsModalSliceActions.setObjectActionCollisionsVectors(actionVectors))}
         />}
-        {(objectStage === objectData.specs.stages.length - 1 && objectData.type === 'tree') &&
+        {(objectStage === (objectData as GameMultiStageObjectUnion).specs.stages.length - 1 && objectTreeTrunk) &&
             <VectorForm title="Tree trunk"
                         data={{width: 0, height: 0, ...objectTreeTrunk}}
                         onChange={({x, y}) => dispatch(objectDetailsModalSliceActions.setObjectAreasTrunkTree({x, y}))}

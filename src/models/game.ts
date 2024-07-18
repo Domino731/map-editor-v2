@@ -19,6 +19,7 @@ export interface ObjectDropModel {
 export interface ActionVector extends Vector {
     actionType: ObjectActionsUnion;
     color: string;
+    uuid: string;
 }
- 
+
 export type GameActorTypeUnion = keyof typeof GameActorType;
