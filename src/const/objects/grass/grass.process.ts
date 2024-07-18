@@ -1,8 +1,9 @@
 import {GrassJsonModel} from "../../types.ts";
 import {processObjectActionType, processObjectType} from "../../utils.ts";
 import {generateUUID} from "../../../utils/string.ts";
-import {GameObjectTextureName, GrassObjectModel} from "../../../models/GameObject.ts";
+import {GrassObjectModel} from "../../../models/GameObject.ts";
 import {GameActorType} from "../../../models/game.ts";
+import {GameObjectTextureName} from "../../../models/textures.ts";
 
 export const processGrassData = (data: GrassJsonModel): GrassObjectModel => ({
     id: data.id,

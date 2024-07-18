@@ -1,4 +1,4 @@
-import {ActionVector} from "../../models/tree.ts";
+import {ActionVector} from "../../models/game.ts";
 import {Vector} from "../../types.ts";
 import {TreeObjectModel} from "../../models/GameObject.ts";
 

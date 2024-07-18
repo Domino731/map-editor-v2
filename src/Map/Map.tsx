@@ -11,10 +11,11 @@ import {generateUUID} from "../utils/string.ts";
 import {ActorOnMap, MapTool} from "./Map.types.ts";
 import {CELL_SIZE} from "../const/app.ts";
 import {GameActorType} from "../models/game.ts";
-import {GameObjectTextureName, GameObjectType, MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
+import {MineObjectModel, TreeObjectModel} from "../models/GameObject.ts";
 import {AllEntities} from "../const/characters/characters.ts";
 import {AppSliceActions} from "../store/AppReducer.ts";
 import {AnimalModel} from "../models/Entities.ts";
+import {GameObjectTextureName} from "../models/textures.ts";
 
 export const defaultCellData: MapTileData = {
     ...TilesData[33],

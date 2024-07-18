@@ -6,7 +6,7 @@ import styles from './VectorForm.module.scss';
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography} from "@mui/material";
 import {Vector} from "../../../../types.ts";
 import {ChangeEvent, useCallback} from "react";
-import {ActionVector} from "../../../../models/tree.ts";
+import {ActionVector} from "../../../../models/game.ts";
 import {ObjectActions, OBJECTS_ACTIONS_OPTIONS} from "../../../../const/app.ts";
 import Button from "@mui/material/Button";
 import {contrastColors} from "../../ObjectDetailsModel.const.ts";

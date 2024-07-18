@@ -1,9 +1,8 @@
 import {
     GameObjectActions,
-    GameObjectTextureName,
-    GameObjectTextureNameUnion,
     GameObjectType
 } from "../models/GameObject.ts";
+import {GameObjectTextureName, GameObjectTextureNameUnion} from "../models/textures.ts";
 
 export const processObjectType = (objectType: string) => {
     switch (objectType) {

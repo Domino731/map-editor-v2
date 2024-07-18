@@ -2,7 +2,7 @@ import {objectAreasColors} from "../../Tabs/ObjectAreas/ObjectAreas.const.ts";
 import {useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {ObjectImage} from "../../../../components/ObjectImage";
-import {GameObjectTextureName} from "../../../../models/GameObject.ts";
+import {GameObjectTextureName} from "../../../../models/textures.ts";
 
 const gridSize = 16;
 const gridMapSize = 20;

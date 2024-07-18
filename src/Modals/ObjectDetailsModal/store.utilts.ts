@@ -1,4 +1,4 @@
-import {ActionVector} from "../../models/tree.ts";
+import {ActionVector} from "../../models/game.ts";
 import {Vector} from "../../types.ts";
 import {contrastColors} from "./ObjectDetailsModel.const.ts";
 import {GameObjectType, TreeObjectModel} from "../../models/GameObject.ts";

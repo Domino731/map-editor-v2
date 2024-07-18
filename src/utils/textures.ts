@@ -4,7 +4,7 @@ import treesSprite from '../assets/map/objects/environment/trees.png';
 import cropsSprite from '../assets/map/objects/environment/crops.png';
 import grassSprite from '../assets/map/objects/environment/grass.png';
 import fruitTreesSprite from '../assets/map/objects/environment/fruit-trees.png';
-import {GameObjectTextureName, GameObjectTextureNameUnion} from "../models/GameObject.ts";
+import {GameObjectTextureNameUnion, GameObjectTextureName} from "../models/textures.ts";
 import buildingBarn from '../assets/map/buildings/barn.png';
 import buildingBeachCabin from '../assets/map/buildings/beach_cabin.png';
 import buildingBigBarn from '../assets/map/buildings/big_barn.png';

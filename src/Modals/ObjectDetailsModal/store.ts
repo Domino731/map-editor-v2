@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ObjectAreasSettings, ObjectDetailsModalState, ObjectDetailsObjectAreasVectors} from "./store.types.ts";
 import {AllObjects} from "../../const/objects/allObjects.ts";
-import {ActionVector, ObjectDropModel} from "../../models/tree.ts";
+import {ActionVector, ObjectDropModel} from "../../models/game.ts";
 import {Vector} from "../../types.ts";
 import {createAreaVectors} from "./store.utilts.ts";
 

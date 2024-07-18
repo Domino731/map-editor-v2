@@ -2,10 +2,10 @@ import {Cords, Vector} from "../types.ts";
 import {
     GameObjectActionCollision,
     GameObjectDrop,
-    GameObjectGroundPlace,
-    GameObjectTextureNameUnion
+    GameObjectGroundPlace
 } from "./GameObject.ts";
 import {GameActorType} from "./game.ts";
+import {GameObjectTextureNameUnion} from "./textures.ts";
 
 export enum EntityType {
     Animal = "Animal",
