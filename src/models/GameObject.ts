@@ -61,6 +61,15 @@ export enum GameObjectActions {
 
 export type GameObjectActionsUnion = keyof typeof GameObjectActions;
 
+export interface TreeStageModel {
+    texture: GameObjectTexture;
+    nextStage: number;
+    drop: Array<GameObjectDrop>;
+    groundCollision: Vector;
+    actionCollisions: Array<GameObjectActionCollision>;
+    zIndex: Vector;
+    groundPlace: GameObjectGroundPlace;
+}
 
 // OBJECT MODELS //
 
@@ -90,17 +99,6 @@ export interface GrassObjectModel extends GameObjectBase {
 }
 
 export interface BuildingObjectModel extends GameObjectBase {
-}
-
-
-export interface TreeStageModel {
-    texture: GameObjectTexture;
-    nextStage: number;
-    drop: Array<GameObjectDrop>;
-    groundCollision: Vector;
-    actionCollisions: Array<GameObjectActionCollision>;
-    zIndex: Vector;
-    groundPlace: GameObjectGroundPlace;
 }
 
 export interface TreeObjectModel {
@@ -133,3 +131,16 @@ export interface CropObjectModel {
         stages: Array<TreeStageModel>;
     }
 }
+
+export type GameObjectUnion =
+    MineObjectModel
+    | BushObjectModel
+    | GrassObjectModel
+    | BuildingObjectModel
+    | TreeObjectModel
+    | FruitTreeObjectModel
+    | CropObjectModel;
+
+
+export type GameMultiStageObjectUnion = TreeObjectModel | FruitTreeObjectModel | CropObjectModel;
+export type GameSingleStageObjectUnion = MineObjectModel | BushObjectModel | GrassObjectModel | BuildingObjectModel;

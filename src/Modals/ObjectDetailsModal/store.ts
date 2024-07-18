@@ -61,7 +61,9 @@ const objectDetailsModalSlice = createSlice({
             stage.objectStage = action.payload;
         },
         setObjectDataById: (state, action: PayloadAction<string>) => {
-            state.objectData = AllObjects.find(({id}) => id === action.payload);
+            const newObjectData = AllObjects.find(({id}) => id === action.payload);
+            if (!newObjectData) return;
+            state.objectData = newObjectData;
             state.objectStage = 0;
             if (state.objectData) {
                 const areasData = createAreaVectors(state.objectData);

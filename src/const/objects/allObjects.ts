@@ -6,8 +6,9 @@ import {GrassData} from "./grass/grass.ts";
 import {FruitTreesData} from "./fruitTree/fruit-trees.ts";
 import {BuildingsData} from "./buildings/buildings.ts";
 import {HoeDirtData} from "./hoeDirt/hoeDirt.ts";
+import {GameObjectUnion} from "../../models/GameObject.ts";
 
-export const AllObjects = [
+export const AllObjects: Array<GameObjectUnion> = [
     ...BushesData,
     ...MinesData,
     ...TreesData,

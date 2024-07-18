@@ -1,9 +1,9 @@
 import {ActionVector} from "../../models/game.ts";
 import {Vector} from "../../types.ts";
-import {TreeObjectModel} from "../../models/GameObject.ts";
+import {GameObjectUnion} from "../../models/GameObject.ts";
 
 export interface ObjectDetailsModalState {
-    objectData: TreeObjectModel | null;
+    objectData: GameObjectUnion | null;
     objectStage: number | null;
     objectAreas: {
         settings: ObjectAreasSettings,
