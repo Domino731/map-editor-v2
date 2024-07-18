@@ -14,8 +14,8 @@ export const ObjectStageSelect = () => {
 
     if (!objectData) return <>Loading...</>
     const multiStageObject = objectStage as unknown as GameMultiStageObjectUnion
-    if (!multiStageObject.specs.stages) return null;
-    
+    if (!multiStageObject.specs?.stages) return null;
+
     return <div>
         <Typography variant="h6">
             Object's stage

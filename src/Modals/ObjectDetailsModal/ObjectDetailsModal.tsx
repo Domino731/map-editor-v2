@@ -44,11 +44,16 @@ export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) 
         alert("TODO: add download functionality")
     }, [])
 
+    const handleCloseModal = useCallback(() => {
+        dispatch(AppSliceActions.closeModal());
+        dispatch(objectDetailsModalSliceActions.resetState());
+    }, [dispatch])
+
     if (!objectData) return <>Loading...</>
 
     return <Modal
         open={isOpen}
-        onClose={() => dispatch(AppSliceActions.closeModal())}
+        onClose={handleCloseModal}
         className={styles.modal}
     >
         <div className={styles.box}>

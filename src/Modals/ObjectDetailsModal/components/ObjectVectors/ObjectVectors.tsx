@@ -53,7 +53,7 @@ export const ObjectVectors = () => {
             data={actionCollisions}
             onChange={(actionVectors) => dispatch(objectDetailsModalSliceActions.setObjectActionCollisionsVectors(actionVectors))}
         />}
-        {(objectStage === (objectData as GameMultiStageObjectUnion).specs.stages.length - 1 && objectTreeTrunk) &&
+        {(objectStage === (objectData as GameMultiStageObjectUnion).specs?.stages?.length - 1 && objectTreeTrunk) &&
             <VectorForm title="Tree trunk"
                         data={{width: 0, height: 0, ...objectTreeTrunk}}
                         onChange={({x, y}) => dispatch(objectDetailsModalSliceActions.setObjectAreasTrunkTree({x, y}))}

@@ -78,7 +78,9 @@ const objectDetailsModalSlice = createSlice({
             }
         },
         resetState: (state) => {
+            state.objectAreas = initialState.objectAreas;
             state.objectData = initialState.objectData;
+            state.objectStage = initialState.objectStage;
         },
         addDrop: (state, {payload}: PayloadAction<ObjectDropModel>) => {
             if (!state.objectData || state.objectStage === null) return;
