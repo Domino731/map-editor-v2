@@ -11,6 +11,7 @@ import {EntityAnimations} from "./tabs/EntityAnimations";
 import {EntityAreas} from "./tabs/EntityAreas";
 import {EntityGeneralInfo} from "./tabs/EntityGeneralInfo";
 import {EntityDrop} from "./tabs/EntityDrop";
+import {DownloadEntityButton} from "./components/DownloadEntityButton";
 
 export interface EntityDetailsModalProps {
     entityId: string;
@@ -64,7 +65,7 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
                 <Typography variant="h5" component="h2">
                     Entity details: {entityData.name}
                 </Typography>
-                <Button variant="outlined" color="success" onClick={handleDownloadJsonFile}>Download .json</Button>
+                <DownloadEntityButton/>
             </div>
             <Tabs value={tab} className={styles.tabs} variant="fullWidth">
                 <Tab label="General" value={EntityDetailsModalTabs.General}
