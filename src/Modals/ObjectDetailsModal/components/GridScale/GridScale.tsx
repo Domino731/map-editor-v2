@@ -7,6 +7,33 @@ import {useCallback} from "react";
 import {objectDetailsModalSliceActions} from "../../store.ts";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 
+interface ScaleButtonsProps {
+    onDecrease: () => void;
+    onIncrease: () => void;
+    scale: number;
+    onResetScale: () => void;
+}
+
+export const ScaleButtons = ({onDecrease, onIncrease, onResetScale, scale}: ScaleButtonsProps) => {
+    return <div className={styles.scaleSection}>
+        <div className={styles.scaleButtons}>
+            <IconButton onClick={onDecrease}>
+                <RemoveIcon/>
+            </IconButton>
+            <Typography className={styles.scaleSectionText}>
+                {scale}
+            </Typography>
+
+            <IconButton onClick={onIncrease}>
+                <AddIcon/>
+            </IconButton>
+        </div>
+        <button onClick={onResetScale}>Reset scale
+        </button>
+    </div>
+}
+
+
 export const GridScale = () => {
     const dispatch = useDispatch();
 
@@ -25,7 +52,7 @@ export const GridScale = () => {
                 {gridScale}
             </Typography>
 
-            <IconButton onClick={() => handleChangeGridScale(Number((gridScale - 0.1).toFixed(1)))}>
+            <IconButton onClick={() => handleChangeGridScale(Number((gridScale + 0.1).toFixed(1)))}>
                 <AddIcon/>
             </IconButton>
         </div>

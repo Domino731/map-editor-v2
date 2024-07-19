@@ -16,6 +16,7 @@ export const EntityAnimationView = ({animationIndex, animationType}: EntityAnima
     const theme = useTheme();
     const dispatch = useDispatch();
 
+    const animationsScale = useSelector(entityDetailsModalSelectors.animationsScale);
     const entityData = useSelector(entityDetailsModalSelectors.entityData)
     const animationData = useSelector(entityDetailsModalSelectors.entityData)?.animations[animationType] ?? []
     const animationX = animationData[animationIndex][0];
@@ -33,14 +34,17 @@ export const EntityAnimationView = ({animationIndex, animationType}: EntityAnima
     return <div className={styles.container}>
         <span className={styles.index} style={{background: theme.palette.primary.main}}>{animationIndex + 1}</span>
         <div className={styles.objectImageWrapper}>
-            <ObjectImage texture={{
-                x: animationX,
-                y: animationY,
-                width: entityData.texture.width,
-                height: entityData.texture.height,
-                name: entityData.texture.name
-            }}
-            />
+            <div style={{transform: `scale(${animationsScale})`}}>
+                <ObjectImage texture={{
+                    x: animationX,
+                    y: animationY,
+                    width: entityData.texture.width,
+                    height: entityData.texture.height,
+                    name: entityData.texture.name
+                }}
+                />
+            </div>
+
         </div>
 
         <div className={styles.inputsRow}>

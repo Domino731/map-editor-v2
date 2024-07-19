@@ -2,6 +2,7 @@ import {EntityAnimationTypeUnion, EntityModel} from "../../models/Entities.ts";
 
 export interface EntityDetailsModalStore {
     entityData: EntityModel | null;
+    animationsScale: number;
 }
 
 // ACTIONS
