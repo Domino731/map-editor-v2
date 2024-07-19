@@ -8,6 +8,8 @@ import {EntityDetailsModalTabs, EntityDetailsModalTabsUnion} from "./EntityDetai
 import {entityDetailsModalSliceActions} from "./store.ts";
 import {entityDetailsModalSelectors} from "./store.selectors.ts";
 import {EntityAnimations} from "./tabs/EntityAnimations";
+import {EntityAreas} from "./tabs/EntityAreas";
+import {EntityGeneralInfo} from "./tabs/EntityGeneralInfo";
 
 export interface EntityDetailsModalProps {
     entityId: string;
@@ -28,9 +30,11 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
     const TabComponent = useCallback(() => {
         switch (tab) {
             case EntityDetailsModalTabs.Areas:
-                return <div>area</div>
+                return <EntityAreas/>
             case EntityDetailsModalTabs.Animations:
                 return <EntityAnimations/>
+            case EntityDetailsModalTabs.General:
+                return <EntityGeneralInfo/>
             default:
                 return null;
         }
@@ -60,6 +64,8 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
                 <Button variant="outlined" color="success" onClick={handleDownloadJsonFile}>Download .json</Button>
             </div>
             <Tabs value={tab} className={styles.tabs} variant="fullWidth">
+                <Tab label="General" value={EntityDetailsModalTabs.General}
+                     onClick={() => setTab(EntityDetailsModalTabs.General)}/>
                 <Tab label="Areas" value={EntityDetailsModalTabs.Areas}
                      onClick={() => setTab(EntityDetailsModalTabs.Areas)}/>
                 <Tab label="Animations" value={EntityDetailsModalTabs.Animations}

@@ -1,6 +1,7 @@
 export enum EntityDetailsModalTabs {
     Animations = "Animations",
-    Areas = "Areas"
+    Areas = "Areas",
+    General = "General"
 }
 
 export type EntityDetailsModalTabsUnion = keyof typeof EntityDetailsModalTabs;
