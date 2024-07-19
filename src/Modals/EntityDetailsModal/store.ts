@@ -61,6 +61,10 @@ const entityDetailsModalSlice = createSlice({
             if (!state.entityData) return;
             state.entityData.zIndex = payload;
         },
+        setEntityHitBox: (state, {payload}: PayloadAction<EntityModel['hitBox']>) => {
+            if (!state.entityData) return;
+            state.entityData.hitBox = payload;
+        },
         setEntityActionsCollisions: (state, {payload}: PayloadAction<EntityModel['actionCollisions']>) => {
             if (!state.entityData) return;
             state.entityData.actionCollisions = payload;

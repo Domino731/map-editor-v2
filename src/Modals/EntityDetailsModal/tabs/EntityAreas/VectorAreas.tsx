@@ -34,6 +34,9 @@ export const VectorAreas = () => {
                     textureXOffset: vector.x
                 }));
                 break;
+            case "hitBox":
+                dispatch(entityDetailsModalSliceActions.setEntityHitBox(vector));
+                break;
         }
     }, [dispatch, entityData])
 
@@ -55,29 +58,38 @@ export const VectorAreas = () => {
             <VectorForm isInputHidden={{x: true, y: true}} color={objectAreasColors.texture} title="Texture"
                         data={texture}
                         onChange={vector => handleChangeVector(vector, 'texture')}/>}
-        {entityData.groundCollision &&
-            <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
-                        data={entityData.groundCollision}
-                        onChange={vector => handleChangeVector(vector, 'groundCollision')}
-            />}
-        {entityData.groundPlace &&
-            <VectorForm color={objectAreasColors.groundArea} title="Ground place" data={{
-                ...entityData.groundPlace,
-                x: entityData.groundPlace.textureXOffset,
-                y: entityData.groundPlace.textureYOffset
-            }}
-                        onChange={vector => handleChangeVector(vector, 'groundVector')} labels={{
-                x: "Texture x offset",
-                y: "Texture y offset"
-            }}/>}
-        {entityData.zIndex &&
-            <VectorForm color={objectAreasColors.zIndexLine} title="Z Index line" data={entityData.zIndex}
-                        onChange={vector => handleChangeVector(vector, 'zIndexLine')}/>}
-        {entityData.actionCollisions && <ActionVectorForm
+
+        <VectorForm color={objectAreasColors.hitBox} title="Ground collision"
+                    data={entityData.hitBox}
+                    onChange={vector => handleChangeVector(vector, 'hitBox')}
+        />
+
+        <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
+                    data={entityData.groundCollision}
+                    onChange={vector => handleChangeVector(vector, 'groundCollision')}
+        />
+        <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
+                    data={entityData.groundCollision}
+                    onChange={vector => handleChangeVector(vector, 'groundCollision')}
+        />
+
+        <VectorForm color={objectAreasColors.groundArea} title="Ground place" data={{
+            ...entityData.groundPlace,
+            x: entityData.groundPlace.textureXOffset,
+            y: entityData.groundPlace.textureYOffset
+        }}
+                    onChange={vector => handleChangeVector(vector, 'groundVector')} labels={{
+            x: "Texture x offset",
+            y: "Texture y offset"
+        }}/>
+
+        <VectorForm color={objectAreasColors.zIndexLine} title="Z Index line" data={entityData.zIndex}
+                    onChange={vector => handleChangeVector(vector, 'zIndexLine')}/>
+        <ActionVectorForm
             title="Actions"
             // TODO add color
             data={entityData.actionCollisions.map(el => ({...el, color: 'red'}))}
             onChange={(actionVectors) => dispatch(entityDetailsModalSliceActions.setEntityActionsCollisions(actionVectors))}
-        />}
+        />
     </div>
 }
