@@ -1,17 +1,18 @@
-import {useDispatch, useSelector} from "react-redux";
-import {objectDetailsModalSelectors} from "../../store.selectors.ts";
 import {Checkbox, FormControlLabel, FormGroup, Typography} from "@mui/material";
 import {ChangeEvent, useCallback} from "react";
-import {objectDetailsModalSliceActions} from "../../store.ts";
+import {ObjectAreasSettings} from "../../store.types.ts";
 
-export const ObjectAreasDebugSettings = () => {
-    const areasSettings = useSelector(objectDetailsModalSelectors.areasSettings);
-    const dispatch = useDispatch();
 
+interface ObjectAreasDebugSettingsProps {
+    areasSettings: ObjectAreasSettings;
+    onChange: (name: string, value: boolean) => void;
+}
+
+export const ObjectAreasDebugSettings = ({areasSettings, onChange}: ObjectAreasDebugSettingsProps) => {
     const handleChangeAreasSettings = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const {target: {name, checked}} = e;
-        dispatch(objectDetailsModalSliceActions.setObjectAreasSettings({...areasSettings, [name]: checked}))
-    }, [areasSettings, dispatch])
+        onChange(name, checked)
+    }, [onChange])
 
     return <div>
         <Typography variant="h6" gutterBottom>Debug Settings</Typography>
