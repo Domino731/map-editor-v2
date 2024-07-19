@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {EntityDetailsModalStore} from "./store.types.ts";
+import {EntityDetailsModalStore, SetEntityAnimationActionPayload} from "./store.types.ts";
 import {EntityModel} from "../../models/Entities.ts";
 import {AllEntities} from "../../const/characters/characters.ts";
 
@@ -16,9 +16,13 @@ const entityDetailsModalSlice = createSlice({
         setEntityDataById: (state, {payload}: PayloadAction<EntityModel['id']>) => {
             state.entityData = AllEntities.find(({id}) => id === payload) ?? null;
         },
+        setEntityAnimation: (state, {payload}: PayloadAction<SetEntityAnimationActionPayload>) => {
+            if (!state.entityData) return;
+            state.entityData.animations[payload.animationType][payload.animationIndex] = payload.animationData;
+        },
         resetState: (state) => {
             state.entityData = initialState.entityData;
-        }
+        },
     }
 });
 

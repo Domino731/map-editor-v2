@@ -1,0 +1,36 @@
+.container {
+  width: 250px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.inputsRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.index {
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: inherit;
+}
+
+.objectImageWrapper {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    transform: scale(3);
+    border: 1px solid red !important;
+  }
+}
