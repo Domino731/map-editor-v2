@@ -1,10 +1,11 @@
 import {AnimalJsonData} from "./animals.types.ts";
-import {AnimalModel} from "../../../models/Entities.ts";
+import {AnimalModel, EntityType} from "../../../models/Entities.ts";
 import {generateUUID} from "../../../utils/string.ts";
 import {processObjectActionType, processObjectTexture} from "../../utils.ts";
 import {GameActorType} from "../../../models/game.ts";
 
 export const processAnimalData = (data: AnimalJsonData): AnimalModel => ({
+    entityType: EntityType.Animal,
     id: data.id,
     name: data.name,
     actorType: GameActorType.Entity,
@@ -40,7 +41,8 @@ export const processAnimalData = (data: AnimalJsonData): AnimalModel => ({
     drop: data.drop.map(el => ({
         id: el.id,
         amount: el.amount,
-        chance: el.chance
+        chance: el.chance,
+        uuid: generateUUID()
     })),
     zIndex: {
         x: data.z_index.x,
@@ -56,6 +58,7 @@ export const processAnimalData = (data: AnimalJsonData): AnimalModel => ({
     },
     hp: data.hp,
     exp: data.exp,
+    damage: 0,
     animations: {
         runDown: data.animations.run_down,
         runRight: data.animations.run_right,

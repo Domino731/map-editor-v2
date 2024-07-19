@@ -28,6 +28,22 @@ const entityDetailsModalSlice = createSlice({
     name: ENTITY_DETAILS_MODAL_REDUCER_NAME,
     initialState,
     reducers: {
+        setEntityName: (state, {payload}: PayloadAction<EntityModel['name']>) => {
+            if (!state.entityData) return;
+            state.entityData.name = payload;
+        },
+        setEntityHp: (state, {payload}: PayloadAction<EntityModel['hp']>) => {
+            if (!state.entityData) return;
+            state.entityData.hp = payload;
+        },
+        setEntityDamage: (state, {payload}: PayloadAction<EntityModel['damage']>) => {
+            if (!state.entityData) return;
+            state.entityData.damage = payload;
+        },
+        setEntityExp: (state, {payload}: PayloadAction<EntityModel['exp']>) => {
+            if (!state.entityData) return;
+            state.entityData.exp = payload;
+        },
         setEntityTexture: (state, {payload}: PayloadAction<{ width: number; height: number }>) => {
             if (!state.entityData) return;
             state.entityData.texture.width = payload.width;

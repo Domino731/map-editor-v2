@@ -36,6 +36,7 @@ export interface EntityModel {
     id: string;
     name: string;
     texture: EntityTextureModel;
+    entityType: EntityTypeUnion;
     actorType: GameActorType.Entity;
     presentationTextureCords: Cords;
     groundPlace: GameObjectGroundPlace;
@@ -46,6 +47,7 @@ export interface EntityModel {
     hitBox: Vector;
     hp: number;
     exp: number;
+    damage: number;
     animations: EntityAnimationsModel;
 
 }
