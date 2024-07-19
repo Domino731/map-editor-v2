@@ -10,6 +10,7 @@ import {entityDetailsModalSelectors} from "./store.selectors.ts";
 import {EntityAnimations} from "./tabs/EntityAnimations";
 import {EntityAreas} from "./tabs/EntityAreas";
 import {EntityGeneralInfo} from "./tabs/EntityGeneralInfo";
+import {EntityDrop} from "./tabs/EntityDrop";
 
 export interface EntityDetailsModalProps {
     entityId: string;
@@ -35,6 +36,8 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
                 return <EntityAnimations/>
             case EntityDetailsModalTabs.General:
                 return <EntityGeneralInfo/>
+            case EntityDetailsModalTabs.Drop:
+                return <EntityDrop/>
             default:
                 return null;
         }
@@ -70,6 +73,8 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
                      onClick={() => setTab(EntityDetailsModalTabs.Areas)}/>
                 <Tab label="Animations" value={EntityDetailsModalTabs.Animations}
                      onClick={() => setTab(EntityDetailsModalTabs.Animations)}/>
+                <Tab label="Drop" value={EntityDetailsModalTabs.Drop}
+                     onClick={() => setTab(EntityDetailsModalTabs.Drop)}/>
             </Tabs>
             <TabComponent/>
         </div>

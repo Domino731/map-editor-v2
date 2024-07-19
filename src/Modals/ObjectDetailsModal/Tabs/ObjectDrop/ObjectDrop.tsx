@@ -93,7 +93,7 @@ export const ObjectDrop = () => {
                                         <TableRow hover role="checkbox" tabIndex={-1} key={row.uuid}>
                                             <TableCell>
                                                 <Button color="error" variant="contained" onClick={() => {
-                                                    dispatch(objectDetailsModalSliceActions.deleteDrop(row.uuid))
+                                                    dispatch(objectDetailsModalSliceActions.deleteEntityDrop(row.uuid))
                                                 }}>
                                                     DELETE
                                                 </Button>

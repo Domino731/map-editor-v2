@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {EntityDetailsModalStore, SetEntityAnimationActionPayload} from "./store.types.ts";
 import {EntityModel} from "../../models/Entities.ts";
 import {AllEntities} from "../../const/characters/characters.ts";
+import {GameObjectDrop} from "../../models/GameObject.ts";
 
 export const ENTITY_DETAILS_MODAL_REDUCER_NAME = 'ENTITIES_DETAILS_MODAL';
 
@@ -30,6 +31,14 @@ const entityDetailsModalSlice = createSlice({
         resetState: (state) => {
             state.entityData = initialState.entityData;
         },
+        deleteEntityDrop: (state, {payload}: PayloadAction<string>) => {
+            if (!state.entityData) return;
+            state.entityData.drop = state.entityData.drop.filter(({uuid}) => uuid !== payload);
+        },
+        addEntityDrop: (state, {payload}: PayloadAction<GameObjectDrop>) => {
+            if (!state.entityData) return;
+            state.entityData.drop.push(payload)
+        }
     }
 });
 
