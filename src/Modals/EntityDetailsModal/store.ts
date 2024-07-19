@@ -31,7 +31,7 @@ const entityDetailsModalSlice = createSlice({
         resetState: (state) => {
             state.entityData = initialState.entityData;
         },
-        deleteEntityDrop: (state, {payload}: PayloadAction<string>) => {
+        deleteObjectDrop: (state, {payload}: PayloadAction<string>) => {
             if (!state.entityData) return;
             state.entityData.drop = state.entityData.drop.filter(({uuid}) => uuid !== payload);
         },

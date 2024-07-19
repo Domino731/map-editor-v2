@@ -90,7 +90,7 @@ const objectDetailsModalSlice = createSlice({
                 (state.objectData as GameSingleStageObjectUnion).specs.drop.push(payload);
             }
         },
-        deleteEntityDrop: (state, {payload}: PayloadAction<string>) => {
+        deleteObjectDrop: (state, {payload}: PayloadAction<string>) => {
             if (!state.objectData || state.objectStage === null) return;
             if ((state.objectData as GameMultiStageObjectUnion).specs.stages) {
                 (state.objectData as GameMultiStageObjectUnion).specs.stages[state.objectStage].drop = (state.objectData as GameMultiStageObjectUnion).specs.stages[state.objectStage]

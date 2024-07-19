@@ -12,7 +12,7 @@ export const EntityDrop = () => {
     const entityData = useSelector(entityDetailsModalSelectors.entityData);
 
     const handleDeleteDrop = useCallback((uuid: string) => {
-        dispatch(entityDetailsModalSliceActions.deleteEntityDrop(uuid))
+        dispatch(entityDetailsModalSliceActions.deleteObjectDrop(uuid))
     }, [dispatch])
 
     const handleAddDrop = useCallback((drop: ActorDropFormikFormData) => {
