@@ -4,7 +4,7 @@ import {ModalsUnion} from "../Modals/ModalManager.types.ts";
 import {ObjectDetailsModalProps} from "../Modals/ObjectDetailsModal/ObjectDetailsModal.tsx";
 import {GameActorTypeUnion} from "../models/game.ts";
 import {ActorOnMap, MapToolUnion} from "../Map/Map.types.ts";
-import {b} from "vite/dist/node/types.d-aGj9QkWt";
+import {EntityDetailsModalProps} from "../Modals/EntityDetailsModal/EntitiesDetailsModal.tsx";
 
 export interface AppState {
     mapTilesData: Array<Array<TileData | null>>;
@@ -13,7 +13,7 @@ export interface AppState {
     objectStage: number | null;
     rightColumnType: RightColumnTabs;
     activeModel: ModalsUnion | null;
-    modalProps: Omit<ObjectDetailsModalProps, 'isOpen'> | null;
+    modalProps: Omit<ObjectDetailsModalProps, 'isOpen'> | Omit<EntityDetailsModalProps, 'isOpen'> | null;
     actorType: GameActorTypeUnion;
     mapTool: MapToolUnion | null;
     mapLayers: Array<MapLayer>;

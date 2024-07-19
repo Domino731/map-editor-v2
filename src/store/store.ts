@@ -4,10 +4,12 @@ import {
     OBJECT_DETAILS_MODAL_REDUCER_NAME,
     ObjectDetailsModalReducer,
 } from "../Modals/ObjectDetailsModal/store.ts";
+import {ENTITY_DETAILS_MODAL_REDUCER_NAME, EntityDetailsModalReducer} from "../Modals/EntityDetailsModal/store.ts";
 
 const rootReducer = combineReducers({
     [APP_REDUCER_NAME]: appReducer,
-    [OBJECT_DETAILS_MODAL_REDUCER_NAME]: ObjectDetailsModalReducer
+    [OBJECT_DETAILS_MODAL_REDUCER_NAME]: ObjectDetailsModalReducer,
+    [ENTITY_DETAILS_MODAL_REDUCER_NAME]: EntityDetailsModalReducer
 });
 
 export const store = configureStore({

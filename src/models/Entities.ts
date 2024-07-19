@@ -20,12 +20,17 @@ export interface EntityTextureModel {
     height: number;
 }
 
-export interface EntityAnimationsModel {
-    runDown: Array<Array<number>>;
-    runRight: Array<Array<number>>;
-    runUp: Array<Array<number>>;
-    runLeft: Array<Array<number>>;
+export type EntityAnimationsModel = Record<EntityAnimationTypeUnion, Array<Array<number>>>;
+
+export enum EntityAnimationType {
+    runDown = "runDown",
+    runRight = "runRight",
+    runUp = "runUp",
+    runLeft = "runLeft"
 }
+
+export type EntityAnimationTypeUnion = keyof typeof EntityAnimationType;
+
 
 export interface EntityModel {
     id: string;

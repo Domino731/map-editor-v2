@@ -1,5 +1,6 @@
 export enum Modals {
-    ObjectDetails = "ObjectDetails"
+    ObjectDetails = "ObjectDetails",
+    EntityDetails = "EntityDetails"
 }
 
 export type ModalsUnion = keyof typeof Modals;
