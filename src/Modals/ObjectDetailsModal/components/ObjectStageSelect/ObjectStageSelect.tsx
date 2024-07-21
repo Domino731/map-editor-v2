@@ -13,7 +13,8 @@ export const ObjectStageSelect = () => {
     const objectData = useSelector(objectDetailsModalSelectors.objectData);
 
     if (!objectData) return <>Loading...</>
-    const multiStageObject = objectStage as unknown as GameMultiStageObjectUnion
+    const multiStageObject = objectData as unknown as GameMultiStageObjectUnion
+    console.log('multiStageObject.specs?.stages" ', objectStage)
     if (!multiStageObject.specs?.stages) return null;
 
     return <div>

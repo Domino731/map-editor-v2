@@ -41,12 +41,13 @@ export interface TreeTrunkModel {
 
 
 export enum GameObjectType {
-    Mine = 'Mine',
     Tree = 'Tree',
     Crop = 'Crop',
+    FruitTree = 'FruitTree',
+
+    Mine = 'Mine',
     Bush = "Bush",
     Grass = "Grass",
-    FruitTree = 'FruitTree',
     Building = "Building",
     Flooring = "Flooring",
     HoeDirt = "HoeDirt"

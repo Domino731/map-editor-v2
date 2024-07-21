@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import {ObjectDrop} from "./Tabs/ObjectDrop";
 import {objectDetailsModalSliceActions} from "./store.ts";
 import {objectDetailsModalSelectors} from "./store.selectors.ts";
+import {DownloadObjectButton} from "./components/DownloadObjectButton";
 
 export interface ObjectDetailsModalProps {
     isOpen: boolean;
@@ -61,7 +62,7 @@ export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) 
                 <Typography variant="h5" component="h2">
                     Object details: {objectData.name}
                 </Typography>
-                <Button variant="outlined" color="success" onClick={handleDownloadJsonFile}>Download .json</Button>
+                <DownloadObjectButton/>
             </div>
             <Tabs value={tab} className={styles.tabs} variant="fullWidth">
                 <Tab label="General" value={ObjectDetailsModelTabs.General}
