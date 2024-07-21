@@ -62,6 +62,24 @@ const GroundCollision = () => {
     }}/>
 }
 
+const HitBox = () => {
+    const entityData = useSelector(entityDetailsModalSelectors.entityData);
+    const settings = useSelector(entityDetailsModalSelectors.areasSettings)
+
+    if (!entityData) return null;
+
+    if (!settings.isHitBoxHighlighted) return null;
+    return <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: `${entityData.hitBox.width}px`,
+        height: `${entityData.hitBox.height}px`,
+        border: `1px solid ${objectAreasColors.hitBox}`,
+        transform: `translate(${objectX + entityData.hitBox.x}px, ${objectY + entityData.hitBox.y}px)`,
+    }}/>
+}
+
 const MapObjectImage = () => {
     const entityData = useSelector(entityDetailsModalSelectors.entityData);
     const settings = useSelector(entityDetailsModalSelectors.areasSettings)
@@ -116,6 +134,7 @@ export const ObjectActionCollisions = () => {
 export const EntityPreview = () => {
     return <>
         <MapObjectImage/>
+        <HitBox/>
         <GroundArea/>
         <ZIndexLine/>
         <GroundCollision/>

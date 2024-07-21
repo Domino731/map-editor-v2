@@ -17,6 +17,7 @@ interface ActorAreasProps {
     onSettingsChange: (name: string, value: boolean) => void;
     actorAreasComponent: ReactNode;
     actorPreviewComponent: ReactNode;
+    isHitBoxVisible?: boolean;
 }
 
 export const ActorAreas = ({
@@ -24,7 +25,8 @@ export const ActorAreas = ({
                                areasSettings,
                                onSettingsChange,
                                actorAreasComponent,
-                               actorPreviewComponent
+                               actorPreviewComponent,
+                               isHitBoxVisible
                            }: ActorAreasProps) => {
     const {isBlackBackground, isGrid, gridScale} = areasSettings;
 
@@ -37,7 +39,8 @@ export const ActorAreas = ({
             </div>}
 
             <div className={styles.settingsSection}>
-                <ObjectAreasDebugSettings areasSettings={areasSettings} onChange={onSettingsChange}/>
+                <ObjectAreasDebugSettings isHitBoxVisible={isHitBoxVisible} areasSettings={areasSettings}
+                                          onChange={onSettingsChange}/>
             </div>
         </section>
 

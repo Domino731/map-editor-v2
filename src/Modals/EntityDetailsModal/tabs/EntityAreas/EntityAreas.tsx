@@ -16,6 +16,7 @@ export const EntityAreas = () => {
     }, [dispatch, settings])
 
     return <ActorAreas
+        isHitBoxVisible
         isObjectStageSelectVisible={false}
         areasSettings={settings}
         onSettingsChange={handleChangeSettings}

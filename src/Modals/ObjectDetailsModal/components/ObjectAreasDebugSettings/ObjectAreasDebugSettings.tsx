@@ -6,9 +6,10 @@ import {ObjectAreasSettings} from "../../store.types.ts";
 interface ObjectAreasDebugSettingsProps {
     areasSettings: ObjectAreasSettings;
     onChange: (name: string, value: boolean) => void;
+    isHitBoxVisible?: boolean;
 }
 
-export const ObjectAreasDebugSettings = ({areasSettings, onChange}: ObjectAreasDebugSettingsProps) => {
+export const ObjectAreasDebugSettings = ({areasSettings, onChange, isHitBoxVisible}: ObjectAreasDebugSettingsProps) => {
     const handleChangeAreasSettings = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const {target: {name, checked}} = e;
         onChange(name, checked)
@@ -22,6 +23,10 @@ export const ObjectAreasDebugSettings = ({areasSettings, onChange}: ObjectAreasD
                                    onChange={handleChangeAreasSettings}
                 />}
                 label="Highlight texture"/>
+            {isHitBoxVisible && <FormControlLabel
+                control={<Checkbox checked={areasSettings.isHitBoxHighlighted} name="isHitBoxHighlighted"
+                                   onChange={handleChangeAreasSettings}/>}
+                label="Hightlight hit box"/>}
             <FormControlLabel
                 control={<Checkbox checked={areasSettings.isBlackBackground} name="isBlackBackground"
                                    onChange={handleChangeAreasSettings}/>}

@@ -59,15 +59,11 @@ export const VectorAreas = () => {
                         data={texture}
                         onChange={vector => handleChangeVector(vector, 'texture')}/>}
 
-        <VectorForm color={objectAreasColors.hitBox} title="Ground collision"
+        <VectorForm color={objectAreasColors.hitBox} title="Hit box"
                     data={entityData.hitBox}
                     onChange={vector => handleChangeVector(vector, 'hitBox')}
         />
 
-        <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
-                    data={entityData.groundCollision}
-                    onChange={vector => handleChangeVector(vector, 'groundCollision')}
-        />
         <VectorForm color={objectAreasColors.groundCollision} title="Ground collision"
                     data={entityData.groundCollision}
                     onChange={vector => handleChangeVector(vector, 'groundCollision')}

@@ -19,7 +19,8 @@ const initialState: EntityDetailsModalStore = {
             isGroundCollisionHighlighted: false,
             isActionsCollisionsHighlighted: false,
             isZIndexLineHighlighted: false,
-            gridScale: 3
+            gridScale: 3,
+            isHitBoxHighlighted: false
         }
     }
 }
