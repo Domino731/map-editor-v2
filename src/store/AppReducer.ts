@@ -17,9 +17,9 @@ const initialState: AppState = {
     selectedTile: null,
     rightColumnType: RightColumnTabs.Tiles,
     objectStage: null,
-    activeModel: "EntityDetails",
+    activeModel: "ObjectDetails",
     modalProps: {
-        entityId: 'baby_blue_chicken'
+        objectId: 'bush_1'
     },
     actorType: GameActorType.Tile,
     mapTool: null,

@@ -7,14 +7,23 @@ import {ObjectVectors} from "../../components/ObjectVectors";
 import {GridScale} from "../../components/GridScale";
 import {GroundArea, GroundCollision, ObjectActionCollisions, ZIndexLine} from "../../components/GridMapObjects";
 import {MapObjectImage} from "../../components/GridMapObjects";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {objectDetailsModalSelectors} from "../../store.selectors.ts";
+import {useCallback} from "react";
+import {objectDetailsModalSliceActions} from "../../store.ts";
 
 const gridMapSize = 20;
 
 export const ObjectAreas = () => {
+    const dispatch = useDispatch();
+
     const {isBlackBackground, isGrid} = useSelector(objectDetailsModalSelectors.areasSettings)
     const gridScale = useSelector(objectDetailsModalSelectors.gridScale)
+    const areasSettings = useSelector(objectDetailsModalSelectors.areasSettings);
+
+    const handleChangeAreasSettings = useCallback((name: string, value: boolean) => {
+        dispatch(objectDetailsModalSliceActions.setObjectAreasSettings({...areasSettings, [name]: value}))
+    }, [areasSettings, dispatch])
 
     return <section className={styles.container}>
 
@@ -25,7 +34,7 @@ export const ObjectAreas = () => {
             </div>
 
             <div className={styles.settingsSection}>
-                <ObjectAreasDebugSettings/>
+                <ObjectAreasDebugSettings onChange={handleChangeAreasSettings} areasSettings={areasSettings}/>
             </div>
         </section>
 

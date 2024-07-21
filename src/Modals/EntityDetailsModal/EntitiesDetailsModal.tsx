@@ -44,10 +44,6 @@ export const EntitiesDetailsModal = ({entityId, isOpen}: EntityDetailsModalProps
         }
     }, [tab])
 
-    const handleDownloadJsonFile = useCallback(() => {
-        alert("TODO: add download functionality")
-    }, [])
-
     const handleCloseModal = useCallback(() => {
         dispatch(AppSliceActions.closeModal());
         dispatch(entityDetailsModalSliceActions.resetState());
