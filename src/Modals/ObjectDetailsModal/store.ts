@@ -51,7 +51,10 @@ const objectDetailsModalSlice = createSlice({
             if (state.objectStage === null) return;
             state.objectAreas.vectors[payload.name][state.objectStage] = payload.vector
         },
-        setObjectAreasTrunkTree: (state, {payload}: PayloadAction<{ x: number, y: number }>) => {
+        setObjectAreasTrunkTree: (state, {payload}: PayloadAction<{
+            x: number,
+            y: number
+        }>) => {
             state.objectAreas.treeTrunk = payload;
         },
         setObjectActionCollisionsVectors: (state, {payload}: PayloadAction<ActionVector[]>) => {

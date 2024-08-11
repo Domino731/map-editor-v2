@@ -1,6 +1,7 @@
 import {RootState} from "./store.ts";
 import {APP_REDUCER_NAME} from "./AppReducer.ts";
 import {createSelector} from "@reduxjs/toolkit";
+import {defaultCellData} from "../Map/Map.tsx";
 
 const root = (root: RootState) => root[APP_REDUCER_NAME];
 
@@ -18,6 +19,13 @@ const mapLayers = createSelector(root, state => state.mapLayers);
 const actorsOnMap = createSelector(root, state => state.actorsOnMap);
 const treeHoveredObjectUuid = createSelector(root, state => state.treeHoveredObjectUuid);
 const mapSettings = createSelector(root, state => state.mapSettings);
+const getMapTilesData = createSelector(root, (state) => (x: number, y: number) => {
+    // {...defaultCellData, zIndex: 0}
+    const data = state.mapTiles.find(el => el.x === x && el.y === y);
+    if (data) return data;
+    return {x, y, tiles: [{...defaultCellData, zIndex: 0}]}
+});
+
 
 export const AppSelectors = {
     mapTilesData,
@@ -33,5 +41,6 @@ export const AppSelectors = {
     mapLayers,
     actorsOnMap,
     treeHoveredObjectUuid,
-    mapSettings
+    mapSettings,
+    getMapTilesData
 }

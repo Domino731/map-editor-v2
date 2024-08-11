@@ -24,18 +24,18 @@ export const defaultCellData: MapTileData = {
 }
 
 const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
+    const dispatch = useDispatch();
+
     const selectedTile = useSelector(AppSelectors.selectedTile);
     const rightColumnType = useSelector(AppSelectors.rightColumnType);
     const mapTool = useSelector(AppSelectors.mapTool);
     const mapLayer = useSelector(AppSelectors.mapLayer);
     const mapLayers = useSelector(AppSelectors.mapLayers);
     const mapSettings = useSelector(AppSelectors.mapSettings);
+    const mapTilesData = useSelector(AppSelectors.getMapTilesData)(cellX, cellY);
+    const tilesData = mapTilesData.tiles;
 
     const [isWall, setIsWall] = useState<boolean>(false);
-    const [tilesData, setTilesData] = useState<Array<Required<MapTileData>>>([
-        {...defaultCellData, zIndex: 0}
-    ]);
-
 
     const handleTileClick = () => {
         if (rightColumnType === RightColumnTabs.Special) {
@@ -54,7 +54,12 @@ const MapCell = ({cellX, cellY}: { cellX: number; cellY: number }) => {
         } else {
             newTilesData.push({...selectedTile, zIndex: mapLayer})
         }
-        setTilesData(newTilesData)
+
+        dispatch(AppSliceActions.setMapTile({
+            x: cellX,
+            y: cellY,
+            tiles: newTilesData
+        }));
     }
 
     const cellStyles = useCallback((tile: MapTileData) => {
@@ -120,7 +125,7 @@ export const Map = () => {
         }
 
         if (actorType === GameActorType.Object) {
-            const objectData: TreeObjectModel | MineObjectModel | undefined = AllObjects.find(el => el.id === objectId);
+            const objectData: TreeObjectModel | MineObjectModel | undefined = AllObjects.find(el => el.id === objectId) as MineObjectModel;
             if (!objectData) return;
             if (objectStage) {
                 const stage = (objectData as TreeObjectModel).specs.stages[objectStage]

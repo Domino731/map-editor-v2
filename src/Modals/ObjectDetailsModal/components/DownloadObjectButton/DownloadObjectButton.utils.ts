@@ -116,9 +116,10 @@ export const useProcessCommonMultiStageObject = () => {
 export const useProcessCommonTreeObject = () => {
     const objectData = useSelector(objectDetailsModalSelectors.objectData) as unknown as TreeObjectModel;
     const objectAreas = useSelector(objectDetailsModalSelectors.objectAreasVectors);
+    const treeTrunk = useSelector(objectDetailsModalSelectors.objectTreeTrunk)
 
     return (): TreeJsonModel | null => {
-        if (!objectData) return null;
+        if (!objectData || !treeTrunk) return null;
         return {
             id: objectData.id,
             name: objectData.name,
@@ -129,8 +130,8 @@ export const useProcessCommonTreeObject = () => {
                     y: objectData.specs.treeTrunk.y,
                     width: objectData.specs.treeTrunk.width,
                     height: objectData.specs.treeTrunk.height,
-                    offset_x: objectData.specs.treeTrunk.offsetX,
-                    offset_y: objectData.specs.treeTrunk.offsetY
+                    offset_x: treeTrunk.x,
+                    offset_y: treeTrunk.y,
                 },
                 stages: objectData.specs.stages.map((stage, stageIndex): MultiStageJsonObjectStageModel => ({
                     width: objectAreas.texture[stageIndex].width,

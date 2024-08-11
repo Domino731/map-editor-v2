@@ -21,6 +21,13 @@ export interface AppState {
     actorsOnMap: Array<ActorOnMap>;
     treeHoveredObjectUuid: string | null;
     mapSettings: MapSettings;
+    mapTiles: Array<StoreMapTileData>;
+}
+
+export interface StoreMapTileData {
+    x: number;
+    y: number;
+    tiles: Array<Required<MapTileData>>;
 }
 
 export interface MapSettings {

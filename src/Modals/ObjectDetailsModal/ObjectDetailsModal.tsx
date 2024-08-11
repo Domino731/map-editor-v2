@@ -6,7 +6,6 @@ import {useCallback, useEffect, useState} from "react";
 import {ObjectDetailsModelTabs} from "./ObjectDetailsModel.const.ts";
 import {ObjectGeneralInfo} from "./Tabs/ObjectGeneralInfo";
 import {ObjectAreas} from "./Tabs/ObjectAreas";
-import Button from "@mui/material/Button";
 import {ObjectDrop} from "./Tabs/ObjectDrop";
 import {objectDetailsModalSliceActions} from "./store.ts";
 import {objectDetailsModalSelectors} from "./store.selectors.ts";
@@ -40,10 +39,6 @@ export const ObjectDetailsModal = ({isOpen, objectId}: ObjectDetailsModalProps) 
                 return null;
         }
     }, [tab])
-
-    const handleDownloadJsonFile = useCallback(() => {
-        alert("TODO: add download functionality")
-    }, [])
 
     const handleCloseModal = useCallback(() => {
         dispatch(AppSliceActions.closeModal());

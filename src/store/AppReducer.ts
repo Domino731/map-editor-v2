@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
     AppState,
     SetActiveModelActionProps,
-    SetObjectIdActionPayload, ToggleMapLayerVisibilityPayload
+    SetObjectIdActionPayload, StoreMapTileData, ToggleMapLayerVisibilityPayload
 } from "./AppReducer.types.ts";
 import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/MapContent.ts";
@@ -17,10 +17,8 @@ const initialState: AppState = {
     selectedTile: null,
     rightColumnType: RightColumnTabs.Tiles,
     objectStage: null,
-    activeModel: "ObjectDetails",
-    modalProps: {
-        objectId: 'bush_1'
-    },
+    activeModel: null,
+    modalProps: null,
     actorType: GameActorType.Tile,
     mapTool: null,
     mapLayers: [
@@ -36,13 +34,22 @@ const initialState: AppState = {
         isObjectHidden: false,
         isEntitiesHidden: false,
         isGridBorderHidden: false
-    }
+    },
+    mapTiles: []
 }
 
 const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        setMapTile: (state, {payload}: PayloadAction<StoreMapTileData>) => {
+            const index = state.mapTiles.findIndex(el => el.x === payload.x && el.y === payload.y);
+            if (index !== -1) {
+                state.mapTiles[index] = payload;
+            } else {
+                state.mapTiles.push(payload)
+            }
+        },
         setMapSettings: (state, {payload}: PayloadAction<AppState['mapSettings']>) => {
             state.mapSettings = payload;
         },
