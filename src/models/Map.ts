@@ -1,9 +1,11 @@
 import {GameActorTypeUnion} from "./game.ts";
+import {StoreMapTileData} from "../store/AppReducer.types.ts";
+import {ActorOnMap} from "../Map/Map.types.ts";
 
 export interface MapJsonData {
     defaultTile: MapTileData,
-    tiles: MapTileData[][];
-    actors: MapActorData[];
+    tiles: Array<StoreMapTileData>;
+    actors: Array<ActorOnMap>;
 }
 
 export interface MapTileData {

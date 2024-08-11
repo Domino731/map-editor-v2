@@ -8,6 +8,7 @@ import {create2DArray} from "../utils/array.ts";
 import {RightColumnTabs} from "../RightColumn/MapContent.ts";
 import {GameActorType} from "../models/game.ts";
 import {ActorOnMap} from "../Map/Map.types.ts";
+import {MapJsonData} from "../models/Map.ts";
 
 export const APP_REDUCER_NAME = 'APP';
 
@@ -42,6 +43,10 @@ const appSlice = createSlice({
     name: APP_REDUCER_NAME,
     initialState,
     reducers: {
+        loadMap: (state, {payload}: PayloadAction<MapJsonData>) => {
+            state.mapTiles = payload.tiles;
+            state.actorsOnMap = payload.actors;
+        },
         setMapTile: (state, {payload}: PayloadAction<StoreMapTileData>) => {
             const index = state.mapTiles.findIndex(el => el.x === payload.x && el.y === payload.y);
             if (index !== -1) {

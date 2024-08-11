@@ -25,6 +25,7 @@ const getMapTilesData = createSelector(root, (state) => (x: number, y: number) =
     if (data) return data;
     return {x, y, tiles: [{...defaultCellData, zIndex: 0}]}
 });
+const mapTiles = createSelector(root, (state) => state.mapTiles);
 
 
 export const AppSelectors = {
@@ -42,5 +43,6 @@ export const AppSelectors = {
     actorsOnMap,
     treeHoveredObjectUuid,
     mapSettings,
-    getMapTilesData
+    getMapTilesData,
+    mapTiles
 }
