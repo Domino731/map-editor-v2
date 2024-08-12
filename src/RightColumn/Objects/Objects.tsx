@@ -14,6 +14,7 @@ import {BuildingsData} from "../../const/objects/buildings/buildings.ts";
 import {FlooringData} from "../../const/objects/flooring/flooring.ts";
 import {HoeDirtData} from "../../const/objects/hoeDirt/hoeDirt.ts";
 import {createSingleStageObjects} from "./Objects.utils.ts";
+import {StaticTreesData} from "../../const/objects/staticTrees/staticTrees.ts";
 
 export const Objects = () => {
     const [objectsType, setObjectsType] = useState<ObjectsTypes>(ObjectsTypes.Bushes);
@@ -38,6 +39,8 @@ export const Objects = () => {
                 return <SingleStageList objects={createSingleStageObjects(FlooringData)}/>
             case ObjectsTypes.HoeDirt:
                 return <SingleStageList objects={createSingleStageObjects(HoeDirtData)}/>
+            case ObjectsTypes.StaticTrees:
+                return <SingleStageList objects={createSingleStageObjects(StaticTreesData)}/>
             default:
                 return null;
         }

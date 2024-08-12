@@ -1,10 +1,10 @@
-import {MineObjectModel} from "../../../models/GameObject.ts";
-import {MineJsonModel} from "../../types.ts";
+import {StaticTreeObjectModel} from "../../../models/GameObject.ts";
 import {processObjectActionType, processObjectTexture, processObjectType} from "../../utils.ts";
-import {generateUUID} from "../../../utils/string.ts";
 import {GameActorType} from "../../../models/game.ts";
+import {generateUUID} from "../../../utils/string.ts";
+import {StaticTreeJsonData} from "./staticTrees.types.ts";
 
-export const processMineData = (data: MineJsonModel): MineObjectModel => ({
+export const processStaticTreeData = (data: StaticTreeJsonData): StaticTreeObjectModel => ({
     id: data.id,
     name: data.name,
     type: processObjectType(data.type),

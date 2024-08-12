@@ -50,6 +50,7 @@ export interface SingleStageObjectModel {
 export interface MineJsonModel extends SingleStageObjectModel {
 }
 
+
 export interface BushJsonModel extends SingleStageObjectModel {
 }
 

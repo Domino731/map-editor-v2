@@ -94,6 +94,9 @@ export interface GameObjectBase {
 export interface MineObjectModel extends GameObjectBase {
 }
 
+export interface StaticTreeObjectModel extends GameObjectBase {
+}
+
 export interface BushObjectModel extends GameObjectBase {
 }
 
@@ -141,7 +144,7 @@ export type GameObjectUnion =
     | BuildingObjectModel
     | TreeObjectModel
     | FruitTreeObjectModel
-    | CropObjectModel;
+    | CropObjectModel | StaticTreeObjectModel;
 
 
 export type GameMultiStageObjectUnion = TreeObjectModel | FruitTreeObjectModel | CropObjectModel;
