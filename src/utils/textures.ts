@@ -42,6 +42,7 @@ import buildingWaterObelisk from '../assets/map/buildings/water_obelisk.png';
 import buildingWell from '../assets/map/buildings/well.png';
 import terrainFeaturesHoeDirt from '../assets/map/terrainFeatures/hoeDirt.png';
 import terrainFeatuesFlooring from '../assets/map/terrainFeatures/Flooring.png';
+import debrisSprite from '../assets/map/objects/environment/debris.png';
 
 // CHARACTERS - ANIMALS
 import babyBlueChicken from '../assets/map/characters/animals/baby_blue_chicken.png';
@@ -294,6 +295,7 @@ const textures = {
     [GameObjectTextureName.Crops]: cropsSprite,
     [GameObjectTextureName.Grass]: grassSprite,
     [GameObjectTextureName.FruitTree]: fruitTreesSprite,
+    [GameObjectTextureName.Debris]: debrisSprite,
 
     // BUILDINGS //
 

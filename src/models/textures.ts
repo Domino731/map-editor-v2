@@ -5,6 +5,7 @@ export enum GameObjectTextureName {
     Bushes = "Bushes",
     FruitTree = "FruitTree",
     Grass = "Grass",
+    Debris = "Debris",
 
     BuildingBarn = 'BuildingBarn',
     BuildingBeachCabin = "BuildingBeachCabin",

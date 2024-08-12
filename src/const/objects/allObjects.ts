@@ -8,6 +8,7 @@ import {BuildingsData} from "./buildings/buildings.ts";
 import {HoeDirtData} from "./hoeDirt/hoeDirt.ts";
 import {GameObjectUnion} from "../../models/GameObject.ts";
 import {StaticTreesData} from "./staticTrees/staticTrees.ts";
+import {DebrisData} from "./debris/debris.ts";
 
 export const AllObjects: Array<GameObjectUnion> = [
     ...BushesData,
@@ -18,5 +19,6 @@ export const AllObjects: Array<GameObjectUnion> = [
     ...FruitTreesData,
     ...BuildingsData,
     ...HoeDirtData,
-    ...StaticTreesData
+    ...StaticTreesData,
+    ...DebrisData
 ];

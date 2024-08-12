@@ -37,6 +37,8 @@ export const processObjectTexture = (objectTexture: string) => {
         ['trees']: GameObjectTextureName.Trees,
         ['bushes']: GameObjectTextureName.Bushes,
         ['grass']: GameObjectTextureName.Grass,
+        ['debris']: GameObjectTextureName.Debris,
+        
         ['BuildingBarn']: GameObjectTextureName.BuildingBarn,
         ['BuildingBeachCabin']: GameObjectTextureName.BuildingBeachCabin,
         ['BuildingBigBarn']: GameObjectTextureName.BuildingBigBarn,
